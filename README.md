@@ -9,10 +9,11 @@ More information on CAP can be found here: http://www.oasis-open.org/standards#c
 Usage
 --
 
-The following frameworks are required to build cap-net:
+The following frameworks/software are required to build cap-net:
 
-* .NET Framework 4.5
-
+* Visual Studio 11 Beta
+* .NET Framework 4.0
+* xUnit 1.9
 
 Versioning
 --
