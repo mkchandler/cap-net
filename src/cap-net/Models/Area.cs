@@ -8,5 +8,10 @@ namespace CAP
 {
     public class Area
     {
+        public string Description { get; set; }
+        public string Polygon { get; set; }
+        public IDictionary<string, string> Geocodes { get; set; }
+        public string Altitude { get; set; }
+        public string Ceiling { get; set; }
     }
 }
