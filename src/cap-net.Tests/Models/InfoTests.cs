@@ -17,5 +17,14 @@ namespace CAP.Tests.Models
 
             Assert.Equal("en-US", info.Language);
         }
+
+        [Fact]
+        public void LanguageSetsToUserValue()
+        {
+            var info = new Info();
+            info.Language = "en-UK";
+
+            Assert.Equal("en-UK", info.Language);
+        }
     }
 }
