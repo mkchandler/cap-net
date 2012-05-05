@@ -8,18 +8,18 @@ namespace CAP
 {
     public class XmlParser
     {
-        public Alert Parse(string xml)
+        public static Alert Parse(string xml)
         {
             var document = XDocument.Parse(xml);
             var alert = ParseInternal(document);
             return alert;
         }
 
-        private Alert ParseInternal(XDocument document)
+        private static Alert ParseInternal(XDocument document)
         {
             var alert = new Alert();
 
-
+            
 
             return alert;
         }

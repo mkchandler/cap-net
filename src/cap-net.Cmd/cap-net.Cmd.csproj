@@ -7,8 +7,8 @@
     <ProjectGuid>{497A789E-1A86-4068-8CC9-A94AB30CE668}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>cap_net.Cmd</RootNamespace>
-    <AssemblyName>cap-net.Cmd</AssemblyName>
+    <RootNamespace>CAP.Cmd</RootNamespace>
+    <AssemblyName>cap-net-cmd</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
