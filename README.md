@@ -1,7 +1,7 @@
 cap-net
 ==
 
-cap-net is a Common Alerting Protocol [de]serialization library for the .NET framework.
+**cap-net** is a Common Alerting Protocol [de]serialization library for the .NET framework.
 
 More information on CAP can be found here: http://www.oasis-open.org/standards#capv1.1.
 
