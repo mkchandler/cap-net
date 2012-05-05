@@ -9,12 +9,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7AD66B
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cap-net.Tests", "cap-net.Tests\cap-net.Tests.csproj", "{0FB0F282-BED1-4201-81F2-76AD9A05CB5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FB0F282-BED1-4201-81F2-76AD9A05CB5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FB0F282-BED1-4201-81F2-76AD9A05CB5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FB0F282-BED1-4201-81F2-76AD9A05CB5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FB0F282-BED1-4201-81F2-76AD9A05CB5A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2834992F-FA0C-4837-9916-1928847EA9C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2834992F-FA0C-4837-9916-1928847EA9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2834992F-FA0C-4837-9916-1928847EA9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU

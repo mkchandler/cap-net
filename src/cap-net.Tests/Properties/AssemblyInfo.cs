@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("cap-net")]
+[assembly: AssemblyTitle("cap-net.Tests")]
 [assembly: AssemblyDescription("A Common Alerting Protocol [de]serialization library for the .NET framework.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2c5cb1c6-0f27-41d7-b3e8-520a75762897")]
+[assembly: Guid("252dde24-30dd-4a3b-bf9a-52a4ccd6e64e")]
 
-[assembly: AssemblyVersion("0.1.0.0")]
-[assembly: AssemblyFileVersion("0.1.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
