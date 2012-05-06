@@ -92,7 +92,15 @@ namespace CAP
                                         info.Urgency = infoNode.InnerText;
                                         break;
                                     case "severity":
-                                        info.Severity = infoNode.InnerText;
+                                        Severity severity;
+                                        if (Enum.TryParse(infoNode.InnerText, out severity))
+                                        {
+                                            info.Severity = severity;
+                                        }
+                                        else
+                                        {
+                                            info.Severity = null;
+                                        }
                                         break;
                                     case "certainty":
                                         info.Certainty = infoNode.InnerText;
