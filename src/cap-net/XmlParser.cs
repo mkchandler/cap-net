@@ -13,6 +13,12 @@ namespace CAP
             return alert;
         }
 
+        public static Alert Parse(XmlDocument xml)
+        {
+            var alert = ParseInternal(xml);
+            return alert;
+        }
+
         private static Alert ParseInternal(XmlDocument document)
         {
             var alert = new Alert();
