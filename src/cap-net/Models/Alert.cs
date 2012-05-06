@@ -8,6 +8,11 @@ namespace CAP
 {
     public class Alert
     {
+        public Alert()
+        {
+            _info = new List<Info>();
+        }
+
         public string Identifier { get; set; }
         public string Sender { get; set; }
         public DateTime? Sent { get; set; }
@@ -21,7 +26,13 @@ namespace CAP
         public string Note { get; set; }
         public string References { get; set; }
         public string Incidents { get; set; }
-        public IEnumerable<Info> Infos { get; set; }
+
+        private ICollection<Info> _info;
+
+        public ICollection<Info> Info
+        {
+            get { return _info; }
+        }
     }
 
     public enum MessageType
