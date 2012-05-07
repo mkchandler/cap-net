@@ -1,7 +1,10 @@
-cap-net
+**NOTE: CAPNet is currently in the early stages of development. Proceed with caution.**
+
+
+CAPNet
 ==
 
-**cap-net** is a Common Alerting Protocol [de]serialization library for the .NET framework.
+CAPNet is a Common Alerting Protocol (CAP) library for the .NET framework.
 
 More information on CAP can be found here: http://www.oasis-open.org/standards#capv1.1.
 
@@ -9,16 +12,15 @@ More information on CAP can be found here: http://www.oasis-open.org/standards#c
 Usage
 --
 
-The following frameworks/software are required to build cap-net:
+The following frameworks/libraries are required to build and test CAPNet:
 
-* Visual Studio 11 Beta
 * .NET Framework 4.0
 * xUnit 1.9
 
 Versioning
 --
 
-**cap-net** will be maintained under the Semantic Versioning guidelines as much as possible.
+CAPNet will be maintained under the Semantic Versioning guidelines as much as possible.
 
 Releases will be numbered with the follow format:
 
