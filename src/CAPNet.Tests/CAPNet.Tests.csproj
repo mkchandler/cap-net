@@ -50,7 +50,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\cap-net\CAPNet.csproj">
+    <ProjectReference Include="..\CAPNet\CAPNet.csproj">
       <Project>{2834992f-fa0c-4837-9916-1928847ea9c3}</Project>
       <Name>CAPNet</Name>
     </ProjectReference>

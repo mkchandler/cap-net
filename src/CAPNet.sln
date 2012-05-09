@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 11
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPNet", "cap-net\CAPNet.csproj", "{2834992F-FA0C-4837-9916-1928847EA9C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPNet", "CAPNet\CAPNet.csproj", "{2834992F-FA0C-4837-9916-1928847EA9C3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7AD66BB8-9A97-4EEE-99D9-FA283DA9F159}"
 	ProjectSection(SolutionItems) = preProject
@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7AD66B
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPNet.Tests", "cap-net.Tests\CAPNet.Tests.csproj", "{0FB0F282-BED1-4201-81F2-76AD9A05CB5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPNet.Tests", "CAPNet.Tests\CAPNet.Tests.csproj", "{0FB0F282-BED1-4201-81F2-76AD9A05CB5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPNet.Cmd", "cap-net.Cmd\CAPNet.Cmd.csproj", "{497A789E-1A86-4068-8CC9-A94AB30CE668}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPNet.Cmd", "CAPNet.Cmd\CAPNet.Cmd.csproj", "{497A789E-1A86-4068-8CC9-A94AB30CE668}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
