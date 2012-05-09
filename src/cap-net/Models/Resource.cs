@@ -5,40 +5,34 @@
     /// </summary>
     public class Resource
     {
-        public string Description
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Description { get; set; }
 
-        public string MimeType
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string MimeType { get; set; }
 
-        public int? Size
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int? Size { get; set; }
 
-        public string Uri
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Uri { get; set; }
 
-        public string DereferencedUri
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string DereferencedUri { get; set; }
 
-        public string Digest
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Digest { get; set; }
     }
 }

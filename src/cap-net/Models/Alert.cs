@@ -94,10 +94,25 @@ namespace CAP
     /// </summary>
     public enum MessageType
     {
+        /// <summary>
+        /// 
+        /// </summary>
         Alert,
+        /// <summary>
+        /// 
+        /// </summary>
         Update,
+        /// <summary>
+        /// 
+        /// </summary>
         Cancel,
+        /// <summary>
+        /// 
+        /// </summary>
         Ack,
+        /// <summary>
+        /// 
+        /// </summary>
         Error
     }
 
@@ -106,8 +121,17 @@ namespace CAP
     /// </summary>
     public enum Scope
     {
+        /// <summary>
+        /// 
+        /// </summary>
         Public,
+        /// <summary>
+        /// 
+        /// </summary>
         Restricted,
+        /// <summary>
+        /// 
+        /// </summary>
         Private
     }
 }
