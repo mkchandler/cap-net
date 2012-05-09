@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CAP
+namespace CAPNet
 {
     /// <summary>
     /// The container for all component parts of the info sub-element of the alert message.

@@ -1,10 +1,18 @@
 ﻿using System;
 using System.Xml;
 
-namespace CAP
+namespace CAPNet
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class XmlParser
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xml"></param>
+        /// <returns></returns>
         public static Alert Parse(string xml)
         {
             var document = new XmlDocument();
@@ -13,6 +21,11 @@ namespace CAP
             return alert;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xml"></param>
+        /// <returns></returns>
         public static Alert Parse(XmlDocument xml)
         {
             var alert = ParseInternal(xml);

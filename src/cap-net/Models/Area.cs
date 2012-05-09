@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CAP
+namespace CAPNet
 {
     /// <summary>
     /// 

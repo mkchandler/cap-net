@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xunit;
 
-namespace CAP.Tests.Models
+namespace CAPNet.Tests.Models
 {
     public class InfoTests
     {

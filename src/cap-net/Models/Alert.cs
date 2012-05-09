@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CAP
+namespace CAPNet
 {
     /// <summary>
     /// The container for all component parts of the alert message.
     /// </summary>
     public class Alert
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public Alert()
         {
             _info = new List<Info>();
