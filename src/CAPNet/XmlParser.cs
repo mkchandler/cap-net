@@ -151,6 +151,21 @@ namespace CAPNet
                                     case "contact":
                                         info.Contact = infoNode.InnerText;
                                         break;
+                                    case "area":
+                                        var area = new Area();
+                                        foreach (XmlNode areaNode in infoNode.ChildNodes)
+                                        {
+                                            switch (areaNode.Name)
+                                            {
+                                                case "areaDesc":
+                                                    area.Description = areaNode.InnerText;
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                        }
+                                        info.Areas.Add(area);
+                                        break;
                                     default:
                                         break;
                                 }

@@ -9,8 +9,8 @@ namespace CAPNet.Cmd
         static void Main(string[] args)
         {
             string xml = null;
-
             var document = new XmlDocument();
+
             try
             {
                 document.Load(@"c:\_dev\cap-net\test\nws-warning.xml");
@@ -33,6 +33,11 @@ namespace CAPNet.Cmd
             {
                 var alert = XmlParser.Parse(xml);
             }
+        }
+
+        static void ReadFromFeed(string url)
+        {
+
         }
     }
 }

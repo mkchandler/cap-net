@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CAPNet
 {
@@ -7,6 +8,15 @@ namespace CAPNet
     /// </summary>
     public class Info
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public Info()
+        {
+            _resources = new List<Resource>();
+            _areas = new List<Area>();
+        }
+
         private string _language;
 
         /// <summary>
@@ -102,6 +112,26 @@ namespace CAPNet
         /// 
         /// </summary>
         public string Contact { get; set; }
+
+        private ICollection<Resource> _resources;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICollection<Resource> Resources
+        {
+            get { return _resources; }
+        }
+
+        private ICollection<Area> _areas;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICollection<Area> Areas
+        {
+            get { return _areas; }
+        }
     }
 
     /// <summary>
