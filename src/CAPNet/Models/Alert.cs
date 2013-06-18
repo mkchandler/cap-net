@@ -29,17 +29,17 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? Sent { get; set; }
+        public DateTime Sent { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string Status { get; set; }
+        public Status Status { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public MessageType? MessageType { get; set; }
+        public MessageType MessageType { get; set; }
 
         /// <summary>
         /// 
@@ -49,7 +49,7 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        public Scope? Scope { get; set; }
+        public Scope Scope { get; set; }
 
         /// <summary>
         /// 
@@ -90,6 +90,33 @@ namespace CAPNet
         {
             get { return _info; }
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum Status
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        Actual,
+        /// <summary>
+        /// 
+        /// </summary>
+        Excercise,
+        /// <summary>
+        /// 
+        /// </summary>
+        System,
+        /// <summary>
+        /// 
+        /// </summary>
+        Test,
+        /// <summary>
+        /// 
+        /// </summary>
+        Draft
     }
 
     /// <summary>

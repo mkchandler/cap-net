@@ -54,15 +54,18 @@ namespace CAPNet
                             alert.Sent = DateTime.Parse(alertNode.InnerText);
                             break;
                         case "status":
-                            alert.Status = alertNode.InnerText;
+                            // TODO: Parse status to enum
+                            alert.Status = Status.Test;
                             break;
                         case "msgType":
+                            // TODO: Parse message type to enum
                             alert.MessageType = MessageType.Alert;
                             break;
                         case "source":
                             alert.Source = alertNode.InnerText;
                             break;
                         case "scope":
+                            // TODO: Parse scope to enum
                             alert.Scope = Scope.Public;
                             break;
                         case "restriction":
@@ -93,7 +96,7 @@ namespace CAPNet
                                         info.Language = infoNode.InnerText;
                                         break;
                                     case "category":
-                                        info.Category = infoNode.InnerText;
+                                        //info.Category = infoNode.InnerText;
                                         break;
                                     case "event":
                                         info.Event = infoNode.InnerText;

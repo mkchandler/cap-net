@@ -13,6 +13,7 @@ namespace CAPNet
         /// </summary>
         public Info()
         {
+            _categories = new List<Category>();
             _resources = new List<Resource>();
             _areas = new List<Area>();
         }
@@ -28,10 +29,18 @@ namespace CAPNet
             set { _language = value; }
         }
 
+        private ICollection<Category> _categories;
+
         /// <summary>
         /// 
         /// </summary>
-        public string Category { get; set; }
+        public ICollection<Category> Categories
+        {
+            get
+            {
+                return _categories;
+            }
+        }
 
         /// <summary>
         /// 
@@ -132,6 +141,61 @@ namespace CAPNet
         {
             get { return _areas; }
         }
+    }
+
+    /// <summary>
+    /// The code denoting the category of the subject event of the alert message.
+    /// </summary>
+    public enum Category
+    {
+        /// <summary>
+        /// Geophysical (inc. landslide)
+        /// </summary>
+        Geo,
+        /// <summary>
+        /// 
+        /// </summary>
+        Met,
+        /// <summary>
+        /// 
+        /// </summary>
+        Safety,
+        /// <summary>
+        /// 
+        /// </summary>
+        Security,
+        /// <summary>
+        /// 
+        /// </summary>
+        Rescue,
+        /// <summary>
+        /// 
+        /// </summary>
+        Fire,
+        /// <summary>
+        /// 
+        /// </summary>
+        Health,
+        /// <summary>
+        /// 
+        /// </summary>
+        Env,
+        /// <summary>
+        /// 
+        /// </summary>
+        Transport,
+        /// <summary>
+        /// 
+        /// </summary>
+        Infra,
+        /// <summary>
+        /// 
+        /// </summary>
+        CBRNE,
+        /// <summary>
+        /// 
+        /// </summary>
+        Other
     }
 
     /// <summary>
