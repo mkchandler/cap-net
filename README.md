@@ -47,7 +47,7 @@ A list of additional contributors can be viewed here: https://github.com/mkchand
 Copyright and license
 ---------------------
 
-Copyright 2012 Matt Chandler and contributors
+Copyright 2013 Matt Chandler and contributors
 
 Licensed under the MIT License (the "License"); you may not use this work except in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:
 
