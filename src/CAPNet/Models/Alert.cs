@@ -29,7 +29,7 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        public DateTime Sent { get; set; }
+        public DateTimeOffset Sent { get; set; }
 
         /// <summary>
         /// 

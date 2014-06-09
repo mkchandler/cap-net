@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Xml;
 
@@ -58,7 +59,7 @@ namespace CAPNet
                             alert.Sender = alertNode.InnerText;
                             break;
                         case "sent":
-                            alert.Sent = DateTime.Parse(alertNode.InnerText);
+                            alert.Sent = DateTimeOffset.Parse(alertNode.InnerText, CultureInfo.InvariantCulture);
                             break;
                         case "status":
                             // TODO: Parse status to enum
