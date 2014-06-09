@@ -62,19 +62,16 @@ namespace CAPNet
                             alert.Sent = DateTimeOffset.Parse(alertNode.InnerText, CultureInfo.InvariantCulture);
                             break;
                         case "status":
-                            // TODO: Parse status to enum
-                            alert.Status = Status.Test;
+                            alert.Status = (Status)Enum.Parse(typeof(Status), alertNode.InnerText);
                             break;
                         case "msgType":
-                            // TODO: Parse message type to enum
-                            alert.MessageType = MessageType.Alert;
+                            alert.MessageType = (MessageType)Enum.Parse(typeof(MessageType), alertNode.InnerText);
                             break;
                         case "source":
                             alert.Source = alertNode.InnerText;
                             break;
                         case "scope":
-                            // TODO: Parse scope to enum
-                            alert.Scope = Scope.Public;
+                            alert.Scope = (Scope)Enum.Parse(typeof(Scope), alertNode.InnerText);
                             break;
                         case "restriction":
                             alert.Restriction = alertNode.InnerText;

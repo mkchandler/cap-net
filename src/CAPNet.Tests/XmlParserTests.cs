@@ -33,5 +33,27 @@ namespace CAPNet.Tests
             Assert.Equal(TimeSpan.FromHours(-7), info.Onset.Offset);
             Assert.Equal(TimeSpan.FromHours(-7), info.Expires.Offset);
         }
+
+        [Fact]
+        public void CanReadAlertStatus()
+        {
+            var alert = XmlParser.Parse(Examples.Thunderstorm12Xml);
+            Assert.Equal(Status.Actual, alert.Status);
+        }
+
+        [Fact]
+        public void CanReadAlertMessageType()
+        {
+            var alert = XmlParser.Parse(Examples.ThunderstormUpdate12Xml);
+            Assert.Equal(MessageType.Update, alert.MessageType);
+        }
+
+        [Fact]
+        public void CanReadAlertScope()
+        {
+            var alert = XmlParser.Parse(Examples.ThunderstormUpdate12Xml);
+            Assert.Equal(Scope.Restricted, alert.Scope);
+            Assert.Contains("glasses", alert.Restriction);
+        }
     }
 }
