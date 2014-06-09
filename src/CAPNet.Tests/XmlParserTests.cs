@@ -21,5 +21,17 @@ namespace CAPNet.Tests
 
             Assert.Equal(TimeSpan.FromHours(-7), alert.Sent.Offset);
         }
+
+        [Fact]
+        public void DatesInInfoHaveTimeZones()
+        {
+            var alert = XmlParser.Parse(Examples.Thunderstorm12AllDatesXml);
+
+            var info = alert.Info.ElementAt(0);
+
+            Assert.Equal(TimeSpan.FromHours(-7), info.Effective.Offset);
+            Assert.Equal(TimeSpan.FromHours(-7), info.Onset.Offset);
+            Assert.Equal(TimeSpan.FromHours(-7), info.Expires.Offset);
+        }
     }
 }

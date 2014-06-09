@@ -80,17 +80,17 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        public DateTime Effective { get; set; }
+        public DateTimeOffset Effective { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime Onset { get; set; }
+        public DateTimeOffset Onset { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime Expires { get; set; }
+        public DateTimeOffset Expires { get; set; }
 
         /// <summary>
         /// 

@@ -136,13 +136,13 @@ namespace CAPNet
                                         info.EventCode = infoNode.InnerText;
                                         break;
                                     case "effective":
-                                        info.Effective = DateTime.Parse(infoNode.InnerText);
+                                        info.Effective = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
                                         break;
                                     case "onset":
-                                        info.Onset = DateTime.Parse(infoNode.InnerText);
+                                        info.Onset = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
                                         break;
                                     case "expires":
-                                        info.Expires = DateTime.Parse(infoNode.InnerText);
+                                        info.Expires = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
                                         break;
                                     case "senderName":
                                         info.SenderName = infoNode.InnerText;
