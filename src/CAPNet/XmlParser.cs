@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Xml;
 
 namespace CAPNet
@@ -37,6 +38,12 @@ namespace CAPNet
             var alert = new Alert();
 
             XmlNodeList elements = document.GetElementsByTagName("alert", "urn:oasis:names:tc:emergency:cap:1.1");
+
+            if (elements.Count == 0)
+            {
+                // try CAP 1.2
+                elements = document.GetElementsByTagName("alert", "urn:oasis:names:tc:emergency:cap:1.2");
+            }
 
             foreach (XmlNode element in elements)
             {
@@ -162,6 +169,9 @@ namespace CAPNet
                                             {
                                                 case "areaDesc":
                                                     area.Description = areaNode.InnerText;
+                                                    break;
+                                                case "polygon":
+                                                    area.Polygon = areaNode.InnerText;
                                                     break;
                                                 default:
                                                     break;
