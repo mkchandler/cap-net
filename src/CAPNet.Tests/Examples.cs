@@ -146,11 +146,11 @@ namespace CAPNet.Tests
   <msgType>Alert</msgType>
   <scope>Public</scope>
   <info>
-    <category>Security</category>   
-    <event>Homeland Security Advisory System Update</event>   
-    <urgency>Immediate</urgency>   
-    <severity>Severe</severity>   
-    <certainty>Likely</certainty>   
+    <category>Security</category>
+    <event>Homeland Security Advisory System Update</event>
+    <urgency>Immediate</urgency>
+    <severity>Severe</severity>
+    <certainty>Likely</certainty>
     <senderName>U.S. Government, Department of Homeland Security</senderName>
     <headline>Homeland Security Sets Code ORANGE</headline>
     <description>The Department of Homeland Security has elevated the Homeland Security Advisory System threat level to ORANGE / High in response to intelligence which may indicate a heightened threat of terrorism.</description>

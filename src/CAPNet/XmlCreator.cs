@@ -29,10 +29,17 @@ namespace CAPNet
                 new XElement(CAP12Namespace + "status", alert.Status),
                 new XElement(CAP12Namespace + "msgType", alert.MessageType),
                 new XElement(CAP12Namespace + "scope", alert.Scope),
-                from info in alert.Info
-                select new XElement(CAP12Namespace + "info"));
+                alert.Info.Select(Create));
 
             return alertElement;
+        }
+
+        private static XElement Create(Info info)
+        {
+            var infoElement = new XElement(
+                CAP12Namespace + "info",
+                info.Categories.Select(cat => new XElement(CAP12Namespace + "category", cat)));
+            return infoElement;
         }
     }
 }
