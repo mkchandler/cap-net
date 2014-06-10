@@ -7,11 +7,15 @@ namespace CAPNet.Tests
 {
     public class XmlCreatorTests
     {
+        private const string Sender = "victorg@email.com";
+
+        private static readonly DateTimeOffset Sent = new DateTimeOffset(2014, 6, 10, 10, 35, 23, 512, TimeSpan.FromHours(-3));
+
         private static readonly Alert Alert = new Alert
                                                   {
                                                       Identifier = Guid.NewGuid().ToString(),
-                                                      Sender = "victorg@email.com",
-                                                      Sent = DateTimeOffset.Now,
+                                                      Sender = Sender,
+                                                      Sent = Sent,
                                                       Status = Status.Test,
                                                       MessageType = MessageType.Alert,
                                                       Scope = Scope.Private
@@ -33,7 +37,7 @@ namespace CAPNet.Tests
             var senderElement = alertElement.Element(XmlCreator.CAP12Namespace + "sender");
 
             Assert.NotNull(senderElement);
-            Assert.Equal("victorg@email.com", senderElement.Value);
+            Assert.Equal(Sender, senderElement.Value);
         }
 
         [Fact]
@@ -45,6 +49,17 @@ namespace CAPNet.Tests
 
             Assert.NotNull(statusElement);
             Assert.Equal("Test", statusElement.Value);
+        }
+
+        [Fact]
+        public void XmlNodeReturnedHasSentTime()
+        {
+            var alertElement = XmlCreator.Create(Alert);
+
+            var sentElement = alertElement.Element(XmlCreator.CAP12Namespace + "sent");
+
+            Assert.NotNull(sentElement);
+            Assert.Equal("2014-06-10T10:35:23-03:00", sentElement.Value);
         }
     }
 }

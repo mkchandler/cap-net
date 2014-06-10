@@ -22,6 +22,8 @@ namespace CAPNet
             return new XElement(
                 CAP12Namespace + "alert",
                 new XElement(CAP12Namespace + "sender", alert.Sender),
+                // set milliseconds to 0
+                new XElement(CAP12Namespace + "sent", alert.Sent.AddMilliseconds(-alert.Sent.Millisecond)),
                 new XElement(CAP12Namespace + "status", alert.Status));
         }
     }
