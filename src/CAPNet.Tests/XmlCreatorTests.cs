@@ -95,7 +95,7 @@ namespace CAPNet.Tests
             }
 
             // compare just the beginning for now, we don't serialize the info elements yet
-            Assert.Equal(Examples.OrangeAlertXml.Substring(0, 337), alertAsString.Substring(0, 337));
+            Assert.Equal(Examples.OrangeAlertXml.Substring(0, 500), alertAsString.Substring(0, 500));
         }
 
         private static Alert CreateOrangeAlert()
@@ -122,10 +122,14 @@ namespace CAPNet.Tests
             var info = new Info();
             //    <category>Security</category>
             info.Categories.Add(Category.Security);
-            //    <event>Homeland Security Advisory System Update</event>   
-            //    <urgency>Immediate</urgency>   
-            //    <severity>Severe</severity>   
-            //    <certainty>Likely</certainty>   
+            //    <event>Homeland Security Advisory System Update</event>
+            info.Event = "Homeland Security Advisory System Update";
+            //    <urgency>Immediate</urgency>
+            info.Urgency = "Immediate";
+            //    <severity>Severe</severity>
+            info.Severity = Severity.Severe;
+            //    <certainty>Likely</certainty>
+            info.Certainty = "Likely";
             //    <senderName>U.S. Government, Department of Homeland Security</senderName>
             //    <headline>Homeland Security Sets Code ORANGE</headline>
             //    <description>The Department of Homeland Security has elevated the Homeland Security Advisory System threat level to ORANGE / High in response to intelligence which may indicate a heightened threat of terrorism.</description>
