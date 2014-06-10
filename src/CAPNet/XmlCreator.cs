@@ -42,7 +42,10 @@ namespace CAPNet
                 new XElement(CAP12Namespace + "event", info.Event),
                 new XElement(CAP12Namespace + "urgency", info.Urgency),
                 new XElement(CAP12Namespace + "severity", info.Severity),
-                new XElement(CAP12Namespace + "certainty", info.Certainty)
+                new XElement(CAP12Namespace + "certainty", info.Certainty),
+                new XElement(CAP12Namespace + "senderName", info.SenderName),
+                new XElement(CAP12Namespace + "headline", info.Headline),
+                new XElement(CAP12Namespace + "description", info.Description)
                 );
             return infoElement;
         }

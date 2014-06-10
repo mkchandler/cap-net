@@ -95,7 +95,7 @@ namespace CAPNet.Tests
             }
 
             // compare just the beginning for now, we don't serialize the info elements yet
-            Assert.Equal(Examples.OrangeAlertXml.Substring(0, 500), alertAsString.Substring(0, 500));
+            Assert.Equal(Examples.OrangeAlertXml.Substring(0, 870), alertAsString.Substring(0, 870));
         }
 
         private static Alert CreateOrangeAlert()
@@ -131,8 +131,11 @@ namespace CAPNet.Tests
             //    <certainty>Likely</certainty>
             info.Certainty = "Likely";
             //    <senderName>U.S. Government, Department of Homeland Security</senderName>
+            info.SenderName = "U.S. Government, Department of Homeland Security";
             //    <headline>Homeland Security Sets Code ORANGE</headline>
+            info.Headline = "Homeland Security Sets Code ORANGE";
             //    <description>The Department of Homeland Security has elevated the Homeland Security Advisory System threat level to ORANGE / High in response to intelligence which may indicate a heightened threat of terrorism.</description>
+            info.Description = "The Department of Homeland Security has elevated the Homeland Security Advisory System threat level to ORANGE / High in response to intelligence which may indicate a heightened threat of terrorism.";
             //    <instruction> A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.</instruction> 
             //    <web>http://www.dhs.gov/dhspublic/display?theme=29</web>
             //    <parameter>
