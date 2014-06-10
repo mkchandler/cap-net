@@ -13,6 +13,7 @@ namespace CAPNet
         /// </summary>
         public Info()
         {
+            this._parameters = new Dictionary<string, string>();
             _categories = new List<Category>();
             _resources = new List<Resource>();
             _areas = new List<Area>();
@@ -121,6 +122,16 @@ namespace CAPNet
         /// 
         /// </summary>
         public string Contact { get; set; }
+
+        private IDictionary<string, string> _parameters;
+
+        public IDictionary<string, string> Parameters
+        {
+            get
+            {
+                return this._parameters;
+            }
+        }
 
         private ICollection<Resource> _resources;
 

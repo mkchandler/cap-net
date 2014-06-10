@@ -154,7 +154,7 @@ namespace CAPNet.Tests
     <senderName>U.S. Government, Department of Homeland Security</senderName>
     <headline>Homeland Security Sets Code ORANGE</headline>
     <description>The Department of Homeland Security has elevated the Homeland Security Advisory System threat level to ORANGE / High in response to intelligence which may indicate a heightened threat of terrorism.</description>
-    <instruction> A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.</instruction> 
+    <instruction>A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.</instruction> 
     <web>http://www.dhs.gov/dhspublic/display?theme=29</web>
     <parameter>
       <valueName>HSAS</valueName>

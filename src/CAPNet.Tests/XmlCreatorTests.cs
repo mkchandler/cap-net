@@ -136,20 +136,34 @@ namespace CAPNet.Tests
             info.Headline = "Homeland Security Sets Code ORANGE";
             //    <description>The Department of Homeland Security has elevated the Homeland Security Advisory System threat level to ORANGE / High in response to intelligence which may indicate a heightened threat of terrorism.</description>
             info.Description = "The Department of Homeland Security has elevated the Homeland Security Advisory System threat level to ORANGE / High in response to intelligence which may indicate a heightened threat of terrorism.";
-            //    <instruction> A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.</instruction> 
+            //    <instruction>A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.</instruction> 
+            info.Instruction = "A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.";
             //    <web>http://www.dhs.gov/dhspublic/display?theme=29</web>
+            info.Web = "http://www.dhs.gov/dhspublic/display?theme=29";
             //    <parameter>
             //      <valueName>HSAS</valueName>
             //      <value>ORANGE</value>
-            //    </parameter>   
+            //    </parameter>
+            info.Parameters.Add("HSAS", "ORANGE");
             //    <resource>
-            //      <resourceDesc>Image file (GIF)</resourceDesc>
-            //      <mimeType>image/gif</mimeType>   
-            //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
-            //    </resource>   
-            //    <area>       
-            //      <areaDesc>U.S. nationwide and interests worldwide</areaDesc>   
-            //    </area>
+            info.Resources.Add(new Resource
+            {
+                //      <resourceDesc>Image file (GIF)</resourceDesc>
+                Description = "Image file (GIF)",
+                //      <mimeType>image/gif</mimeType>
+                MimeType = "image/gif",
+                //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
+                Uri = "http://www.dhs.gov/dhspublic/getAdvisoryImage"
+            //    </resource>
+            });
+            info.Areas.Add(
+                //  <area>
+                new Area
+                {
+                    //  <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
+                    Description = "U.S. nationwide and interests worldwide"
+                //  </area>
+                });
             //  </info>
 
             orangeAlert.Info.Add(info);
