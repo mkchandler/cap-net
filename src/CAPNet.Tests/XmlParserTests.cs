@@ -55,5 +55,12 @@ namespace CAPNet.Tests
             Assert.Equal(Scope.Restricted, alert.Scope);
             Assert.Contains("glasses", alert.Restriction);
         }
+
+        [Fact]
+        public void InfoHasMetCategory()
+        {
+            var alert = XmlParser.Parse(Examples.Thunderstorm12Xml);
+            Assert.Contains(Category.Met, alert.Info.ElementAt(0).Categories);
+        }
     }
 }

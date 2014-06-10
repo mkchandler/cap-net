@@ -101,7 +101,8 @@ namespace CAPNet
                                         info.Language = infoNode.InnerText;
                                         break;
                                     case "category":
-                                        //info.Category = infoNode.InnerText;
+                                        var category = (Category)Enum.Parse(typeof(Category), infoNode.InnerText);
+                                        info.Categories.Add(category);
                                         break;
                                     case "event":
                                         info.Event = infoNode.InnerText;
