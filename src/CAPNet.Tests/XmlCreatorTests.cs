@@ -35,5 +35,16 @@ namespace CAPNet.Tests
             Assert.NotNull(senderElement);
             Assert.Equal("victorg@email.com", senderElement.Value);
         }
+
+        [Fact]
+        public void XmlNodeReturnedHasStatus()
+        {
+            var alertElement = XmlCreator.Create(Alert);
+
+            var statusElement = alertElement.Element(XmlCreator.CAP12Namespace + "status");
+
+            Assert.NotNull(statusElement);
+            Assert.Equal("Test", statusElement.Value);
+        }
     }
 }
