@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Xml.Linq;
 
 namespace CAPNet
@@ -19,7 +20,7 @@ namespace CAPNet
         /// <returns>An XML representation of the alert</returns>
         public static XElement Create(Alert alert)
         {
-            return new XElement(
+            var alertElement = new XElement(
                 CAP12Namespace + "alert",
                 new XElement(CAP12Namespace + "identifier", alert.Identifier),
                 new XElement(CAP12Namespace + "sender", alert.Sender),
@@ -27,7 +28,11 @@ namespace CAPNet
                 new XElement(CAP12Namespace + "sent", alert.Sent.AddMilliseconds(-alert.Sent.Millisecond)),
                 new XElement(CAP12Namespace + "status", alert.Status),
                 new XElement(CAP12Namespace + "msgType", alert.MessageType),
-                new XElement(CAP12Namespace + "scope", alert.Scope));
+                new XElement(CAP12Namespace + "scope", alert.Scope),
+                from info in alert.Info
+                select new XElement(CAP12Namespace + "info"));
+
+            return alertElement;
         }
     }
 }
