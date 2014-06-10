@@ -95,7 +95,7 @@ namespace CAPNet.Tests
             }
 
             // compare just the beginning for now, we don't serialize the info elements yet
-            Assert.Equal(Examples.OrangeAlertXml.Substring(0, 870), alertAsString.Substring(0, 870));
+            Assert.Equal(Examples.OrangeAlertXml, alertAsString);
         }
 
         private static Alert CreateOrangeAlert()

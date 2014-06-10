@@ -45,8 +45,26 @@ namespace CAPNet
                 new XElement(CAP12Namespace + "certainty", info.Certainty),
                 new XElement(CAP12Namespace + "senderName", info.SenderName),
                 new XElement(CAP12Namespace + "headline", info.Headline),
-                new XElement(CAP12Namespace + "description", info.Description)
+                new XElement(CAP12Namespace + "description", info.Description),
+                new XElement(CAP12Namespace + "instruction", info.Instruction),
+                new XElement(CAP12Namespace + "web", info.Web),
+                from p in info.Parameters
+                select new XElement(
+                    CAP12Namespace + "parameter",
+                    new XElement(CAP12Namespace + "valueName", p.Key),
+                    new XElement(CAP12Namespace + "value", p.Value)),
+                from r in info.Resources
+                select new XElement(
+                    CAP12Namespace + "resource",
+                    new XElement(CAP12Namespace + "resourceDesc", r.Description),
+                    new XElement(CAP12Namespace + "mimeType", r.MimeType),
+                    new XElement(CAP12Namespace + "uri", r.Uri)),
+                from a in info.Areas
+                select new XElement(
+                    CAP12Namespace + "area",
+                    new XElement(CAP12Namespace + "areaDesc", a.Description))
                 );
+
             return infoElement;
         }
     }
