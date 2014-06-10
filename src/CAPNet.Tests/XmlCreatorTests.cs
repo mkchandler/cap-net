@@ -94,7 +94,6 @@ namespace CAPNet.Tests
                 alertAsString = new StreamReader(memoryStream, Encoding.UTF8).ReadToEnd();
             }
 
-            // compare just the beginning for now, we don't serialize the info elements yet
             Assert.Equal(Examples.OrangeAlertXml, alertAsString);
         }
 
