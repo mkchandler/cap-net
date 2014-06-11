@@ -209,6 +209,15 @@ namespace CAPNet
         Other
     }
 
+    public enum Urgency
+    {
+        Immediate,
+        Expected,
+        Future,
+        Past,
+        Unknown
+    }
+
     /// <summary>
     /// The code denoting the severity of the subject event of the alert message.
     /// </summary>
@@ -233,15 +242,6 @@ namespace CAPNet
         /// <summary>
         /// Severity unknown.
         /// </summary>
-        Unknown
-    }
-
-    public enum Urgency
-    {
-        Immediate,
-        Expected,
-        Future,
-        Past,
         Unknown
     }
 }
