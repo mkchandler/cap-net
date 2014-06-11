@@ -62,5 +62,13 @@ namespace CAPNet.Tests
             var alert = XmlParser.Parse(Examples.Thunderstorm12Xml);
             Assert.Contains(Category.Met, alert.Info.ElementAt(0).Categories);
         }
+
+        [Fact]
+        public void UrgencyIsSet()
+        {
+            var alert = XmlParser.Parse(Examples.Thunderstorm12Xml);
+
+            Assert.Equal((object)Urgency.Immediate, (object)alert.Info.ElementAt(0).Urgency);
+        }
     }
 }

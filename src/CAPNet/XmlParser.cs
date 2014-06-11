@@ -111,7 +111,7 @@ namespace CAPNet
                                         info.ResponseType = infoNode.InnerText;
                                         break;
                                     case "urgency":
-                                        info.Urgency = infoNode.InnerText;
+                                        info.Urgency = (Urgency)Enum.Parse(typeof(Urgency), infoNode.InnerText);
                                         break;
                                     case "severity":
                                         Severity severity;

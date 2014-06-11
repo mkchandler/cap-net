@@ -124,7 +124,7 @@ namespace CAPNet.Tests
             //    <event>Homeland Security Advisory System Update</event>
             info.Event = "Homeland Security Advisory System Update";
             //    <urgency>Immediate</urgency>
-            info.Urgency = "Immediate";
+            info.Urgency = Urgency.Immediate;
             //    <severity>Severe</severity>
             info.Severity = Severity.Severe;
             //    <certainty>Likely</certainty>

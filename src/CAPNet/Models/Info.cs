@@ -56,7 +56,7 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        public string Urgency { get; set; }
+        public Urgency Urgency { get; set; }
 
         /// <summary>
         /// 
