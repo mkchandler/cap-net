@@ -5,6 +5,8 @@ using System.Net;
 using System.ServiceModel.Syndication;
 using System.Xml;
 
+using CAPNet.Models;
+
 namespace CAPNet.Cmd
 {
     class Program

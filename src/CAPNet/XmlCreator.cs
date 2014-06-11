@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Xml.Linq;
 
+using CAPNet.Models;
+
 namespace CAPNet
 {
     /// <summary>

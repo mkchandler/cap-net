@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CAPNet
+namespace CAPNet.Models
 {
     /// <summary>
     /// The container for all component parts of the alert message.
@@ -132,78 +132,5 @@ namespace CAPNet
         {
             get { return _info; }
         }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public enum Status
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        Actual,
-        /// <summary>
-        /// 
-        /// </summary>
-        Excercise,
-        /// <summary>
-        /// 
-        /// </summary>
-        System,
-        /// <summary>
-        /// 
-        /// </summary>
-        Test,
-        /// <summary>
-        /// 
-        /// </summary>
-        Draft
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public enum MessageType
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        Alert,
-        /// <summary>
-        /// 
-        /// </summary>
-        Update,
-        /// <summary>
-        /// 
-        /// </summary>
-        Cancel,
-        /// <summary>
-        /// 
-        /// </summary>
-        Ack,
-        /// <summary>
-        /// 
-        /// </summary>
-        Error
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public enum Scope
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        Public,
-        /// <summary>
-        /// 
-        /// </summary>
-        Restricted,
-        /// <summary>
-        /// 
-        /// </summary>
-        Private
     }
 }

@@ -3,36 +3,27 @@
     /// <summary>
     /// 
     /// </summary>
-    public class Resource
+    public enum MessageType
     {
         /// <summary>
         /// 
         /// </summary>
-        public string Description { get; set; }
-
+        Alert,
         /// <summary>
         /// 
         /// </summary>
-        public string MimeType { get; set; }
-
+        Update,
         /// <summary>
         /// 
         /// </summary>
-        public int? Size { get; set; }
-
+        Cancel,
         /// <summary>
         /// 
         /// </summary>
-        public string Uri { get; set; }
-
+        Ack,
         /// <summary>
         /// 
         /// </summary>
-        public string DereferencedUri { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Digest { get; set; }
+        Error
     }
 }

@@ -3,6 +3,8 @@ using System.Globalization;
 using System.Linq;
 using System.Xml;
 
+using CAPNet.Models;
+
 namespace CAPNet
 {
     /// <summary>

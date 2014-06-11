@@ -4,6 +4,8 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
+using CAPNet.Models;
+
 using Xunit;
 
 namespace CAPNet.Tests

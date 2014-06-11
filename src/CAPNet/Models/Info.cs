@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CAPNet
+namespace CAPNet.Models
 {
     /// <summary>
     /// The container for all component parts of the info sub-element of the alert message.
@@ -13,7 +13,7 @@ namespace CAPNet
         /// </summary>
         public Info()
         {
-            this._parameters = new Dictionary<string, string>();
+            _parameters = new Dictionary<string, string>();
             _categories = new List<Category>();
             _resources = new List<Resource>();
             _areas = new List<Area>();
@@ -129,7 +129,7 @@ namespace CAPNet
         {
             get
             {
-                return this._parameters;
+                return _parameters;
             }
         }
 
@@ -152,105 +152,5 @@ namespace CAPNet
         {
             get { return _areas; }
         }
-    }
-
-    /// <summary>
-    /// The code denoting the category of the subject event of the alert message.
-    /// </summary>
-    public enum Category
-    {
-        /// <summary>
-        /// Geophysical (inc. landslide)
-        /// </summary>
-        Geo,
-        /// <summary>
-        /// 
-        /// </summary>
-        Met,
-        /// <summary>
-        /// 
-        /// </summary>
-        Safety,
-        /// <summary>
-        /// 
-        /// </summary>
-        Security,
-        /// <summary>
-        /// 
-        /// </summary>
-        Rescue,
-        /// <summary>
-        /// 
-        /// </summary>
-        Fire,
-        /// <summary>
-        /// 
-        /// </summary>
-        Health,
-        /// <summary>
-        /// 
-        /// </summary>
-        Env,
-        /// <summary>
-        /// 
-        /// </summary>
-        Transport,
-        /// <summary>
-        /// 
-        /// </summary>
-        Infra,
-        /// <summary>
-        /// 
-        /// </summary>
-        CBRNE,
-        /// <summary>
-        /// 
-        /// </summary>
-        Other
-    }
-
-    public enum Urgency
-    {
-        Immediate,
-        Expected,
-        Future,
-        Past,
-        Unknown
-    }
-
-    /// <summary>
-    /// The code denoting the severity of the subject event of the alert message.
-    /// </summary>
-    public enum Severity
-    {
-        /// <summary>
-        /// Extraordinary threat to life or property.
-        /// </summary>
-        Extreme,
-        /// <summary>
-        /// Signifcant threat to life or property.
-        /// </summary>
-        Severe,
-        /// <summary>
-        /// Possible threat to life or property.
-        /// </summary>
-        Moderate,
-        /// <summary>
-        /// Minimal threat to life or property.
-        /// </summary>
-        Minor,
-        /// <summary>
-        /// Severity unknown.
-        /// </summary>
-        Unknown
-    }
-
-    public enum Certainty
-    {
-        Observed,
-        Likely,
-        Possible,
-        Unlikely,
-        Unknown
     }
 }

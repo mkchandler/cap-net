@@ -3,36 +3,27 @@
     /// <summary>
     /// 
     /// </summary>
-    public class Resource
+    public enum Status
     {
         /// <summary>
         /// 
         /// </summary>
-        public string Description { get; set; }
-
+        Actual,
         /// <summary>
         /// 
         /// </summary>
-        public string MimeType { get; set; }
-
+        Excercise,
         /// <summary>
         /// 
         /// </summary>
-        public int? Size { get; set; }
-
+        System,
         /// <summary>
         /// 
         /// </summary>
-        public string Uri { get; set; }
-
+        Test,
         /// <summary>
         /// 
         /// </summary>
-        public string DereferencedUri { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Digest { get; set; }
+        Draft
     }
 }

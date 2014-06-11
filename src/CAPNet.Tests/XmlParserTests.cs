@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 
+using CAPNet.Models;
+
 using Xunit;
 
 namespace CAPNet.Tests
