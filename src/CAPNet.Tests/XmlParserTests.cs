@@ -70,7 +70,7 @@ namespace CAPNet.Tests
         {
             var alert = XmlParser.Parse(Examples.Thunderstorm12Xml);
 
-            Assert.Equal((object)Urgency.Immediate, (object)alert.Info.ElementAt(0).Urgency);
+            Assert.Equal(Urgency.Immediate, alert.Info.ElementAt(0).Urgency);
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace CAPNet.Tests
         {
             var alert = XmlParser.Parse(Examples.Thunderstorm12Xml);
 
-            Assert.Equal((object)Certainty.Observed, (object)alert.Info.ElementAt(0).Certainty);
+            Assert.Equal(Certainty.Observed, alert.Info.ElementAt(0).Certainty);
         }
 
         /// <summary>
