@@ -235,4 +235,13 @@ namespace CAPNet
         /// </summary>
         Unknown
     }
+
+    public enum Urgency
+    {
+        Immediate,
+        Expected,
+        Future,
+        Past,
+        Unknown
+    }
 }
