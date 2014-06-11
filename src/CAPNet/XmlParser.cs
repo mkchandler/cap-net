@@ -125,7 +125,14 @@ namespace CAPNet
                                         }
                                         break;
                                     case "certainty":
-                                        info.Certainty = (Certainty)Enum.Parse(typeof(Certainty), infoNode.InnerText);
+                                        if (infoNode.InnerText == "Very Likely")
+                                        {
+                                            info.Certainty = Certainty.Likely;
+                                        }
+                                        else
+                                        {
+                                            info.Certainty = (Certainty)Enum.Parse(typeof(Certainty), infoNode.InnerText);
+                                        }
                                         break;
                                     case "audience":
                                         info.Audience = infoNode.InnerText;

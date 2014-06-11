@@ -78,5 +78,16 @@ namespace CAPNet.Tests
 
             Assert.Equal((object)Certainty.Observed, (object)alert.Info.ElementAt(0).Certainty);
         }
+
+        /// <summary>
+        /// For backward compatibility with CAP 1.0, the deprecated value of “Very Likely” SHOULD be treated as equivalent to “Likely”.
+        /// </summary>
+        [Fact]
+        public void VeryLikelyIsTreatedAsLikely()
+        {
+            var alert = XmlParser.Parse(Examples.VeryLikelyOrangeAlertXml);
+
+            Assert.Equal(Certainty.Likely, alert.Info.ElementAt(0).Certainty);
+        }
     }
 }
