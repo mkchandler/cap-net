@@ -66,7 +66,7 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        public string Certainty { get; set; }
+        public Certainty Certainty { get; set; }
 
         /// <summary>
         /// 
@@ -242,6 +242,15 @@ namespace CAPNet
         /// <summary>
         /// Severity unknown.
         /// </summary>
+        Unknown
+    }
+
+    public enum Certainty
+    {
+        Observed,
+        Likely,
+        Possible,
+        Unlikely,
         Unknown
     }
 }

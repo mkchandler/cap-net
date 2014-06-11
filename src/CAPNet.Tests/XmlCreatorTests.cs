@@ -128,7 +128,7 @@ namespace CAPNet.Tests
             //    <severity>Severe</severity>
             info.Severity = Severity.Severe;
             //    <certainty>Likely</certainty>
-            info.Certainty = "Likely";
+            info.Certainty = Certainty.Likely;
             //    <senderName>U.S. Government, Department of Homeland Security</senderName>
             info.SenderName = "U.S. Government, Department of Homeland Security";
             //    <headline>Homeland Security Sets Code ORANGE</headline>

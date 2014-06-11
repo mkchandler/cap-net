@@ -70,5 +70,13 @@ namespace CAPNet.Tests
 
             Assert.Equal((object)Urgency.Immediate, (object)alert.Info.ElementAt(0).Urgency);
         }
+
+        [Fact]
+        public void CertaintyIsSet()
+        {
+            var alert = XmlParser.Parse(Examples.Thunderstorm12Xml);
+
+            Assert.Equal((object)Certainty.Observed, (object)alert.Info.ElementAt(0).Certainty);
+        }
     }
 }
