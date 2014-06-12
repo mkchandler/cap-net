@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
@@ -10,7 +11,7 @@ namespace CAPNet
     /// <summary>
     /// 
     /// </summary>
-    public class XmlParser
+    public static class XmlParser
     {
         /// <summary>
         /// 
@@ -168,6 +169,44 @@ namespace CAPNet
                                         break;
                                     case "contact":
                                         info.Contact = infoNode.InnerText;
+                                        break;
+                                    case "parameter":
+                                        string valueName = null;
+                                        string value = null;
+                                        foreach (XmlNode parameterNode in infoNode.ChildNodes)
+                                        {
+                                            switch (parameterNode.Name)
+                                            {
+                                                case "valueName":
+                                                    valueName = parameterNode.InnerText;
+                                                    break;
+                                                case "value":
+                                                    value = parameterNode.InnerText;
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                        }
+                                        info.Parameters.Add(valueName, value);
+                                        break;
+                                    case "resource":
+                                        var resource = new Resource();
+                                        foreach (XmlNode resourceNode in infoNode.ChildNodes)
+                                        {
+                                            switch (resourceNode.Name)
+                                            {
+                                                case "resourceDesc":
+                                                    resource.Description = resourceNode.InnerText;
+                                                    break;
+                                                case "mimeType":
+                                                    resource.MimeType = resourceNode.InnerText;
+                                                    break;
+                                                case "uri":
+                                                    resource.Uri = resourceNode.InnerText;
+                                                    break;
+                                            }
+                                        }
+                                        info.Resources.Add(resource);
                                         break;
                                     case "area":
                                         var area = new Area();
