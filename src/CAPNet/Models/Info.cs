@@ -125,6 +125,10 @@ namespace CAPNet.Models
 
         private IDictionary<string, string> _parameters;
 
+        /// <summary>
+        /// System-specific additional parameters associated
+        /// with the alert message (OPTIONAL)
+        /// </summary>
         public IDictionary<string, string> Parameters
         {
             get
