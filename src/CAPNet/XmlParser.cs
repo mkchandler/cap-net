@@ -95,141 +95,7 @@ namespace CAPNet
                             alert.Incidents = alertNode.InnerText;
                             break;
                         case "info":
-                            var info = new Info();
-                            foreach (XmlNode infoNode in alertNode.ChildNodes)
-                            {
-                                switch (infoNode.Name)
-                                {
-                                    case "language":
-                                        info.Language = infoNode.InnerText;
-                                        break;
-                                    case "category":
-                                        var category = (Category)Enum.Parse(typeof(Category), infoNode.InnerText);
-                                        info.Categories.Add(category);
-                                        break;
-                                    case "event":
-                                        info.Event = infoNode.InnerText;
-                                        break;
-                                    case "responseType":
-                                        info.ResponseType = infoNode.InnerText;
-                                        break;
-                                    case "urgency":
-                                        info.Urgency = (Urgency)Enum.Parse(typeof(Urgency), infoNode.InnerText);
-                                        break;
-                                    case "severity":
-                                        Severity severity;
-                                        if (Enum.TryParse(infoNode.InnerText, out severity))
-                                        {
-                                            info.Severity = severity;
-                                        }
-                                        else
-                                        {
-                                            info.Severity = null;
-                                        }
-                                        break;
-                                    case "certainty":
-                                        if (infoNode.InnerText == "Very Likely")
-                                        {
-                                            info.Certainty = Certainty.Likely;
-                                        }
-                                        else
-                                        {
-                                            info.Certainty = (Certainty)Enum.Parse(typeof(Certainty), infoNode.InnerText);
-                                        }
-                                        break;
-                                    case "audience":
-                                        info.Audience = infoNode.InnerText;
-                                        break;
-                                    case "eventCode":
-                                        info.EventCode = infoNode.InnerText;
-                                        break;
-                                    case "effective":
-                                        info.Effective = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
-                                        break;
-                                    case "onset":
-                                        info.Onset = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
-                                        break;
-                                    case "expires":
-                                        info.Expires = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
-                                        break;
-                                    case "senderName":
-                                        info.SenderName = infoNode.InnerText;
-                                        break;
-                                    case "headline":
-                                        info.Headline = infoNode.InnerText;
-                                        break;
-                                    case "description":
-                                        info.Description = infoNode.InnerText;
-                                        break;
-                                    case "instruction":
-                                        info.Instruction = infoNode.InnerText;
-                                        break;
-                                    case "web":
-                                        info.Web = infoNode.InnerText;
-                                        break;
-                                    case "contact":
-                                        info.Contact = infoNode.InnerText;
-                                        break;
-                                    case "parameter":
-                                        string valueName = null;
-                                        string value = null;
-                                        foreach (XmlNode parameterNode in infoNode.ChildNodes)
-                                        {
-                                            switch (parameterNode.Name)
-                                            {
-                                                case "valueName":
-                                                    valueName = parameterNode.InnerText;
-                                                    break;
-                                                case "value":
-                                                    value = parameterNode.InnerText;
-                                                    break;
-                                                default:
-                                                    break;
-                                            }
-                                        }
-                                        info.Parameters.Add(valueName, value);
-                                        break;
-                                    case "resource":
-                                        var resource = new Resource();
-                                        foreach (XmlNode resourceNode in infoNode.ChildNodes)
-                                        {
-                                            switch (resourceNode.Name)
-                                            {
-                                                case "resourceDesc":
-                                                    resource.Description = resourceNode.InnerText;
-                                                    break;
-                                                case "mimeType":
-                                                    resource.MimeType = resourceNode.InnerText;
-                                                    break;
-                                                case "uri":
-                                                    resource.Uri = resourceNode.InnerText;
-                                                    break;
-                                            }
-                                        }
-                                        info.Resources.Add(resource);
-                                        break;
-                                    case "area":
-                                        var area = new Area();
-                                        foreach (XmlNode areaNode in infoNode.ChildNodes)
-                                        {
-                                            switch (areaNode.Name)
-                                            {
-                                                case "areaDesc":
-                                                    area.Description = areaNode.InnerText;
-                                                    break;
-                                                case "polygon":
-                                                    area.Polygon = areaNode.InnerText;
-                                                    break;
-                                                default:
-                                                    break;
-                                            }
-                                        }
-                                        info.Areas.Add(area);
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
+                            var info = ParseInfo(alertNode);
                             alert.Info.Add(info);
                             break;
                         default:
@@ -239,6 +105,158 @@ namespace CAPNet
             }
 
             return alert;
+        }
+
+        private static Info ParseInfo(XmlNode alertNode)
+        {
+            var info = new Info();
+            foreach (XmlNode infoNode in alertNode.ChildNodes)
+            {
+                switch (infoNode.Name)
+                {
+                    case "language":
+                        info.Language = infoNode.InnerText;
+                        break;
+                    case "category":
+                        var category = (Category)Enum.Parse(typeof(Category), infoNode.InnerText);
+                        info.Categories.Add(category);
+                        break;
+                    case "event":
+                        info.Event = infoNode.InnerText;
+                        break;
+                    case "responseType":
+                        info.ResponseType = infoNode.InnerText;
+                        break;
+                    case "urgency":
+                        info.Urgency = (Urgency)Enum.Parse(typeof(Urgency), infoNode.InnerText);
+                        break;
+                    case "severity":
+                        Severity severity;
+                        if (Enum.TryParse(infoNode.InnerText, out severity))
+                        {
+                            info.Severity = severity;
+                        }
+                        else
+                        {
+                            info.Severity = null;
+                        }
+                        break;
+                    case "certainty":
+                        if (infoNode.InnerText == "Very Likely")
+                        {
+                            info.Certainty = Certainty.Likely;
+                        }
+                        else
+                        {
+                            info.Certainty = (Certainty)Enum.Parse(typeof(Certainty), infoNode.InnerText);
+                        }
+                        break;
+                    case "audience":
+                        info.Audience = infoNode.InnerText;
+                        break;
+                    case "eventCode":
+                        info.EventCode = infoNode.InnerText;
+                        break;
+                    case "effective":
+                        info.Effective = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
+                        break;
+                    case "onset":
+                        info.Onset = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
+                        break;
+                    case "expires":
+                        info.Expires = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
+                        break;
+                    case "senderName":
+                        info.SenderName = infoNode.InnerText;
+                        break;
+                    case "headline":
+                        info.Headline = infoNode.InnerText;
+                        break;
+                    case "description":
+                        info.Description = infoNode.InnerText;
+                        break;
+                    case "instruction":
+                        info.Instruction = infoNode.InnerText;
+                        break;
+                    case "web":
+                        info.Web = infoNode.InnerText;
+                        break;
+                    case "contact":
+                        info.Contact = infoNode.InnerText;
+                        break;
+                    case "parameter":
+                        string valueName = null;
+                        string value = null;
+                        foreach (XmlNode parameterNode in infoNode.ChildNodes)
+                        {
+                            switch (parameterNode.Name)
+                            {
+                                case "valueName":
+                                    valueName = parameterNode.InnerText;
+                                    break;
+                                case "value":
+                                    value = parameterNode.InnerText;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        info.Parameters.Add(valueName, value);
+                        break;
+                    case "resource":
+                        var resource = ParseResource(infoNode);
+                        info.Resources.Add(resource);
+                        break;
+                    case "area":
+                        var area = ParseArea(infoNode);
+                        info.Areas.Add(area);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return info;
+        }
+
+        private static Area ParseArea(XmlNode infoNode)
+        {
+            var area = new Area();
+            foreach (XmlNode areaNode in infoNode.ChildNodes)
+            {
+                switch (areaNode.Name)
+                {
+                    case "areaDesc":
+                        area.Description = areaNode.InnerText;
+                        break;
+                    case "polygon":
+                        area.Polygon = areaNode.InnerText;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return area;
+        }
+
+        private static Resource ParseResource(XmlNode infoNode)
+        {
+            var resource = new Resource();
+            foreach (XmlNode resourceNode in infoNode.ChildNodes)
+            {
+                switch (resourceNode.Name)
+                {
+                    case "resourceDesc":
+                        resource.Description = resourceNode.InnerText;
+                        break;
+                    case "mimeType":
+                        resource.MimeType = resourceNode.InnerText;
+                        break;
+                    case "uri":
+                        resource.Uri = resourceNode.InnerText;
+                        break;
+                }
+            }
+            return resource;
         }
     }
 }
