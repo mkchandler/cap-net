@@ -13,33 +13,40 @@ namespace CAPNet
     /// </summary>
     public static class XmlParser
     {
+        
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public static Alert Parse(string xml)
+        public static List<Alert> Parse(string xml)
         {
             var document = new XmlDocument();
             document.LoadXml(xml);
-            var alert = ParseInternal(document);
-            return alert;
+            var alertList = ParseInternal(document);
+            return alertList;
         }
+
+       
+
+        
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public static Alert Parse(XmlDocument xml)
+        public static List<Alert> Parse(XmlDocument xml)
         {
-            var alert = ParseInternal(xml);
-            return alert;
+            var alertList = ParseInternal(xml);
+
+            return alertList;
         }
 
-        private static Alert ParseInternal(XmlDocument document)
+        private static List<Alert> ParseInternal(XmlDocument document)
         {
-            var alert = new Alert();
+            var alertList = new List<Alert>();            
 
             XmlNodeList elements = document.GetElementsByTagName("alert", "urn:oasis:names:tc:emergency:cap:1.1");
 
@@ -51,6 +58,8 @@ namespace CAPNet
 
             foreach (XmlNode element in elements)
             {
+                var alert = new Alert();
+
                 foreach (XmlNode alertNode in element.ChildNodes)
                 {
                     switch (alertNode.Name)
@@ -102,9 +111,11 @@ namespace CAPNet
                             break;
                     }
                 }
+
+                alertList.Add(alert);
             }
 
-            return alert;
+            return alertList;
         }
 
         private static Info ParseInfo(XmlNode alertNode)

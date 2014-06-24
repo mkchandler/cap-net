@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.ServiceModel.Syndication;
 using System.Xml;
@@ -13,52 +14,25 @@ namespace CAPNet.Cmd
     {
         static void Main(string[] args)
         {
+
             ReadNWS();
 
-            //string xml = null;
-            //var document = new XmlDocument();
-
-            //try
-            //{
-            //    document.Load(@"c:\_dev\cap-net\test\nws-warning.xml");
-            //}
-            //catch (XmlException e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //}
-
-            //using (StringWriter sringWriter = new StringWriter())
-            //{
-            //    using (XmlTextWriter textWriter = new XmlTextWriter(sringWriter))
-            //    {
-            //        document.WriteTo(textWriter);
-            //        xml = sringWriter.ToString();
-            //    }
-            //}
-
-            //if (xml != null)
-            //{
-            //    var alert = XmlParser.Parse(xml);
-            //}
-
-            //Console.ReadLine();
         }
 
         static void ReadNWS()
         {
-            var alerts = new List<Alert>();
+            IEnumerable<Alert> alerts;
 
             using (var reader = XmlReader.Create("http://alerts.weather.gov/cap/ok.atom"))
             {
                 var feed = SyndicationFeed.Load(reader);
 
-                foreach (var item in feed.Items)
-                {
-                    string url = item.Id;
-                    Alert alert = GetXml(url);
-                    alerts.Add(alert);
-                }
+                alerts = from item in feed.Items
+                         from alert in GetAlerts(item.Id)
+                         select alert;
             }
+
+            Console.WriteLine("{0} alerts", alerts.Count());
 
             foreach (var alert in alerts)
             {
@@ -82,20 +56,6 @@ namespace CAPNet.Cmd
                         areas += area.Description;
                     }
 
-                    //if (info.Severity == Severity.Severe || info.Severity == Severity.Extreme)
-                    //{
-                    //    var eventRepository = new EventRepository();
-                    //    var eventModel = new Event();
-                    //    eventModel.Sender = alert.Sender;
-                    //    eventModel.Alias = info.Event;
-                    //    eventModel.DefaultMessage = info.Headline;
-                    //    eventModel.Type = new EventType() { Id = 1 };
-                    //    eventModel.EffectiveDateTime = info.Effective;
-                    //    eventModel.ExpiresDateTime = info.Expires;
-                    //    eventModel.Areas = areas;
-
-                    //    eventRepository.Save(eventModel);
-                    //}
                 }
             }
 
@@ -103,7 +63,7 @@ namespace CAPNet.Cmd
             Console.ReadLine();
         }
 
-        public static Alert GetXml(string url)
+        public static List<Alert> GetAlerts(string url)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
@@ -123,17 +83,11 @@ namespace CAPNet.Cmd
                         XmlDocument doc = new XmlDocument();
                         doc.Load(responseStream);
 
-                        Alert alert = XmlParser.Parse(doc);
-
-                        return alert;
+                        var alertList = XmlParser.Parse(doc);
+                        return alertList;
                     }
                 }
             }
-        }
-
-        static void ReadFromFeed(string url)
-        {
-
         }
     }
 }
