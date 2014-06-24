@@ -14,9 +14,7 @@ namespace CAPNet.Cmd
     {
         static void Main(string[] args)
         {
-
             ReadNWS();
-
         }
 
         static void ReadNWS()
