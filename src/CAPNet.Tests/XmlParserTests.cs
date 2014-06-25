@@ -17,14 +17,19 @@ namespace CAPNet.Tests
         }
 
         [Fact]
+        public void ReadingXmlWithNoAlertReturnsEmptyList()
+        {
+            var alertList = XmlParser.Parse("<a><b/><c/></a>");
+
+            Assert.Empty(alertList);
+        }
+
+        [Fact]
         public void CanReadCAP12Example()
         {
             var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
             Assert.NotNull(alert.Info.ElementAt(0).Areas.ElementAt(0).Polygon);
         }
-
- 
-
 
         [Fact]
         public void SentTimeHasTimeZone()
