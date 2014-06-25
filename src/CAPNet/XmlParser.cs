@@ -13,8 +13,6 @@ namespace CAPNet
     /// </summary>
     public static class XmlParser
     {
-        
-
         /// <summary>
         /// 
         /// </summary>
@@ -27,10 +25,6 @@ namespace CAPNet
             var alertList = ParseInternal(document);
             return alertList;
         }
-
-       
-
-        
 
         /// <summary>
         /// 

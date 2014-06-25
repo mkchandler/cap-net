@@ -23,9 +23,6 @@ namespace CAPNet.Tests
             Assert.NotNull(alert.Info.ElementAt(0).Areas.ElementAt(0).Polygon);
         }
 
- 
-
-
         [Fact]
         public void SentTimeHasTimeZone()
         {
