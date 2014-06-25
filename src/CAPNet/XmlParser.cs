@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Xml;
 
 using CAPNet.Models;
@@ -13,8 +12,6 @@ namespace CAPNet
     /// </summary>
     public static class XmlParser
     {
-        
-
         /// <summary>
         /// 
         /// </summary>
@@ -28,10 +25,6 @@ namespace CAPNet
             return alertList;
         }
 
-       
-
-        
-
         /// <summary>
         /// 
         /// </summary>
@@ -40,7 +33,6 @@ namespace CAPNet
         public static List<Alert> Parse(XmlDocument xml)
         {
             var alertList = ParseInternal(xml);
-
             return alertList;
         }
 
@@ -59,7 +51,6 @@ namespace CAPNet
             foreach (XmlNode element in elements)
             {
                 var alert = new Alert();
-
                 foreach (XmlNode alertNode in element.ChildNodes)
                 {
                     switch (alertNode.Name)
