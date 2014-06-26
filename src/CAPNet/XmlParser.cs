@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
 
 using CAPNet.Models;
 
@@ -40,7 +40,7 @@ namespace CAPNet
 
         private static List<Alert> ParseInternal(XmlDocument document)
         {
-            var alertList = new List<Alert>();            
+            var alertList = new List<Alert>();
 
             XmlNodeList elements = document.GetElementsByTagName("alert", "urn:oasis:names:tc:emergency:cap:1.1");
 
@@ -243,24 +243,34 @@ namespace CAPNet
             return area;
         }
 
-        private static Resource ParseResource(XmlNode infoNode)
+        private static Resource ParseResource(XmlNode resourceNode)
+        {
+            var translatedResourceNode = XDocument.Parse(resourceNode.OuterXml).Root;
+            return ParseResource(translatedResourceNode);
+        }
+
+        private static Resource ParseResource(XElement translatedResourceNode)
         {
             var resource = new Resource();
-            foreach (XmlNode resourceNode in infoNode.ChildNodes)
-            {
-                switch (resourceNode.Name)
-                {
-                    case "resourceDesc":
-                        resource.Description = resourceNode.InnerText;
-                        break;
-                    case "mimeType":
-                        resource.MimeType = resourceNode.InnerText;
-                        break;
-                    case "uri":
-                        resource.Uri = resourceNode.InnerText;
-                        break;
-                }
-            }
+
+            //<resource>
+            //  <resourceDesc>Image file (GIF)</resourceDesc>
+            //  <mimeType>image/gif</mimeType>
+            //  <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
+            //</resource>
+
+            var resourceDescNode = translatedResourceNode.Element(XmlCreator.CAP12Namespace + "resourceDesc");
+            if (resourceDescNode != null)
+                resource.Description = resourceDescNode.Value;
+
+            var mimeTypeNode = translatedResourceNode.Element(XmlCreator.CAP12Namespace + "mimeType");
+            if (mimeTypeNode != null)
+                resource.MimeType = mimeTypeNode.Value;
+
+            var uriNode = translatedResourceNode.Element(XmlCreator.CAP12Namespace + "uri");
+            if (uriNode != null)
+                resource.Uri = uriNode.Value;
+
             return resource;
         }
     }
