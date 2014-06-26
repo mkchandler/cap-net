@@ -223,23 +223,24 @@ namespace CAPNet
             return info;
         }
 
-        private static Area ParseArea(XmlNode infoNode)
+        private static Area ParseArea(XmlNode areaNode)
+        {
+            var translatedAreaNode = XDocument.Parse(areaNode.OuterXml).Root;
+            return ParseArea(translatedAreaNode);
+        }
+
+        private static Area ParseArea(XElement translatedAreaNode)
         {
             var area = new Area();
-            foreach (XmlNode areaNode in infoNode.ChildNodes)
-            {
-                switch (areaNode.Name)
-                {
-                    case "areaDesc":
-                        area.Description = areaNode.InnerText;
-                        break;
-                    case "polygon":
-                        area.Polygon = areaNode.InnerText;
-                        break;
-                    default:
-                        break;
-                }
-            }
+
+            var areaDescNode = translatedAreaNode.Element(XmlCreator.CAP12Namespace + "areaDesc");
+            if (areaDescNode != null)
+                area.Description = areaDescNode.Value;
+
+            var polygonNode = translatedAreaNode.Element(XmlCreator.CAP12Namespace + "polygon");
+            if (polygonNode != null)
+                area.Polygon = polygonNode.Value;
+
             return area;
         }
 
