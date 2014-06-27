@@ -53,7 +53,7 @@ namespace CAPNet
                 from p in info.Parameters
                 select new XElement(
                     CAP12Namespace + "parameter",
-                    new XElement(CAP12Namespace + "valueName", p.Key),
+                    new XElement(CAP12Namespace + "valueName", p.ValueName),
                     new XElement(CAP12Namespace + "value", p.Value)),
                 from r in info.Resources
                 select new XElement(

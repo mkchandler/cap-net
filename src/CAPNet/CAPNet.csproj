@@ -49,6 +49,7 @@
     <Compile Include="Models\Certainty.cs" />
     <Compile Include="Models\Info.cs" />
     <Compile Include="Models\MessageType.cs" />
+    <Compile Include="Models\Parameter.cs" />
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\Scope.cs" />
     <Compile Include="Models\Severity.cs" />

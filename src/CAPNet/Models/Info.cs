@@ -13,7 +13,7 @@ namespace CAPNet.Models
         /// </summary>
         public Info()
         {
-            _parameters = new Dictionary<string, string>();
+            _parameters = new List<Parameter>();
             _categories = new List<Category>();
             _resources = new List<Resource>();
             _areas = new List<Area>();
@@ -123,13 +123,13 @@ namespace CAPNet.Models
         /// </summary>
         public string Contact { get; set; }
 
-        private IDictionary<string, string> _parameters;
+        private List<Parameter> _parameters;
 
         /// <summary>
         /// System-specific additional parameters associated
         /// with the alert message (OPTIONAL)
         /// </summary>
-        public IDictionary<string, string> Parameters
+        public List<Parameter> Parameters
         {
             get
             {
