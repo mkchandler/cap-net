@@ -1,11 +1,9 @@
-﻿using System;
+﻿using CAPNet.Models;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
-
-using CAPNet.Models;
 
 namespace CAPNet
 {
@@ -21,9 +19,9 @@ namespace CAPNet
         /// <returns></returns>
         public static IEnumerable<Alert> Parse(string xml)
         {
-            var document = new XmlDocument();
-            document.LoadXml(xml);
+            var document = XDocument.Parse(xml);
             var alertList = ParseInternal(document);
+            
             return alertList;
         }
 
@@ -32,25 +30,19 @@ namespace CAPNet
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public static IEnumerable<Alert> Parse(XmlDocument xml)
+        public static IEnumerable<Alert> Parse(XDocument xml)
         {
             var alertList = ParseInternal(xml);
 
             return alertList;
         }
 
-        private static IEnumerable<Alert> ParseInternal(XmlDocument document)
+        private static IEnumerable<Alert> ParseInternal(XDocument xdoc)
         {
-            var alertList = new List<Alert>();
-
-            XDocument xdoc = XDocument.Parse(document.OuterXml);
-            XNamespace ns1 = "urn:oasis:names:tc:emergency:cap:1.1";
-            XNamespace ns2 = "urn:oasis:names:tc:emergency:cap:1.2";
-
-            var elements = xdoc.Descendants(ns1 + "alert");
+            var elements = xdoc.Descendants(XmlCreator.CAP11Namespace + "alert");
             if (!elements.Any())
             {
-                elements = xdoc.Descendants(ns2 + "alert");
+                elements = xdoc.Descendants(XmlCreator.CAP12Namespace + "alert");
             }
 
             return from alertElement in elements
@@ -64,7 +56,7 @@ namespace CAPNet
             var infoNode = alertElement.Element(XmlCreator.CAP12Namespace + "info");
             if (infoNode != null)
             {
-                var info = ParseInfo(GetXmlNode(infoNode));
+                var info = ParseInfo(infoNode);
                 alert.Info.Add(info);
             }
 
@@ -149,19 +141,9 @@ namespace CAPNet
             return alert;
         }
 
-        private static XmlNode GetXmlNode(XElement element)
+        private static Info ParseInfo(XNode alertNode)
         {
-            using (XmlReader xmlReader = element.CreateReader())
-            {
-                XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(xmlReader);
-                return xmlDoc;
-            }
-        }
-
-        private static Info ParseInfo(XmlNode alertNode)
-        {
-            var translatedAlertNode = XDocument.Parse(alertNode.OuterXml).Root;
+            var translatedAlertNode = (XElement)alertNode;
             var info = new Info();
 
             var languageNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "language");
@@ -324,15 +306,10 @@ namespace CAPNet
             return info;
         }
 
-        private static Area ParseArea(XmlNode areaNode)
-        {
-            var translatedAreaNode = XDocument.Parse(areaNode.OuterXml).Root;
-            return ParseArea(translatedAreaNode);
-        }
-
-        private static Area ParseArea(XElement translatedAreaNode)
+        private static Area ParseArea(XNode areaNode)
         {
             var area = new Area();
+            var translatedAreaNode = (XElement)areaNode;
 
             var areaDescNode = translatedAreaNode.Element(XmlCreator.CAP12Namespace + "areaDesc");
             if (areaDescNode != null)
@@ -345,15 +322,10 @@ namespace CAPNet
             return area;
         }
 
-        private static Resource ParseResource(XmlNode resourceNode)
-        {
-            var translatedResourceNode = XDocument.Parse(resourceNode.OuterXml).Root;
-            return ParseResource(translatedResourceNode);
-        }
-
-        private static Resource ParseResource(XElement translatedResourceNode)
+        private static Resource ParseResource(XNode resourceNode)
         {
             var resource = new Resource();
+            var translatedResourceNode = (XElement)resourceNode;
 
             //<resource>
             //  <resourceDesc>Image file (GIF)</resourceDesc>

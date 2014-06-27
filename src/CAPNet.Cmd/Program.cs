@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.ServiceModel.Syndication;
 using System.Xml;
+using System.Xml.Linq;
 
 using CAPNet.Models;
 
@@ -78,8 +79,8 @@ namespace CAPNet.Cmd
                 {
                     using (Stream responseStream = response.GetResponseStream())
                     {
-                        XmlDocument doc = new XmlDocument();
-                        doc.Load(responseStream);
+                        XDocument doc = new XDocument();
+                        doc.Add(responseStream);
 
                         var alertList = XmlParser.Parse(doc);
                         return alertList;
