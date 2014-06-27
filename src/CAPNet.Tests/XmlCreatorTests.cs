@@ -145,7 +145,7 @@ namespace CAPNet.Tests
             //      <valueName>HSAS</valueName>
             //      <value>ORANGE</value>
             //    </parameter>
-            info.Parameters.Add("HSAS", "ORANGE");
+            info.Parameters.Add(new Parameter("HSAS", "ORANGE"));
             //    <resource>
             info.Resources.Add(new Resource
             {

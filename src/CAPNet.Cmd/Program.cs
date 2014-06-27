@@ -30,7 +30,10 @@ namespace CAPNet.Cmd
                          select alert;
             }
 
-            Console.WriteLine("{0} alerts", alerts.Count());
+            if (alerts.Count() == 0)
+                Console.WriteLine("No alerts");
+            else
+                Console.WriteLine("{0} alerts", alerts.Count());
 
             foreach (var alert in alerts)
             {

@@ -203,7 +203,7 @@ namespace CAPNet
                                     break;
                             }
                         }
-                        info.Parameters.Add(valueName, value);
+                        info.Parameters.Add(new Parameter(valueName, value));
                         break;
                     case "resource":
                         var resource = ParseResource(infoNode);

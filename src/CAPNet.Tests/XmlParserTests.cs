@@ -150,7 +150,7 @@ namespace CAPNet.Tests
             Assert.Equal(1, info.Parameters.Count);
             var parameter = info.Parameters.First();
             //      <valueName>HSAS</valueName>
-            Assert.Equal("HSAS", parameter.Key);
+            Assert.Equal("HSAS", parameter.ValueName);
             //      <value>ORANGE</value>
             Assert.Equal("ORANGE", parameter.Value);
             //    </parameter>
