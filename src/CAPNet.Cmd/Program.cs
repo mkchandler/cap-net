@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.ServiceModel.Syndication;
 using System.Xml;
+using System.Xml.Linq;
 
 using CAPNet.Models;
 
@@ -64,7 +65,7 @@ namespace CAPNet.Cmd
             Console.ReadLine();
         }
 
-        public static List<Alert> GetAlerts(string url)
+        public static IEnumerable<Alert> GetAlerts(string url)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
@@ -81,8 +82,8 @@ namespace CAPNet.Cmd
                 {
                     using (Stream responseStream = response.GetResponseStream())
                     {
-                        XmlDocument doc = new XmlDocument();
-                        doc.Load(responseStream);
+                        XDocument doc = new XDocument();
+                        doc.Add(responseStream);
 
                         var alertList = XmlParser.Parse(doc);
                         return alertList;
