@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -18,7 +19,7 @@ namespace CAPNet
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public static List<Alert> Parse(string xml)
+        public static IEnumerable<Alert> Parse(string xml)
         {
             var document = new XmlDocument();
             document.LoadXml(xml);
@@ -31,85 +32,131 @@ namespace CAPNet
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public static List<Alert> Parse(XmlDocument xml)
+        public static IEnumerable<Alert> Parse(XmlDocument xml)
         {
             var alertList = ParseInternal(xml);
 
             return alertList;
         }
 
-        private static List<Alert> ParseInternal(XmlDocument document)
+        private static IEnumerable<Alert> ParseInternal(XmlDocument document)
         {
             var alertList = new List<Alert>();
 
-            XmlNodeList elements = document.GetElementsByTagName("alert", "urn:oasis:names:tc:emergency:cap:1.1");
+            XDocument xdoc = XDocument.Parse(document.OuterXml);
+            XNamespace ns1 = "urn:oasis:names:tc:emergency:cap:1.1";
+            XNamespace ns2 = "urn:oasis:names:tc:emergency:cap:1.2";
 
-            if (elements.Count == 0)
+            var elements = xdoc.Descendants(ns1 + "alert");
+            if (!elements.Any())
             {
-                // try CAP 1.2
-                elements = document.GetElementsByTagName("alert", "urn:oasis:names:tc:emergency:cap:1.2");
+                elements = xdoc.Descendants(ns2 + "alert");
             }
 
-            foreach (XmlNode element in elements)
+            return from alertElement in elements
+                   select ParseAlert(alertElement);
+        }
+
+        private static Alert ParseAlert(XElement alertElement)
+        {
+            Alert alert = new Alert();
+
+            var infoNode = alertElement.Element(XmlCreator.CAP12Namespace + "info");
+            if (infoNode != null)
             {
-                var alert = new Alert();
-
-                foreach (XmlNode alertNode in element.ChildNodes)
-                {
-                    switch (alertNode.Name)
-                    {
-                        case "identifier":
-                            alert.Identifier = alertNode.InnerText;
-                            break;
-                        case "sender":
-                            alert.Sender = alertNode.InnerText;
-                            break;
-                        case "sent":
-                            alert.Sent = DateTimeOffset.Parse(alertNode.InnerText, CultureInfo.InvariantCulture);
-                            break;
-                        case "status":
-                            alert.Status = (Status)Enum.Parse(typeof(Status), alertNode.InnerText);
-                            break;
-                        case "msgType":
-                            alert.MessageType = (MessageType)Enum.Parse(typeof(MessageType), alertNode.InnerText);
-                            break;
-                        case "source":
-                            alert.Source = alertNode.InnerText;
-                            break;
-                        case "scope":
-                            alert.Scope = (Scope)Enum.Parse(typeof(Scope), alertNode.InnerText);
-                            break;
-                        case "restriction":
-                            alert.Restriction = alertNode.InnerText;
-                            break;
-                        case "addresses":
-                            alert.Addresses = alertNode.InnerText;
-                            break;
-                        case "code":
-                            alert.Code = alertNode.InnerText;
-                            break;
-                        case "note":
-                            alert.Note = alertNode.InnerText;
-                            break;
-                        case "references":
-                            alert.References = alertNode.InnerText;
-                            break;
-                        case "incidents":
-                            alert.Incidents = alertNode.InnerText;
-                            break;
-                        case "info":
-                            var info = ParseInfo(alertNode);
-                            alert.Info.Add(info);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-                alertList.Add(alert);
+                var info = ParseInfo(GetXmlNode(infoNode));
+                alert.Info.Add(info);
             }
 
-            return alertList;
+            var incidentsNode = alertElement.Element(XmlCreator.CAP12Namespace + "incidents");
+            if (incidentsNode != null)
+            {
+                alert.Incidents = incidentsNode.Value;
+            }
+
+            var referencesNode = alertElement.Element(XmlCreator.CAP12Namespace + "references");
+            if (referencesNode != null)
+            {
+                alert.References = referencesNode.Value;
+            }
+
+            var noteNode = alertElement.Element(XmlCreator.CAP12Namespace + "note");
+            if (noteNode != null)
+            {
+                alert.Note = noteNode.Value;
+            }
+
+            var codeNode = alertElement.Element(XmlCreator.CAP12Namespace + "code");
+            if (codeNode != null)
+            {
+                alert.Code = codeNode.Value;
+            }
+
+            var addressesNode = alertElement.Element(XmlCreator.CAP12Namespace + "addresses");
+            if (addressesNode != null)
+            {
+                alert.Addresses = addressesNode.Value;
+            }
+
+            var restrictionNode = alertElement.Element(XmlCreator.CAP12Namespace + "restriction");
+            if (restrictionNode != null)
+            {
+                alert.Restriction = restrictionNode.Value;
+            }
+
+            var scopeNode = alertElement.Element(XmlCreator.CAP12Namespace + "scope");
+            if (scopeNode != null)
+            {
+                alert.Scope = (Scope)Enum.Parse(typeof(Scope), scopeNode.Value);
+            }
+
+            var sourceNode = alertElement.Element(XmlCreator.CAP12Namespace + "source");
+            if (sourceNode != null)
+            {
+                alert.Source = sourceNode.Value;
+            }
+
+            var msgTypeNode = alertElement.Element(XmlCreator.CAP12Namespace + "msgType");
+            if (msgTypeNode != null)
+            {
+                alert.MessageType = (MessageType)Enum.Parse(typeof(MessageType), msgTypeNode.Value);
+            }
+
+            var statusNode = alertElement.Element(XmlCreator.CAP12Namespace + "status");
+            if (statusNode != null)
+            {
+                alert.Status = (Status)Enum.Parse(typeof(Status), statusNode.Value);
+            }
+
+            var sentNode = alertElement.Element(XmlCreator.CAP12Namespace + "sent");
+            if (sentNode != null)
+            {
+                alert.Sent = DateTimeOffset.Parse(sentNode.Value, CultureInfo.InvariantCulture);
+            }
+
+            var senderNode = alertElement.Element(XmlCreator.CAP12Namespace + "sender");
+            if (senderNode != null)
+            {
+                alert.Sender = senderNode.Value;
+            }
+
+            var identifierNode = alertElement.Element(XmlCreator.CAP12Namespace + "identifier");
+            if (identifierNode != null)
+            {
+                alert.Identifier = identifierNode.Value;
+            }
+
+            return alert;
+        }
+
+        private static XmlNode GetXmlNode(XElement element)
+        {
+            using (XmlReader xmlReader = element.CreateReader())
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(xmlReader);
+                return xmlDoc;
+            }
         }
 
         private static Info ParseInfo(XmlNode alertNode)
@@ -117,7 +164,7 @@ namespace CAPNet
             var translatedAlertNode = XDocument.Parse(alertNode.OuterXml).Root;
             var info = new Info();
 
-            var languageNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace+"language");
+            var languageNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "language");
             if (languageNode != null)
                 info.Language = languageNode.Value;
 
@@ -233,7 +280,7 @@ namespace CAPNet
                 info.Web = webNode.Value;
             }
 
-            var contactNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace+"contact");
+            var contactNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "contact");
             if (contactNode != null)
             {
                 info.Contact = contactNode.Value;
@@ -273,7 +320,7 @@ namespace CAPNet
                 var area = ParseArea(areaNode);
                 info.Areas.Add(area);
             }
-            
+
             return info;
         }
 

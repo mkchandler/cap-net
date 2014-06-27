@@ -61,7 +61,7 @@ namespace CAPNet.Cmd
             Console.ReadLine();
         }
 
-        public static List<Alert> GetAlerts(string url)
+        public static IEnumerable<Alert> GetAlerts(string url)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
