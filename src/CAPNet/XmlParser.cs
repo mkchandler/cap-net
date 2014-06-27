@@ -114,112 +114,166 @@ namespace CAPNet
 
         private static Info ParseInfo(XmlNode alertNode)
         {
+            var translatedAlertNode = XDocument.Parse(alertNode.OuterXml).Root;
             var info = new Info();
-            foreach (XmlNode infoNode in alertNode.ChildNodes)
+
+            var languageNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace+"language");
+            if (languageNode != null)
+                info.Language = languageNode.Value;
+
+            var categoryNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "category");
+            if (categoryNode != null)
             {
-                switch (infoNode.Name)
+                var category = (Category)Enum.Parse(typeof(Category), categoryNode.Value);
+                info.Categories.Add(category);
+            }
+
+            var eventNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "event");
+            if (eventNode != null)
+            {
+                info.Event = eventNode.Value;
+            }
+
+            var responseTypeNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "responseType");
+            if (responseTypeNode != null)
+            {
+                info.ResponseType = responseTypeNode.Value;
+            }
+
+            var urgencyNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "urgency");
+            if (urgencyNode != null)
+            {
+                info.Urgency = (Urgency)Enum.Parse(typeof(Urgency), urgencyNode.Value);
+            }
+
+            var certaintyNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "certainty");
+            if (certaintyNode != null)
+            {
+                if (certaintyNode.Value == "Very Likely")
                 {
-                    case "language":
-                        info.Language = infoNode.InnerText;
-                        break;
-                    case "category":
-                        var category = (Category)Enum.Parse(typeof(Category), infoNode.InnerText);
-                        info.Categories.Add(category);
-                        break;
-                    case "event":
-                        info.Event = infoNode.InnerText;
-                        break;
-                    case "responseType":
-                        info.ResponseType = infoNode.InnerText;
-                        break;
-                    case "urgency":
-                        info.Urgency = (Urgency)Enum.Parse(typeof(Urgency), infoNode.InnerText);
-                        break;
-                    case "severity":
-                        Severity severity;
-                        if (Enum.TryParse(infoNode.InnerText, out severity))
-                        {
-                            info.Severity = severity;
-                        }
-                        else
-                        {
-                            info.Severity = null;
-                        }
-                        break;
-                    case "certainty":
-                        if (infoNode.InnerText == "Very Likely")
-                        {
-                            info.Certainty = Certainty.Likely;
-                        }
-                        else
-                        {
-                            info.Certainty = (Certainty)Enum.Parse(typeof(Certainty), infoNode.InnerText);
-                        }
-                        break;
-                    case "audience":
-                        info.Audience = infoNode.InnerText;
-                        break;
-                    case "eventCode":
-                        info.EventCode = infoNode.InnerText;
-                        break;
-                    case "effective":
-                        info.Effective = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
-                        break;
-                    case "onset":
-                        info.Onset = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
-                        break;
-                    case "expires":
-                        info.Expires = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
-                        break;
-                    case "senderName":
-                        info.SenderName = infoNode.InnerText;
-                        break;
-                    case "headline":
-                        info.Headline = infoNode.InnerText;
-                        break;
-                    case "description":
-                        info.Description = infoNode.InnerText;
-                        break;
-                    case "instruction":
-                        info.Instruction = infoNode.InnerText;
-                        break;
-                    case "web":
-                        info.Web = infoNode.InnerText;
-                        break;
-                    case "contact":
-                        info.Contact = infoNode.InnerText;
-                        break;
-                    case "parameter":
-                        string valueName = null;
-                        string value = null;
-                        foreach (XmlNode parameterNode in infoNode.ChildNodes)
-                        {
-                            switch (parameterNode.Name)
-                            {
-                                case "valueName":
-                                    valueName = parameterNode.InnerText;
-                                    break;
-                                case "value":
-                                    value = parameterNode.InnerText;
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        info.Parameters.Add(valueName, value);
-                        break;
-                    case "resource":
-                        var resource = ParseResource(infoNode);
-                        info.Resources.Add(resource);
-                        break;
-                    case "area":
-                        var area = ParseArea(infoNode);
-                        info.Areas.Add(area);
-                        break;
-                    default:
-                        break;
+                    info.Certainty = Certainty.Likely;
+                }
+                else
+                {
+                    info.Certainty = (Certainty)Enum.Parse(typeof(Certainty), certaintyNode.Value);
                 }
             }
+
+            var audienceNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "audience");
+            if (audienceNode != null)
+            {
+                info.Audience = audienceNode.Value;
+            }
+
+            var eventCodeNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "eventCode");
+            if (eventCodeNode != null)
+            {
+                info.EventCode = eventCodeNode.Value;
+            }
+
+            var effectiveNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "effective");
+            if (effectiveNode != null)
+            {
+                info.Effective = DateTimeOffset.Parse(effectiveNode.Value, CultureInfo.InvariantCulture);
+            }
+
+            var severityNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "severity");
+            if (severityNode != null)
+            {
+                Severity severity;
+                if (Enum.TryParse(severityNode.Value, out severity))
+                {
+                    info.Severity = severity;
+                }
+                else
+                {
+                    info.Severity = null;
+                }
+            }
+
+            var onsetNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "onset");
+            if (onsetNode != null)
+            {
+                info.Onset = DateTimeOffset.Parse(onsetNode.Value, CultureInfo.InvariantCulture);
+            }
+
+            var expiresNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "expires");
+            if (expiresNode != null)
+            {
+                info.Expires = DateTimeOffset.Parse(expiresNode.Value, CultureInfo.InvariantCulture);
+            }
+
+            var senderNameNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "senderName");
+            if (senderNameNode != null)
+            {
+                info.SenderName = senderNameNode.Value;
+            }
+
+            var headlineNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "headline");
+            if (headlineNode != null)
+            {
+                info.Headline = headlineNode.Value;
+            }
+
+            var descriptionNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "description");
+            if (descriptionNode != null)
+            {
+                info.Description = descriptionNode.Value;
+            }
+
+            var instructionNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "instruction");
+            if (instructionNode != null)
+            {
+                info.Instruction = instructionNode.Value;
+            }
+
+            var webNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "web");
+            if (webNode != null)
+            {
+                info.Web = webNode.Value;
+            }
+
+            var contactNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace+"contact");
+            if (contactNode != null)
+            {
+                info.Contact = contactNode.Value;
+            }
+
+            var parameterNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "parameter");
+            if (parameterNode != null)
+            {
+                string valueName = null;
+                string value = null;
+
+                var valueNameNode = parameterNode.Element(XmlCreator.CAP12Namespace + "valueName");
+                if (valueNameNode != null)
+                {
+                    valueName = valueNameNode.Value;
+                }
+
+                var valueNode = parameterNode.Element(XmlCreator.CAP12Namespace + "value");
+                if (valueNode != null)
+                {
+                    value = valueNode.Value;
+                }
+
+                info.Parameters.Add(valueName, value);
+            }
+
+            var resourceNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "resource");
+            if (resourceNode != null)
+            {
+                var resource = ParseResource(resourceNode);
+                info.Resources.Add(resource);
+            }
+
+            var areaNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "area");
+            if (areaNode != null)
+            {
+                var area = ParseArea(areaNode);
+                info.Areas.Add(area);
+            }
+            
             return info;
         }
 
