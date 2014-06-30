@@ -160,6 +160,10 @@ namespace CAPNet.Tests
     <severity>Severe</severity>
     <certainty>Likely</certainty>
     <audience>audience</audience>
+    <eventCode>
+      <valueName>valN</valueName>
+      <value>val</value>
+    </eventCode>
     <effective>2003-04-02T14:39:01-05:00</effective>
     <onset>2003-04-02T14:39:01-05:00</onset>
     <expires>2003-04-02T14:39:01-05:00</expires>

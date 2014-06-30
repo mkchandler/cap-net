@@ -97,7 +97,8 @@ namespace CAPNet.Tests
                 alertAsString = new StreamReader(memoryStream, Encoding.UTF8).ReadToEnd();
             }
 
-            Assert.Equal(Examples.OrangeAlertXml, alertAsString);
+            Assert.Equal<string>(Examples.OrangeAlertXml, alertAsString);
+
         }
 
         private static Alert CreateOrangeAlert()
@@ -152,8 +153,8 @@ namespace CAPNet.Tests
             //    <audience>audience</audience>
             info.Audience = "audience";
             //<eventcode>
-            //  <valuename>valueName</valuename>
-            //  <value>value</value>
+            //  <valuename>valN</valuename>
+            //  <value>val</value>
             //</eventcode>
             info.EventCode.Add(new Parameter("valN", "val"));
             //  <effective>2003-04-02T14:39:01-05:00</effective>

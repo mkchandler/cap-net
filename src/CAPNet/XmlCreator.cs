@@ -54,11 +54,11 @@ namespace CAPNet
                 new XElement(CAP12Namespace + "severity", info.Severity),
                 new XElement(CAP12Namespace + "certainty", info.Certainty),
                 new XElement(CAP12Namespace + "audience", info.Audience),
-                //from e in info.EventCode
-                //select new XElement(
-                //    CAP12Namespace + "eventCode",
-                //    new XElement(CAP12Namespace + "valueName", e.ValueName),
-                 //   new XElement(CAP12Namespace + "value", e.Value)),
+                from e in info.EventCode
+                select new XElement(
+                    CAP12Namespace + "eventCode",
+                    new XElement(CAP12Namespace + "valueName", e.ValueName),
+                    new XElement(CAP12Namespace + "value", e.Value)),
                 new XElement(CAP12Namespace + "effective", info.Effective),
                 new XElement(CAP12Namespace + "onset", info.Onset),
                 new XElement(CAP12Namespace + "expires", info.Expires),
