@@ -13,7 +13,7 @@ namespace CAPNet.Tests
         public void CanReadMultipleAlertsFromXML()
         {
             var alertList = XmlParser.Parse(ExamplesMultiple.Thunderstorm12Xml);
-            Assert.Equal(2, alertList.Count);
+            Assert.Equal(2, alertList.Count());
         }
 
         [Fact]
