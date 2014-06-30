@@ -104,6 +104,36 @@ namespace CAPNet.Tests
         }
 
         [Fact]
+        public void CanParseXmlWithMultipleResource()
+        {
+            var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
+
+            var info = alert.Info.ElementAt(0);
+
+            //    <resource>
+            Assert.Equal(2, info.Resources.Count);
+            
+            var firstResource = info.Resources.First();
+            //      <resourceDesc>Image file (GIF)</resourceDesc>
+            Assert.Equal("Image file (GIF)", firstResource.Description);
+            //      <mimeType>image/gif</mimeType>
+            Assert.Equal("image/gif", firstResource.MimeType);
+            //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
+            Assert.Equal("http://www.dhs.gov/dhspublic/getAdvisoryImage", firstResource.Uri);
+            //    </resource>
+
+            //    <resource>
+            var lastResource = info.Resources.Last();
+            //      <resourceDesc>Image file (GIF)</resourceDesc>
+            Assert.Equal("Image(GIF)", lastResource.Description);
+            //      <mimeType>image/gif</mimeType>
+            Assert.Equal("image/gif", lastResource.MimeType);
+            //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryNoImage</uri>
+            Assert.Equal("http://www.dhs.gov/dhspublic/getAdvisoryNoImage", lastResource.Uri);
+            //    </resource>
+        }
+
+        [Fact]
         public void CanParseXmlWithMultipleArea()
         {
             var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();

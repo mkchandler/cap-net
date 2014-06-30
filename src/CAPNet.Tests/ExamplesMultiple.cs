@@ -122,6 +122,11 @@
       <mimeType>image/gif</mimeType>
       <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
     </resource>
+    <resource>
+      <resourceDesc>Image(GIF)</resourceDesc>
+      <mimeType>image/gif</mimeType>
+      <uri>http://www.dhs.gov/dhspublic/getAdvisoryNoImage</uri>
+    </resource>
     <area>
       <areaDesc>U.S.</areaDesc>
     </area>

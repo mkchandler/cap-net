@@ -278,10 +278,12 @@ namespace CAPNet
                 info.Parameters.Add(parameter);
             }
 
-            var resourceNode = infoElement.Element(XmlCreator.CAP12Namespace + "resource");
-            if (resourceNode != null)
+            var resourceQuery = from resourceNode in infoElement.Elements(XmlCreator.CAP12Namespace+"resource")
+                                where resourceNode != null
+                                select ParseResource(resourceNode);
+
+            foreach ( var resource in resourceQuery)
             {
-                var resource = ParseResource(resourceNode);
                 info.Resources.Add(resource);
             }
 
