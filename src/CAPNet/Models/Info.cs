@@ -119,7 +119,7 @@ namespace CAPNet.Models
         /// </summary>
         public string Contact { get; set; }
 
-        private List<Parameter> _parameters;
+        private ICollection<Parameter> _parameters;
 
         /// <summary>
         /// System-specific additional parameters associated

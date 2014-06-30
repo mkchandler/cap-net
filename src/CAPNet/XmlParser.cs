@@ -141,41 +141,42 @@ namespace CAPNet
             return alert;
         }
 
-        private static Info ParseInfo(XNode alertNode)
+        private static Info ParseInfo(XElement infoElement)
         {
-            var translatedAlertNode = (XElement)alertNode;
             var info = new Info();
 
-            var languageNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "language");
+            var languageNode = infoElement.Element(XmlCreator.CAP12Namespace + "language");
             if (languageNode != null)
                 info.Language = languageNode.Value;
 
-            var categoryNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "category");
-            if (categoryNode != null)
+            var categoryQuery = from categoryNode in infoElement.Elements(XmlCreator.CAP12Namespace + "category")
+                                where categoryNode != null
+                                select (Category)Enum.Parse(typeof(Category), categoryNode.Value);
+
+            foreach (var category in categoryQuery)
             {
-                var category = (Category)Enum.Parse(typeof(Category), categoryNode.Value);
                 info.Categories.Add(category);
             }
 
-            var eventNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "event");
+            var eventNode = infoElement.Element(XmlCreator.CAP12Namespace + "event");
             if (eventNode != null)
             {
                 info.Event = eventNode.Value;
             }
 
-            var responseTypeNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "responseType");
+            var responseTypeNode = infoElement.Element(XmlCreator.CAP12Namespace + "responseType");
             if (responseTypeNode != null)
             {
                 info.ResponseType = responseTypeNode.Value;
             }
 
-            var urgencyNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "urgency");
+            var urgencyNode = infoElement.Element(XmlCreator.CAP12Namespace + "urgency");
             if (urgencyNode != null)
             {
                 info.Urgency = (Urgency)Enum.Parse(typeof(Urgency), urgencyNode.Value);
             }
 
-            var certaintyNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "certainty");
+            var certaintyNode = infoElement.Element(XmlCreator.CAP12Namespace + "certainty");
             if (certaintyNode != null)
             {
                 if (certaintyNode.Value == "Very Likely")
@@ -188,13 +189,13 @@ namespace CAPNet
                 }
             }
 
-            var audienceNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "audience");
+            var audienceNode = infoElement.Element(XmlCreator.CAP12Namespace + "audience");
             if (audienceNode != null)
             {
                 info.Audience = audienceNode.Value;
             }
 
-            var eventCodeNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "eventCode");
+            var eventCodeNode = infoElement.Element(XmlCreator.CAP12Namespace + "eventCode");
             if (eventCodeNode != null)
             {
                 string valueName = null;
@@ -215,13 +216,13 @@ namespace CAPNet
                 info.EventCodes.Add(new EventCode(valueName, value));
             }
 
-            var effectiveNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "effective");
+            var effectiveNode = infoElement.Element(XmlCreator.CAP12Namespace + "effective");
             if (effectiveNode != null)
             {
                 info.Effective = DateTimeOffset.Parse(effectiveNode.Value, CultureInfo.InvariantCulture);
             }
 
-            var severityNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "severity");
+            var severityNode = infoElement.Element(XmlCreator.CAP12Namespace + "severity");
             if (severityNode != null)
             {
                 Severity severity;
@@ -235,128 +236,130 @@ namespace CAPNet
                 }
             }
 
-            var onsetNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "onset");
+            var onsetNode = infoElement.Element(XmlCreator.CAP12Namespace + "onset");
             if (onsetNode != null)
             {
                 info.Onset = DateTimeOffset.Parse(onsetNode.Value, CultureInfo.InvariantCulture);
             }
 
-            var expiresNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "expires");
+            var expiresNode = infoElement.Element(XmlCreator.CAP12Namespace + "expires");
             if (expiresNode != null)
             {
                 info.Expires = DateTimeOffset.Parse(expiresNode.Value, CultureInfo.InvariantCulture);
             }
 
-            var senderNameNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "senderName");
+            var senderNameNode = infoElement.Element(XmlCreator.CAP12Namespace + "senderName");
             if (senderNameNode != null)
             {
                 info.SenderName = senderNameNode.Value;
             }
 
-            var headlineNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "headline");
+            var headlineNode = infoElement.Element(XmlCreator.CAP12Namespace + "headline");
             if (headlineNode != null)
             {
                 info.Headline = headlineNode.Value;
             }
 
-            var descriptionNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "description");
+            var descriptionNode = infoElement.Element(XmlCreator.CAP12Namespace + "description");
             if (descriptionNode != null)
             {
                 info.Description = descriptionNode.Value;
             }
 
-            var instructionNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "instruction");
+            var instructionNode = infoElement.Element(XmlCreator.CAP12Namespace + "instruction");
             if (instructionNode != null)
             {
                 info.Instruction = instructionNode.Value;
             }
 
-            var webNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "web");
+            var webNode = infoElement.Element(XmlCreator.CAP12Namespace + "web");
             if (webNode != null)
             {
                 info.Web = webNode.Value;
             }
 
-            var contactNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "contact");
+            var contactNode = infoElement.Element(XmlCreator.CAP12Namespace + "contact");
             if (contactNode != null)
             {
                 info.Contact = contactNode.Value;
             }
 
-            var parameterNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "parameter");
-            if (parameterNode != null)
+            var parameterQuery = from parameter in infoElement.Elements(XmlCreator.CAP12Namespace + "parameter")
+                                 let valueNameNode = parameter.Element(XmlCreator.CAP12Namespace + "valueName")
+                                 let valueNode = parameter.Element(XmlCreator.CAP12Namespace + "value")
+                                 where valueNameNode != null && valueNode != null
+                                 select new Parameter(valueNameNode.Value, valueNode.Value);
+                                 
+            foreach (var parameter in parameterQuery)
             {
-                string valueName = null;
-                string value = null;
-
-                var valueNameNode = parameterNode.Element(XmlCreator.CAP12Namespace + "valueName");
-                if (valueNameNode != null)
-                {
-                    valueName = valueNameNode.Value;
-                }
-
-                var valueNode = parameterNode.Element(XmlCreator.CAP12Namespace + "value");
-                if (valueNode != null)
-                {
-                    value = valueNode.Value;
-                }
-
-                info.Parameters.Add(new Parameter(valueName, value));
+                info.Parameters.Add(parameter);
             }
 
-            var resourceNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "resource");
-            if (resourceNode != null)
+            var resourceQuery = from resourceNode in infoElement.Elements(XmlCreator.CAP12Namespace+"resource")
+                                where resourceNode != null
+                                select ParseResource(resourceNode);
+
+            foreach ( var resource in resourceQuery)
             {
-                var resource = ParseResource(resourceNode);
                 info.Resources.Add(resource);
             }
 
-            var areaNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "area");
-            if (areaNode != null)
+            var areaQuery = from areaNode in infoElement.Elements(XmlCreator.CAP12Namespace + "area")
+                            where areaNode != null
+                            select ParseArea(areaNode);
+
+            foreach ( var area in areaQuery )
             {
-                var area = ParseArea(areaNode);
                 info.Areas.Add(area);
             }
 
             return info;
         }
 
-        private static Area ParseArea(XNode areaNode)
+        private static Area ParseArea(XElement areaElement)
         {
             var area = new Area();
-            var translatedAreaNode = (XElement)areaNode;
-
-            var areaDescNode = translatedAreaNode.Element(XmlCreator.CAP12Namespace + "areaDesc");
+            
+            var areaDescNode = areaElement.Element(XmlCreator.CAP12Namespace + "areaDesc");
             if (areaDescNode != null)
                 area.Description = areaDescNode.Value;
 
-            var polygonNode = translatedAreaNode.Element(XmlCreator.CAP12Namespace + "polygon");
-            if (polygonNode != null)
-                area.Polygon = polygonNode.Value;
+            var polygonQuery = from polygonNode in areaElement.Elements(XmlCreator.CAP12Namespace + "polygon")
+                               where polygonNode != null
+                               select polygonNode.Value;
+            
+            foreach (var polygonValue in polygonQuery )
+                area.Polygons.Add(polygonValue);
 
+            var circleQuery = from circleNode in areaElement.Elements(XmlCreator.CAP12Namespace + "circle")
+                              where circleNode != null
+                              select circleNode.Value;
+
+            foreach (var circleValue in circleQuery)
+                area.Circles.Add(circleValue);
+            
             return area;
         }
 
-        private static Resource ParseResource(XNode resourceNode)
+        private static Resource ParseResource(XElement resourceElement)
         {
             var resource = new Resource();
-            var translatedResourceNode = (XElement)resourceNode;
-
+            
             //<resource>
             //  <resourceDesc>Image file (GIF)</resourceDesc>
             //  <mimeType>image/gif</mimeType>
             //  <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
             //</resource>
 
-            var resourceDescNode = translatedResourceNode.Element(XmlCreator.CAP12Namespace + "resourceDesc");
+            var resourceDescNode = resourceElement.Element(XmlCreator.CAP12Namespace + "resourceDesc");
             if (resourceDescNode != null)
                 resource.Description = resourceDescNode.Value;
 
-            var mimeTypeNode = translatedResourceNode.Element(XmlCreator.CAP12Namespace + "mimeType");
+            var mimeTypeNode = resourceElement.Element(XmlCreator.CAP12Namespace + "mimeType");
             if (mimeTypeNode != null)
                 resource.MimeType = mimeTypeNode.Value;
 
-            var uriNode = translatedResourceNode.Element(XmlCreator.CAP12Namespace + "uri");
+            var uriNode = resourceElement.Element(XmlCreator.CAP12Namespace + "uri");
             if (uriNode != null)
                 resource.Uri = uriNode.Value;
 
