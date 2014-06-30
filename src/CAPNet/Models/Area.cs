@@ -92,7 +92,6 @@ namespace CAPNet.Models
         public ICollection<GeoCode> GeoCodes
         {
             get { return _geoCodes; }
-            set { _geoCodes = value; }
         }
 
         /// <summary>

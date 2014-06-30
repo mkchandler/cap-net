@@ -195,32 +195,29 @@ namespace CAPNet.Tests
             //    </resource>
             });
 
-            ICollection<GeoCode> geocodeList = new List<GeoCode>();
-            geocodeList.Add(new GeoCode("valN","val"));
-            geocodeList.Add(new GeoCode("valN1", "val1"));
-
-            info.Areas.Add(
                 //  <area>
-                new Area
-                {
-                    //  <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
-                    Description = "U.S. nationwide and interests worldwide",
-                    //  <altitude>altitude</altitude>
-                    Altitude = "altitude",
-                    //  <ceiling>ceiling</ceiling>
-                    Ceiling = "ceiling",
-                    //<geocode>
-                    //  <valueName>valN</valueName>
-                    //  <value>val</value>
-                    //</geocode>
-                    //<geocode>
-                    //  <valueName>valN1</valueName>
-                    //  <value>val1</value>
-                    //</geocode>
-                    GeoCodes = geocodeList    
+            var area = new Area
+            {
+                //  <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
+                Description = "U.S. nationwide and interests worldwide",
+                //  <altitude>altitude</altitude>
+                Altitude = "altitude",
+                //  <ceiling>ceiling</ceiling>
+                Ceiling = "ceiling",        
+            };
 
-                    //  </area>
-                });
+            //<geocode>
+            //  <valueName>valN</valueName>
+            //  <value>val</value>
+            //</geocode>
+            //<geocode>
+            //  <valueName>valN1</valueName>
+            //  <value>val1</value>
+            //</geocode>
+            area.GeoCodes.Add(new GeoCode("valN", "val"));
+            area.GeoCodes.Add(new GeoCode("valN1", "val1"));
+            info.Areas.Add(area);
+            //  </area>
             //  </info>
 
             orangeAlert.Info.Add(info);
