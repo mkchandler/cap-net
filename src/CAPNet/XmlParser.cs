@@ -314,7 +314,7 @@ namespace CAPNet
                                select polygonNode.Value;
             
             foreach (var polygonValue in polygonQuery )
-                    area.Polygon.Add(polygonValue);
+                    area.Polygons.Add(polygonValue);
             
             return area;
         }

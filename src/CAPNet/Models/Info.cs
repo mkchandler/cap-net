@@ -123,13 +123,13 @@ namespace CAPNet.Models
         /// </summary>
         public string Contact { get; set; }
 
-        private List<Parameter> _parameters;
+        private ICollection<Parameter> _parameters;
 
         /// <summary>
         /// System-specific additional parameters associated
         /// with the alert message (OPTIONAL)
         /// </summary>
-        public List<Parameter> Parameters
+        public ICollection<Parameter> Parameters
         {
             get
             {

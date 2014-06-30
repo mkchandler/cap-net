@@ -28,7 +28,7 @@ namespace CAPNet.Tests
         public void CanReadCAP12Example()
         {
             var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
-            Assert.NotNull(alert.Info.ElementAt(0).Areas.ElementAt(0).Polygon);
+            Assert.NotNull(alert.Info.ElementAt(0).Areas.ElementAt(0).Polygons);
         }
 
         [Fact]
@@ -109,7 +109,7 @@ namespace CAPNet.Tests
             var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
             Assert.NotNull(alert);
 
-            var polygonNode = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygon;
+            var polygonNode = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygons;
             Assert.Equal(1, polygonNode.Count());
 
             //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
@@ -122,7 +122,7 @@ namespace CAPNet.Tests
             var alert = XmlParser.Parse(ExamplesMultiple.Thunderstorm12Xml).First();
             Assert.NotNull(alert);
 
-            var polygon = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygon;
+            var polygon = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygons;
             Assert.Equal(2, polygon.Count());
 
             //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
@@ -130,7 +130,7 @@ namespace CAPNet.Tests
             Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", firstPolygon);
 
             //<polygon>58.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
-            var secondPolygon = polygon.ElementAt(1);
+            var secondPolygon = polygon.Last();
             Assert.Equal("58.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", secondPolygon);
         }
 
