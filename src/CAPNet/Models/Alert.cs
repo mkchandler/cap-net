@@ -13,7 +13,7 @@ namespace CAPNet.Models
         /// </summary>
         public Alert()
         {
-            _info = new List<Info>();
+            info = new List<Info>();
         }
 
         /// <summary>
@@ -123,14 +123,14 @@ namespace CAPNet.Models
         /// </summary>
         public string Incidents { get; set; }
 
-        private ICollection<Info> _info;
+        private readonly ICollection<Info> info;
 
         /// <summary>
         /// 
         /// </summary>
         public ICollection<Info> Info
         {
-            get { return _info; }
+            get { return info; }
         }
     }
 }
