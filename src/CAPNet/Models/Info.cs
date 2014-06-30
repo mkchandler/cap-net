@@ -14,6 +14,7 @@ namespace CAPNet.Models
         public Info()
         {
             _parameters = new List<Parameter>();
+            _eventCode = new List<Parameter>();
             _categories = new List<Category>();
             _resources = new List<Resource>();
             _areas = new List<Area>();
@@ -76,11 +77,6 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        public string EventCode { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public DateTimeOffset Effective { get; set; }
 
         /// <summary>
@@ -134,6 +130,26 @@ namespace CAPNet.Models
             get
             {
                 return _parameters;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private List<Parameter> _eventCode;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<Parameter> EventCode
+        {
+            get
+            {
+                return _eventCode;
+            }
+            set
+            {
+                _eventCode = value;
             }
         }
 

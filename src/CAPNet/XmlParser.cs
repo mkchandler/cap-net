@@ -157,7 +157,7 @@ namespace CAPNet
                         info.Audience = infoNode.InnerText;
                         break;
                     case "eventCode":
-                        info.EventCode = infoNode.InnerText;
+                        info.EventCode.Add(ParseParameter(infoNode));
                         break;
                     case "effective":
                         info.Effective = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
@@ -187,23 +187,7 @@ namespace CAPNet
                         info.Contact = infoNode.InnerText;
                         break;
                     case "parameter":
-                        string valueName = null;
-                        string value = null;
-                        foreach (XmlNode parameterNode in infoNode.ChildNodes)
-                        {
-                            switch (parameterNode.Name)
-                            {
-                                case "valueName":
-                                    valueName = parameterNode.InnerText;
-                                    break;
-                                case "value":
-                                    value = parameterNode.InnerText;
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        info.Parameters.Add(new Parameter(valueName, value));
+                        info.Parameters.Add(ParseParameter(infoNode));
                         break;
                     case "resource":
                         var resource = ParseResource(infoNode);
@@ -218,6 +202,28 @@ namespace CAPNet
                 }
             }
             return info;
+        }
+
+        private static Parameter ParseParameter(XmlNode infoNode)
+        {
+            string valueName = null;
+            string value = null;
+
+            foreach (XmlNode parameterNode in infoNode.ChildNodes)
+            {
+                switch (parameterNode.Name)
+                {
+                    case "valueName":
+                        valueName = parameterNode.InnerText;
+                        break;
+                    case "value":
+                        value = parameterNode.InnerText;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return new Parameter(valueName, value);
         }
 
         private static Area ParseArea(XmlNode infoNode)

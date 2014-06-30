@@ -151,6 +151,11 @@ namespace CAPNet.Tests
             info.Certainty = Certainty.Likely;
             //    <audience>audience</audience>
             info.Audience = "audience";
+            //<eventcode>
+            //  <valuename>valueName</valuename>
+            //  <value>value</value>
+            //</eventcode>
+            info.EventCode.Add(new Parameter("valN", "val"));
             //  <effective>2003-04-02T14:39:01-05:00</effective>
             info.Effective = new DateTimeOffset(2003, 4, 2, 14, 39, 1, TimeSpan.FromHours(-5));
             //  <onset>2003-04-02T14:39:01-05:00</onset>
