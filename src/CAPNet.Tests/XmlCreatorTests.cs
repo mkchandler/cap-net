@@ -118,20 +118,21 @@ namespace CAPNet.Tests
                 MessageType = MessageType.Alert,
                 //  <scope>Public</scope>
                 Scope = Scope.Public,
-
+                //  <source>source</source>
                 Source = "source",
-
+                //   <restriction>restriction</restriction>
                 Restriction = "restriction",
-
+                //   <addresses>addresses</addresses>
                 Addresses = "addresses",
-
+                //   <code>code</code>
                 Code = "code",
-
+                //   <note>note</note>
                 Note = "note",
-
+                //   <references>references</references>
                 References = "references",
-
+                //   <incidents>incidents</incidents>
                 Incidents = "incidents"
+
             };
 
             //  <info>
@@ -140,12 +141,22 @@ namespace CAPNet.Tests
             info.Categories.Add(Category.Security);
             //    <event>Homeland Security Advisory System Update</event>
             info.Event = "Homeland Security Advisory System Update";
+            //    <responsetype>Shelter</responsetype>
+            info.ResponseType = "Shelter";
             //    <urgency>Immediate</urgency>
             info.Urgency = Urgency.Immediate;
             //    <severity>Severe</severity>
             info.Severity = Severity.Severe;
             //    <certainty>Likely</certainty>
             info.Certainty = Certainty.Likely;
+            //    <audience>audience</audience>
+            info.Audience = "audience";
+            //  <effective>2003-04-02T14:39:01-05:00</effective>
+            info.Effective = new DateTimeOffset(2003, 4, 2, 14, 39, 1, TimeSpan.FromHours(-5));
+            //  <onset>2003-04-02T14:39:01-05:00</onset>
+            info.Onset = new DateTimeOffset(2003, 4, 2, 14, 39, 1, TimeSpan.FromHours(-5));
+            //  <expires>2003-04-02T14:39:01-05:00</expires>
+            info.Expires = new DateTimeOffset(2003, 4, 2, 14, 39, 1, TimeSpan.FromHours(-5));
             //    <senderName>U.S. Government, Department of Homeland Security</senderName>
             info.SenderName = "U.S. Government, Department of Homeland Security";
             //    <headline>Homeland Security Sets Code ORANGE</headline>
@@ -156,6 +167,8 @@ namespace CAPNet.Tests
             info.Instruction = "A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.";
             //    <web>http://www.dhs.gov/dhspublic/display?theme=29</web>
             info.Web = "http://www.dhs.gov/dhspublic/display?theme=29";
+            //    <contact>contact</contact>
+            info.Contact = "contact";
             //    <parameter>
             //      <valueName>HSAS</valueName>
             //      <value>ORANGE</value>
