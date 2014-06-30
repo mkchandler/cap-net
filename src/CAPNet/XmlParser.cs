@@ -268,25 +268,15 @@ namespace CAPNet
                 info.Contact = contactNode.Value;
             }
 
-            var parameterNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "parameter");
-            if (parameterNode != null)
+            var parameterQuery = from parameter in translatedAlertNode.Elements(XmlCreator.CAP12Namespace + "parameter")
+                                 let valueNameNode = parameter.Element(XmlCreator.CAP12Namespace + "valueName")
+                                 let valueNode = parameter.Element(XmlCreator.CAP12Namespace + "value")
+                                 where valueNameNode != null && valueNode != null
+                                 select new Parameter(valueNameNode.Value, valueNode.Value);
+                                 
+            foreach (var parameter in parameterQuery)
             {
-                string valueName = null;
-                string value = null;
-
-                var valueNameNode = parameterNode.Element(XmlCreator.CAP12Namespace + "valueName");
-                if (valueNameNode != null)
-                {
-                    valueName = valueNameNode.Value;
-                }
-
-                var valueNode = parameterNode.Element(XmlCreator.CAP12Namespace + "value");
-                if (valueNode != null)
-                {
-                    value = valueNode.Value;
-                }
-
-                info.Parameters.Add(new Parameter(valueName, value));
+                info.Parameters.Add(parameter);
             }
 
             var resourceNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "resource");

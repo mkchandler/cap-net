@@ -104,6 +104,31 @@ namespace CAPNet.Tests
         }
 
         [Fact]
+        public void CanParseXmlWithMultipleParameter()
+        {
+            var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
+           
+            var info = alert.Info.ElementAt(0);
+            Assert.Equal(2, info.Parameters.Count);
+
+            //    <parameter>
+            var parameter = info.Parameters.First();
+            //      <valueName>HSAS1</valueName>
+            Assert.Equal("HSAS1", parameter.ValueName);
+            //      <value>ORANGE1</value>
+            Assert.Equal("ORANGE1", parameter.Value);
+            //    </parameter>
+
+            //    <parameter>       
+            parameter = info.Parameters.Last();
+            //      <valueName>HSAS2</valueName>
+            Assert.Equal("HSAS2", parameter.ValueName);
+            //      <value>ORANGE2</value>
+            Assert.Equal("ORANGE2", parameter.Value);
+            //    </parameter>
+        }
+
+        [Fact]
         public void OrangeAlertExampleIsParsedCorrectly()
         {
             var alert = XmlParser.Parse(Examples.OrangeAlertXml).First();
