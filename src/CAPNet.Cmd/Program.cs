@@ -33,6 +33,8 @@ namespace CAPNet.Cmd
 
             if (alerts.Count() == 0)
                 Console.WriteLine("No alerts");
+            else if(alerts.Count() == 1)
+                Console.WriteLine("1 alert");
             else
                 Console.WriteLine("{0} alerts", alerts.Count());
 
