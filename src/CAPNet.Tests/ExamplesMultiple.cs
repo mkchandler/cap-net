@@ -89,5 +89,72 @@
   </info>
 </alert>
 </alerts>";
+
+public const string MultipleAlertXml = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<alert xmlns=""urn:oasis:names:tc:emergency:cap:1.2"">
+  <identifier>43b080713727</identifier>
+  <sender>hsas@dhs.gov</sender>
+  <sent>2003-04-02T14:39:01-05:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <source>source</source>
+  <restriction>restriction</restriction>
+  <addresses>addresses</addresses>
+  <code>code</code>
+  <note>note</note>
+  <references>references</references>
+  <incidents>incidents</incidents>
+  <info>
+    <category>Security</category>
+    <event>Homeland Security Advisory System Update</event>
+    <responseType>Shelter</responseType>
+    <urgency>Immediate</urgency>
+    <severity>Severe</severity>
+    <certainty>Likely</certainty>
+    <audience>audience</audience>
+    <eventCode>
+      <valueName>valN</valueName>
+      <value>val</value>
+    </eventCode>
+    <eventCode>
+      <valueName>valN1</valueName>
+      <value>val1</value>
+    </eventCode>
+    <effective>2003-04-02T14:39:01-05:00</effective>
+    <onset>2003-04-02T14:39:01-05:00</onset>
+    <expires>2003-04-02T14:39:01-05:00</expires>
+    <senderName>U.S. Government, Department of Homeland Security</senderName>
+    <headline>Homeland Security Sets Code ORANGE</headline>
+    <description>The Department of Homeland Security has elevated the Homeland Security Advisory System threat level to ORANGE / High in response to intelligence which may indicate a heightened threat of terrorism.</description>
+    <instruction>A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.</instruction>
+    <web>http://www.dhs.gov/dhspublic/display?theme=29</web>
+    <contact>contact</contact>
+    <parameter>
+      <valueName>HSAS</valueName>
+      <value>ORANGE</value>
+    </parameter>
+    <resource>
+      <resourceDesc>Image file (GIF)</resourceDesc>
+      <mimeType>image/gif</mimeType>
+      <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
+    </resource>
+    <area>
+      <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
+      <altitude>altitude</altitude>
+      <ceiling>ceiling</ceiling>
+      <geocode>
+        <valueName>valN</valueName>
+        <value>val</value>
+      </geocode>
+      <geocode>
+        <valueName>valN1</valueName>
+        <value>val1</value>
+      </geocode>
+    </area>
+  </info>
+</alert>";
     }
 }
+
+

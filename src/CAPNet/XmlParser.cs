@@ -197,7 +197,22 @@ namespace CAPNet
             var eventCodeNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "eventCode");
             if (eventCodeNode != null)
             {
-                //info.EventCode = eventCodeNode.Value;
+                string valueName = null;
+                string value = null;
+
+                var valueNameNode = eventCodeNode.Element(XmlCreator.CAP12Namespace + "valueName");
+                if (valueNameNode != null)
+                {
+                    valueName = valueNameNode.Value;
+                }
+
+                var valueNode = eventCodeNode.Element(XmlCreator.CAP12Namespace + "value");
+                if (valueNode != null)
+                {
+                    value = valueNode.Value;
+                }
+
+                info.EventCodes.Add(new EventCode(valueName, value));
             }
 
             var effectiveNode = translatedAlertNode.Element(XmlCreator.CAP12Namespace + "effective");
