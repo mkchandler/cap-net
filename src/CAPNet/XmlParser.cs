@@ -309,10 +309,13 @@ namespace CAPNet
             if (areaDescNode != null)
                 area.Description = areaDescNode.Value;
 
-            var polygonNode = areaElement.Element(XmlCreator.CAP12Namespace + "polygon");
-            if (polygonNode != null)
-                area.Polygon = polygonNode.Value;
-
+            var polygonQuery = from polygonNode in areaElement.Elements(XmlCreator.CAP12Namespace + "polygon")
+                               where polygonNode != null
+                               select polygonNode.Value;
+            
+            foreach (var polygonValue in polygonQuery )
+                    area.Polygon.Add(polygonValue);
+            
             return area;
         }
 

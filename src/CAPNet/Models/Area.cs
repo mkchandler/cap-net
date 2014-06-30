@@ -31,6 +31,7 @@ namespace CAPNet.Models
         public Area()
         {
             _geocodes = new List<Parameter>();
+            _polygon = new List<string>();
         }
 
         /// <summary>
@@ -55,7 +56,13 @@ namespace CAPNet.Models
         ///     </description></item>
         ///   </list>
         /// </remarks>
-        public string Polygon { get; set; }
+        public List<string> Polygon
+        {
+            get { return _polygon; }
+            set { _polygon = value; }
+        }
+
+        private List<string> _polygon;
 
         private List<Parameter> _geocodes;
 

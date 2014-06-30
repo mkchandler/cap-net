@@ -104,6 +104,37 @@ namespace CAPNet.Tests
         }
 
         [Fact]
+        public void CanParseXmlWithPolygon()
+        {
+            var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
+            Assert.NotNull(alert);
+
+            var polygonNode = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygon;
+            Assert.Equal(1, polygonNode.Count());
+
+            //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
+            Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", polygonNode.First());
+        }
+
+        [Fact]
+        public void CanParseXmlWithPolygonMultiple()
+        {
+            var alert = XmlParser.Parse(ExamplesMultiple.Thunderstorm12Xml).First();
+            Assert.NotNull(alert);
+
+            var polygon = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygon;
+            Assert.Equal(2, polygon.Count());
+
+            //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
+            var firstPolygon = polygon.First();
+            Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", firstPolygon);
+
+            //<polygon>58.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
+            var secondPolygon = polygon.ElementAt(1);
+            Assert.Equal("58.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", secondPolygon);
+        }
+
+        [Fact]
         public void CanParseXmlWithMultipleCategory()
         {
             var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
