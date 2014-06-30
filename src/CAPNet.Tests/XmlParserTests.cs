@@ -104,6 +104,26 @@ namespace CAPNet.Tests
         }
 
         [Fact]
+        public void CanParseXmlWithMultipleArea()
+        {
+            var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
+
+            var info = alert.Info.ElementAt(0);
+
+            Assert.Equal(2, info.Areas.Count);
+
+            var firstArea = info.Areas.First();
+            //      <areaDesc>U.S.</areaDesc>
+            Assert.Equal("U.S.", firstArea.Description);
+            //    </area>
+
+            var lastArea = info.Areas.Last();
+            //      <areaDesc>Canada</areaDesc>
+            Assert.Equal("Canada", lastArea.Description);
+            //    </area>
+        }
+
+        [Fact]
         public void CanParseXmlWithMultipleParameter()
         {
             var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();

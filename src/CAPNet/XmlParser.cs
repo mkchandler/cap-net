@@ -285,10 +285,12 @@ namespace CAPNet
                 info.Resources.Add(resource);
             }
 
-            var areaNode = infoElement.Element(XmlCreator.CAP12Namespace + "area");
-            if (areaNode != null)
+            var areaQuery = from areaNode in infoElement.Elements(XmlCreator.CAP12Namespace + "area")
+                            where areaNode != null
+                            select ParseArea(areaNode);
+
+            foreach ( var area in areaQuery )
             {
-                var area = ParseArea(areaNode);
                 info.Areas.Add(area);
             }
 

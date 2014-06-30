@@ -123,7 +123,10 @@
       <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
     </resource>
     <area>
-      <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
+      <areaDesc>U.S.</areaDesc>
+    </area>
+    <area>
+      <areaDesc>Canada</areaDesc>
     </area>
   </info>
 </alert>";
