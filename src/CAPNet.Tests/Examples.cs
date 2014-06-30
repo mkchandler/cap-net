@@ -155,7 +155,7 @@ namespace CAPNet.Tests
   <info>
     <category>Security</category>
     <event>Homeland Security Advisory System Update</event>
-    <responsetype>Shelter</responsetype>
+    <responseType>Shelter</responseType>
     <urgency>Immediate</urgency>
     <severity>Severe</severity>
     <certainty>Likely</certainty>
@@ -163,6 +163,10 @@ namespace CAPNet.Tests
     <eventCode>
       <valueName>valN</valueName>
       <value>val</value>
+    </eventCode>
+    <eventCode>
+      <valueName>valN1</valueName>
+      <value>val1</value>
     </eventCode>
     <effective>2003-04-02T14:39:01-05:00</effective>
     <onset>2003-04-02T14:39:01-05:00</onset>
@@ -184,6 +188,16 @@ namespace CAPNet.Tests
     </resource>
     <area>
       <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
+      <altitude>altitude</altitude>
+      <ceiling>ceiling</ceiling>
+      <geocode>
+        <valueName>valN</valueName>
+        <value>val</value>
+      </geocode>
+      <geocode>
+        <valueName>valN1</valueName>
+        <value>val1</value>
+      </geocode>
     </area>
   </info>
 </alert>";

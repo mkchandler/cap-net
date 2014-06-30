@@ -14,7 +14,7 @@ namespace CAPNet.Models
         public Info()
         {
             _parameters = new List<Parameter>();
-            _eventCode = new List<Parameter>();
+            _eventCodes = new List<EventCode>();
             _categories = new List<Category>();
             _resources = new List<Resource>();
             _areas = new List<Area>();
@@ -136,20 +136,20 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        private List<Parameter> _eventCode;
+        private List<EventCode> _eventCodes;
 
         /// <summary>
         /// 
         /// </summary>
-        public List<Parameter> EventCode
+        public List<EventCode> EventCodes
         {
             get
             {
-                return _eventCode;
+                return _eventCodes;
             }
             set
             {
-                _eventCode = value;
+                _eventCodes = value;
             }
         }
 

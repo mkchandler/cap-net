@@ -157,7 +157,24 @@ namespace CAPNet
                         info.Audience = infoNode.InnerText;
                         break;
                     case "eventCode":
-                        info.EventCode.Add(ParseParameter(infoNode));
+                        string valueName = null;
+                        string value = null;
+
+                        foreach (XmlNode parameterNode in infoNode.ChildNodes)
+                        {
+                            switch (parameterNode.Name)
+                            {
+                                case "valueName":
+                                    valueName = parameterNode.InnerText;
+                                    break;
+                                case "value":
+                                    value = parameterNode.InnerText;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        info.EventCodes.Add(new EventCode(valueName, value));
                         break;
                     case "effective":
                         info.Effective = DateTimeOffset.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
@@ -187,7 +204,24 @@ namespace CAPNet
                         info.Contact = infoNode.InnerText;
                         break;
                     case "parameter":
-                        info.Parameters.Add(ParseParameter(infoNode));
+                        valueName = null;
+                        value = null;
+
+                        foreach (XmlNode parameterNode in infoNode.ChildNodes)
+                        {
+                            switch (parameterNode.Name)
+                            {
+                                case "valueName":
+                                    valueName = parameterNode.InnerText;
+                                    break;
+                                case "value":
+                                    value = parameterNode.InnerText;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        info.Parameters.Add(new Parameter(valueName, value));
                         break;
                     case "resource":
                         var resource = ParseResource(infoNode);
@@ -226,6 +260,7 @@ namespace CAPNet
             return new Parameter(valueName, value);
         }
 
+       
         private static Area ParseArea(XmlNode infoNode)
         {
             var area = new Area();

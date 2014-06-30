@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using System.Collections.Generic;
 
 using CAPNet.Models;
 
@@ -32,7 +33,7 @@ namespace CAPNet.Tests
                                                       Status = Status.Test,
                                                       MessageType = MessageType.Alert,
                                                       Scope = Scope.Private
-                                                      
+
                                                   };
 
         [Fact]
@@ -156,7 +157,8 @@ namespace CAPNet.Tests
             //  <valuename>valN</valuename>
             //  <value>val</value>
             //</eventcode>
-            info.EventCode.Add(new Parameter("valN", "val"));
+            info.EventCodes.Add(new EventCode("valN", "val"));
+            info.EventCodes.Add(new EventCode("valN1", "val1"));
             //  <effective>2003-04-02T14:39:01-05:00</effective>
             info.Effective = new DateTimeOffset(2003, 4, 2, 14, 39, 1, TimeSpan.FromHours(-5));
             //  <onset>2003-04-02T14:39:01-05:00</onset>
@@ -191,13 +193,32 @@ namespace CAPNet.Tests
                 Uri = "http://www.dhs.gov/dhspublic/getAdvisoryImage"
             //    </resource>
             });
+
+            List<GeoCode> geocodeList = new List<GeoCode>();
+            geocodeList.Add(new GeoCode("valN","val"));
+            geocodeList.Add(new GeoCode("valN1", "val1"));
+
             info.Areas.Add(
                 //  <area>
                 new Area
                 {
                     //  <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
-                    Description = "U.S. nationwide and interests worldwide"
-                //  </area>
+                    Description = "U.S. nationwide and interests worldwide",
+                    //  <altitude>altitude</altitude>
+                    Altitude = "altitude",
+                    //  <ceiling>ceiling</ceiling>
+                    Ceiling = "ceiling",
+                    //<geocode>
+                    //  <valueName>valN</valueName>
+                    //  <value>val</value>
+                    //</geocode>
+                    //<geocode>
+                    //  <valueName>valN1</valueName>
+                    //  <value>val1</value>
+                    //</geocode>
+                    Geocodes = geocodeList         
+
+                    //  </area>
                 });
             //  </info>
 

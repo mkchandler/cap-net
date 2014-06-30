@@ -49,12 +49,12 @@ namespace CAPNet
                 CAP12Namespace + "info",
                 info.Categories.Select(cat => new XElement(CAP12Namespace + "category", cat)),
                 new XElement(CAP12Namespace + "event", info.Event),
-                new XElement(CAP12Namespace + "responsetype", info.ResponseType),
+                new XElement(CAP12Namespace + "responseType", info.ResponseType),
                 new XElement(CAP12Namespace + "urgency", info.Urgency),
                 new XElement(CAP12Namespace + "severity", info.Severity),
                 new XElement(CAP12Namespace + "certainty", info.Certainty),
                 new XElement(CAP12Namespace + "audience", info.Audience),
-                from e in info.EventCode
+                from e in info.EventCodes
                 select new XElement(
                     CAP12Namespace + "eventCode",
                     new XElement(CAP12Namespace + "valueName", e.ValueName),
@@ -82,8 +82,15 @@ namespace CAPNet
                 from a in info.Areas
                 select new XElement(
                     CAP12Namespace + "area",
-                    new XElement(CAP12Namespace + "areaDesc", a.Description))
-                );
+                    new XElement(CAP12Namespace + "areaDesc", a.Description),
+                    new XElement(CAP12Namespace + "altitude", a.Altitude),
+                    new XElement(CAP12Namespace + "ceiling", a.Ceiling),
+                    from geo in a.Geocodes
+                    select new XElement(
+                        CAP12Namespace + "geocode",
+                        new XElement(CAP12Namespace + "valueName", geo.ValueName),
+                        new XElement(CAP12Namespace + "value", geo.Value))
+                ));
 
             return infoElement;
         }

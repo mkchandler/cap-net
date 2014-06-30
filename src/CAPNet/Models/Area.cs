@@ -30,7 +30,7 @@ namespace CAPNet.Models
         /// </summary>
         public Area()
         {
-            _geocodes = new List<Parameter>();
+            _geocodes = new List<GeoCode>();
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace CAPNet.Models
         /// </remarks>
         public string Polygon { get; set; }
 
-        private List<Parameter> _geocodes;
+        private List<GeoCode> _geocodes;
 
         /// <summary>
         /// The geographic code(s) delineating the affected area of the alert message (OPTIONAL)
@@ -88,9 +88,10 @@ namespace CAPNet.Models
         ///     </description></item>
         ///   </list>
         /// </remarks>
-        public List<Parameter> Geocodes
+        public List<GeoCode> Geocodes
         {
             get { return _geocodes; }
+            set { _geocodes = value; }
         }
 
         /// <summary>
