@@ -314,7 +314,14 @@ namespace CAPNet
                                select polygonNode.Value;
             
             foreach (var polygonValue in polygonQuery )
-                    area.Polygons.Add(polygonValue);
+                area.Polygons.Add(polygonValue);
+
+            var circleQuery = from circleNode in areaElement.Elements(XmlCreator.CAP12Namespace + "circle")
+                              where circleNode != null
+                              select circleNode.Value;
+
+            foreach (var circleValue in circleQuery)
+                area.Circles.Add(circleValue);
             
             return area;
         }

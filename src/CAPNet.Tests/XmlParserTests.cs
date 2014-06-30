@@ -104,38 +104,67 @@ namespace CAPNet.Tests
         }
 
         [Fact]
+        public void CanParseXmlWithCircle()
+        {
+            var alert = XmlParser.Parse(Examples.circleXml).First();
+            Assert.NotNull(alert);
+
+            var circle = alert.Info.ElementAt(0).Areas.ElementAt(0).Circles;
+            Assert.Equal(1, circle.Count());
+
+            //<circle>32.9525,-115.5527 0</circle>  
+            Assert.Equal("32.9525,-115.5527 0", circle.First()); 
+        }
+
+        [Fact]
+        public void CanParseXmlWithMultipleCircles()
+        {
+            var alert = XmlParser.Parse(ExamplesMultiple.circleXml).First();
+            Assert.NotNull(alert);
+
+            var circles = alert.Info.ElementAt(0).Areas.ElementAt(0).Circles;
+            Assert.Equal(2, circles.Count());
+
+            //<circle>32.9525,-115.5527 0</circle>  
+            Assert.Equal("32.9525,-115.5527 0", circles.First());
+
+            //<circle>62.9525,-55.5527 0</circle>
+            Assert.Equal("62.9525,-55.5527 0", circles.Last());
+        }
+
+        [Fact]
         public void CanParseXmlWithPolygon()
         {
             var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
             Assert.NotNull(alert);
 
-            var polygonNode = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygons;
-            Assert.Equal(1, polygonNode.Count());
+            var polygons = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygons;
+            Assert.Equal(1, polygons.Count());
 
             //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
-            Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", polygonNode.First());
+            Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", polygons.First());
         }
 
         [Fact]
-        public void CanParseXmlWithPolygonMultiple()
+        public void CanParseXmlWithMultiplePolygons()
         {
             var alert = XmlParser.Parse(ExamplesMultiple.Thunderstorm12Xml).First();
             Assert.NotNull(alert);
 
-            var polygon = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygons;
-            Assert.Equal(2, polygon.Count());
+            var polygons = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygons;
+            Assert.Equal(2, polygons.Count());
 
             //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
-            var firstPolygon = polygon.First();
+            var firstPolygon = polygons.First();
             Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", firstPolygon);
 
             //<polygon>58.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
-            var secondPolygon = polygon.Last();
-            Assert.Equal("58.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", secondPolygon);
+            var lastPolygon = polygons.Last();
+            Assert.Equal("58.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 58.47,-120.14", lastPolygon);
         }
 
         [Fact]
-        public void CanParseXmlWithMultipleCategory()
+        public void CanParseXmlWithMultipleCategories()
         {
             var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
 
@@ -149,7 +178,7 @@ namespace CAPNet.Tests
         }
 
         [Fact]
-        public void CanParseXmlWithMultipleResource()
+        public void CanParseXmlWithMultipleResources()
         {
             var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
 
@@ -160,9 +189,9 @@ namespace CAPNet.Tests
             
             var firstResource = info.Resources.First();
             //      <resourceDesc>Image file (GIF)</resourceDesc>
-            Assert.Equal("Image file (GIF)", firstResource.Description);
+            Assert.Equal("Image file (JPG)", firstResource.Description);
             //      <mimeType>image/gif</mimeType>
-            Assert.Equal("image/gif", firstResource.MimeType);
+            Assert.Equal("image/jpg", firstResource.MimeType);
             //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
             Assert.Equal("http://www.dhs.gov/dhspublic/getAdvisoryImage", firstResource.Uri);
             //    </resource>
@@ -179,7 +208,7 @@ namespace CAPNet.Tests
         }
 
         [Fact]
-        public void CanParseXmlWithMultipleArea()
+        public void CanParseXmlWithMultipleAreas()
         {
             var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
 
@@ -199,7 +228,7 @@ namespace CAPNet.Tests
         }
 
         [Fact]
-        public void CanParseXmlWithMultipleParameter()
+        public void CanParseXmlWithMultipleParameters()
         {
             var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
            

@@ -32,6 +32,7 @@ namespace CAPNet.Models
         {
             _geocodes = new List<Parameter>();
             _polygons = new List<string>();
+            _circles = new List<string>();
         }
 
         /// <summary>
@@ -60,6 +61,21 @@ namespace CAPNet.Models
         {
             get { return _polygons; }
             set { _polygons = value; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICollection<string> Circles
+        {
+            get { return _circles; }
+            set { _circles = value; }
+        }
+
+        private ICollection<string> _circles
+        {
+            get;
+            set;
         }
 
         private ICollection<string> _polygons;
