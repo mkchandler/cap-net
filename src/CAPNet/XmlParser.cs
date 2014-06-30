@@ -149,10 +149,12 @@ namespace CAPNet
             if (languageNode != null)
                 info.Language = languageNode.Value;
 
-            var categoryNode = infoElement.Element(XmlCreator.CAP12Namespace + "category");
-            if (categoryNode != null)
+            var categoryQuery = from categoryNode in infoElement.Elements(XmlCreator.CAP12Namespace + "category")
+                                where categoryNode != null
+                                select (Category)Enum.Parse(typeof(Category), categoryNode.Value);
+
+            foreach (var category in categoryQuery)
             {
-                var category = (Category)Enum.Parse(typeof(Category), categoryNode.Value);
                 info.Categories.Add(category);
             }
 

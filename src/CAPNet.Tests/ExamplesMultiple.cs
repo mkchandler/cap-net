@@ -100,6 +100,7 @@
   <scope>Public</scope>
   <info>
     <category>Security</category>
+    <category>Safety</category>
     <event>Homeland Security Advisory System Update</event>
     <urgency>Immediate</urgency>
     <severity>Severe</severity>

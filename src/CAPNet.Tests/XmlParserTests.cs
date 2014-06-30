@@ -104,6 +104,20 @@ namespace CAPNet.Tests
         }
 
         [Fact]
+        public void CanParseXmlWithMultipleCategory()
+        {
+            var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
+
+            var info = alert.Info.ElementAt(0);
+            Assert.Equal(2, info.Categories.Count);
+
+            //    <category>Security</category>
+            Assert.Contains(Category.Security, info.Categories);
+            //    <category>Safety</category>
+            Assert.Contains(Category.Safety, info.Categories);
+        }
+
+        [Fact]
         public void CanParseXmlWithMultipleResource()
         {
             var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
