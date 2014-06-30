@@ -98,7 +98,7 @@ namespace CAPNet.Tests
                 alertAsString = new StreamReader(memoryStream, Encoding.UTF8).ReadToEnd();
             }
 
-            Assert.Equal<string>(Examples.OrangeAlertXml, alertAsString);
+            Assert.Equal(Examples.OrangeAlertXml, alertAsString);
 
         }
 
