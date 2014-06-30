@@ -32,6 +32,8 @@ namespace CAPNet.Models
         public Area()
         {
             _geoCodes = new List<GeoCode>();
+            _polygons = new List<string>();
+            _circles = new List<string>();
         }
 
         /// <summary>
@@ -56,7 +58,28 @@ namespace CAPNet.Models
         ///     </description></item>
         ///   </list>
         /// </remarks>
-        public string Polygon { get; set; }
+        public ICollection<string> Polygons
+        {
+            get { return _polygons; }
+            set { _polygons = value; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICollection<string> Circles
+        {
+            get { return _circles; }
+            set { _circles = value; }
+        }
+
+        private ICollection<string> _circles
+        {
+            get;
+            set;
+        }
+
+        private ICollection<string> _polygons;
 
         private ICollection<GeoCode> _geoCodes;
 

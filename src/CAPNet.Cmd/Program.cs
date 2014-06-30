@@ -84,9 +84,7 @@ namespace CAPNet.Cmd
                 {
                     using (Stream responseStream = response.GetResponseStream())
                     {
-                        XDocument doc = new XDocument();
-                        doc.Add(responseStream);
-
+                        XDocument doc = XDocument.Load(responseStream);
                         var alertList = XmlParser.Parse(doc);
                         return alertList;
                     }

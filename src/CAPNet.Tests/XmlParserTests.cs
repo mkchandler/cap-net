@@ -28,7 +28,7 @@ namespace CAPNet.Tests
         public void CanReadCAP12Example()
         {
             var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
-            Assert.NotNull(alert.Info.ElementAt(0).Areas.ElementAt(0).Polygon);
+            Assert.NotNull(alert.Info.ElementAt(0).Areas.ElementAt(0).Polygons);
         }
 
         [Fact]
@@ -101,6 +101,155 @@ namespace CAPNet.Tests
         {
             var alert = XmlParser.Parse(Examples.VeryLikelyOrangeAlertXml).First();
             Assert.Equal(Certainty.Likely, alert.Info.ElementAt(0).Certainty);
+        }
+
+        [Fact]
+        public void CanParseXmlWithCircle()
+        {
+            var alert = XmlParser.Parse(Examples.circleXml).First();
+            Assert.NotNull(alert);
+
+            var circle = alert.Info.ElementAt(0).Areas.ElementAt(0).Circles;
+            Assert.Equal(1, circle.Count());
+
+            //<circle>32.9525,-115.5527 0</circle>  
+            Assert.Equal("32.9525,-115.5527 0", circle.First()); 
+        }
+
+        [Fact]
+        public void CanParseXmlWithMultipleCircles()
+        {
+            var alert = XmlParser.Parse(ExamplesMultiple.CircleXml).First();
+            Assert.NotNull(alert);
+
+            var circles = alert.Info.ElementAt(0).Areas.ElementAt(0).Circles;
+            Assert.Equal(2, circles.Count());
+
+            //<circle>32.9525,-115.5527 0</circle>  
+            Assert.Equal("32.9525,-115.5527 0", circles.First());
+
+            //<circle>62.9525,-55.5527 0</circle>
+            Assert.Equal("62.9525,-55.5527 0", circles.Last());
+        }
+
+        [Fact]
+        public void CanParseXmlWithPolygon()
+        {
+            var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
+            Assert.NotNull(alert);
+
+            var polygons = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygons;
+            Assert.Equal(1, polygons.Count());
+
+            //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
+            Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", polygons.First());
+        }
+
+        [Fact]
+        public void CanParseXmlWithMultiplePolygons()
+        {
+            var alert = XmlParser.Parse(ExamplesMultiple.Thunderstorm12Xml).First();
+            Assert.NotNull(alert);
+
+            var polygons = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygons;
+            Assert.Equal(2, polygons.Count());
+
+            //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
+            var firstPolygon = polygons.First();
+            Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", firstPolygon);
+
+            //<polygon>58.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
+            var lastPolygon = polygons.Last();
+            Assert.Equal("58.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 58.47,-120.14", lastPolygon);
+        }
+
+        [Fact]
+        public void CanParseXmlWithMultipleCategories()
+        {
+            var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
+
+            var info = alert.Info.ElementAt(0);
+            Assert.Equal(2, info.Categories.Count);
+
+            //    <category>Security</category>
+            Assert.Contains(Category.Security, info.Categories);
+            //    <category>Safety</category>
+            Assert.Contains(Category.Safety, info.Categories);
+        }
+
+        [Fact]
+        public void CanParseXmlWithMultipleResources()
+        {
+            var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
+
+            var info = alert.Info.ElementAt(0);
+
+            //    <resource>
+            Assert.Equal(2, info.Resources.Count);
+            
+            var firstResource = info.Resources.First();
+            //      <resourceDesc>Image file (GIF)</resourceDesc>
+            Assert.Equal("Image file (JPG)", firstResource.Description);
+            //      <mimeType>image/gif</mimeType>
+            Assert.Equal("image/jpg", firstResource.MimeType);
+            //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
+            Assert.Equal("http://www.dhs.gov/dhspublic/getAdvisoryImage", firstResource.Uri);
+            //    </resource>
+
+            //    <resource>
+            var lastResource = info.Resources.Last();
+            //      <resourceDesc>Image file (GIF)</resourceDesc>
+            Assert.Equal("Image(GIF)", lastResource.Description);
+            //      <mimeType>image/gif</mimeType>
+            Assert.Equal("image/gif", lastResource.MimeType);
+            //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryNoImage</uri>
+            Assert.Equal("http://www.dhs.gov/dhspublic/getAdvisoryNoImage", lastResource.Uri);
+            //    </resource>
+        }
+
+        [Fact]
+        public void CanParseXmlWithMultipleAreas()
+        {
+            var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
+
+            var info = alert.Info.ElementAt(0);
+
+            Assert.Equal(2, info.Areas.Count);
+
+            var firstArea = info.Areas.First();
+            //      <areaDesc>U.S.</areaDesc>
+            Assert.Equal("U.S.", firstArea.Description);
+            //    </area>
+
+            var lastArea = info.Areas.Last();
+            //      <areaDesc>Canada</areaDesc>
+            Assert.Equal("Canada", lastArea.Description);
+            //    </area>
+        }
+
+        [Fact]
+        public void CanParseXmlWithMultipleParameters()
+        {
+            var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
+           
+            var info = alert.Info.ElementAt(0);
+            Assert.Equal(2, info.Parameters.Count);
+
+            //    <parameter>
+            var parameter = info.Parameters.First();
+            //      <valueName>HSAS1</valueName>
+            Assert.Equal("HSAS1", parameter.ValueName);
+            //      <value>ORANGE1</value>
+            Assert.Equal("ORANGE1", parameter.Value);
+            //    </parameter>
+
+            //    <parameter>       
+            parameter = info.Parameters.Last();
+            //      <valueName>HSAS2</valueName>
+            Assert.Equal("HSAS2", parameter.ValueName);
+            //      <value>ORANGE2</value>
+            Assert.Equal("ORANGE2", parameter.Value);
+            //    </parameter>
         }
 
         [Fact]
