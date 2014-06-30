@@ -32,6 +32,7 @@ namespace CAPNet.Tests
                                                       Status = Status.Test,
                                                       MessageType = MessageType.Alert,
                                                       Scope = Scope.Private
+                                                      
                                                   };
 
         [Fact]
@@ -116,7 +117,21 @@ namespace CAPNet.Tests
                 //  <msgType>Alert</msgType>
                 MessageType = MessageType.Alert,
                 //  <scope>Public</scope>
-                Scope = Scope.Public
+                Scope = Scope.Public,
+
+                Source = "source",
+
+                Restriction = "restriction",
+
+                Addresses = "addresses",
+
+                Code = "code",
+
+                Note = "note",
+
+                References = "references",
+
+                Incidents = "incidents"
             };
 
             //  <info>

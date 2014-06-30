@@ -145,6 +145,13 @@ namespace CAPNet.Tests
   <status>Actual</status>
   <msgType>Alert</msgType>
   <scope>Public</scope>
+  <source>source</source>
+  <restriction>restriction</restriction>
+  <addresses>addresses</addresses>
+  <code>code</code>
+  <note>note</note>
+  <references>references</references>
+  <incidents>incidents</incidents>
   <info>
     <category>Security</category>
     <event>Homeland Security Advisory System Update</event>

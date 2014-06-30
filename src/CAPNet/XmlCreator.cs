@@ -31,6 +31,13 @@ namespace CAPNet
                 new XElement(CAP12Namespace + "status", alert.Status),
                 new XElement(CAP12Namespace + "msgType", alert.MessageType),
                 new XElement(CAP12Namespace + "scope", alert.Scope),
+                new XElement(CAP12Namespace + "source", alert.Source),
+                new XElement(CAP12Namespace + "restriction", alert.Restriction),
+                new XElement(CAP12Namespace + "addresses", alert.Addresses),
+                new XElement(CAP12Namespace + "code", alert.Code),
+                new XElement(CAP12Namespace + "note", alert.Note),
+                new XElement(CAP12Namespace + "references", alert.References),
+                new XElement(CAP12Namespace + "incidents", alert.Incidents),
                 alert.Info.Select(Create));
 
             return alertElement;
