@@ -125,7 +125,7 @@ namespace CAPNet.Models
         /// System-specific additional parameters associated
         /// with the alert message (OPTIONAL)
         /// </summary>
-        public List<Parameter> Parameters
+        public ICollection<Parameter> Parameters
         {
             get
             {
@@ -136,21 +136,18 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        private List<EventCode> _eventCodes;
+        private ICollection<EventCode> _eventCodes;
 
         /// <summary>
         /// 
         /// </summary>
-        public List<EventCode> EventCodes
+        public ICollection<EventCode> EventCodes
         {
             get
             {
                 return _eventCodes;
             }
-            set
-            {
-                _eventCodes = value;
-            }
+            
         }
 
         private ICollection<Resource> _resources;

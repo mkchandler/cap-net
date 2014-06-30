@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using CAPNet.Models;
 
@@ -194,7 +195,7 @@ namespace CAPNet.Tests
             //    </resource>
             });
 
-            List<GeoCode> geocodeList = new List<GeoCode>();
+            ICollection<GeoCode> geocodeList = new List<GeoCode>();
             geocodeList.Add(new GeoCode("valN","val"));
             geocodeList.Add(new GeoCode("valN1", "val1"));
 
@@ -216,7 +217,7 @@ namespace CAPNet.Tests
                     //  <valueName>valN1</valueName>
                     //  <value>val1</value>
                     //</geocode>
-                    Geocodes = geocodeList         
+                    GeoCodes = geocodeList    
 
                     //  </area>
                 });

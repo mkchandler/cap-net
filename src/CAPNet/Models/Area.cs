@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+
 namespace CAPNet.Models
 {
     /// <summary>
@@ -30,7 +31,7 @@ namespace CAPNet.Models
         /// </summary>
         public Area()
         {
-            _geocodes = new List<GeoCode>();
+            _geoCodes = new List<GeoCode>();
         }
 
         /// <summary>
@@ -57,7 +58,7 @@ namespace CAPNet.Models
         /// </remarks>
         public string Polygon { get; set; }
 
-        private List<GeoCode> _geocodes;
+        private ICollection<GeoCode> _geoCodes;
 
         /// <summary>
         /// The geographic code(s) delineating the affected area of the alert message (OPTIONAL)
@@ -88,10 +89,10 @@ namespace CAPNet.Models
         ///     </description></item>
         ///   </list>
         /// </remarks>
-        public List<GeoCode> Geocodes
+        public ICollection<GeoCode> GeoCodes
         {
-            get { return _geocodes; }
-            set { _geocodes = value; }
+            get { return _geoCodes; }
+            set { _geoCodes = value; }
         }
 
         /// <summary>

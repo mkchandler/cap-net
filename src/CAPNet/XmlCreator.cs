@@ -85,7 +85,7 @@ namespace CAPNet
                     new XElement(CAP12Namespace + "areaDesc", a.Description),
                     new XElement(CAP12Namespace + "altitude", a.Altitude),
                     new XElement(CAP12Namespace + "ceiling", a.Ceiling),
-                    from geo in a.Geocodes
+                    from geo in a.GeoCodes
                     select new XElement(
                         CAP12Namespace + "geocode",
                         new XElement(CAP12Namespace + "valueName", geo.ValueName),
