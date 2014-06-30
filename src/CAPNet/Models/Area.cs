@@ -26,14 +26,20 @@ namespace CAPNet.Models
     /// </remarks>
     public class Area
     {
+        private readonly ICollection<string> circles;
+
+        private readonly ICollection<string> polygons;
+
+        private readonly ICollection<GeoCode> geoCodes;
+
         /// <summary>
         /// 
         /// </summary>
         public Area()
         {
-            _geoCodes = new List<GeoCode>();
-            _polygons = new List<string>();
-            _circles = new List<string>();
+            geoCodes = new List<GeoCode>();
+            polygons = new List<string>();
+            circles = new List<string>();
         }
 
         /// <summary>
@@ -60,8 +66,7 @@ namespace CAPNet.Models
         /// </remarks>
         public ICollection<string> Polygons
         {
-            get { return _polygons; }
-            set { _polygons = value; }
+            get { return polygons; }
         }
 
         /// <summary>
@@ -69,19 +74,8 @@ namespace CAPNet.Models
         /// </summary>
         public ICollection<string> Circles
         {
-            get { return _circles; }
-            set { _circles = value; }
+            get { return circles; }
         }
-
-        private ICollection<string> _circles
-        {
-            get;
-            set;
-        }
-
-        private ICollection<string> _polygons;
-
-        private ICollection<GeoCode> _geoCodes;
 
         /// <summary>
         /// The geographic code(s) delineating the affected area of the alert message (OPTIONAL)
@@ -114,7 +108,7 @@ namespace CAPNet.Models
         /// </remarks>
         public ICollection<GeoCode> GeoCodes
         {
-            get { return _geoCodes; }
+            get { return geoCodes; }
         }
 
         /// <summary>
