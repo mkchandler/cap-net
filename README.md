@@ -38,17 +38,17 @@ For more information on SemVer, please visit http://semver.org/.
 Authors
 -------
 
-**Matt Chandler**
+Based on original work by **Matt Chandler**
 
 + http://twitter.com/mkchandler
 + http://github.com/mkchandler
 
-A list of additional contributors can be viewed here: https://github.com/mkchandler/cap-net/contributors
+A list of additional contributors can be viewed here: https://github.com/TeamnetGroup/cap-net/contributors
 
 Copyright and license
 ---------------------
 
-Copyright 2013 Matt Chandler and contributors
+Copyright 2014 Matt Chandler and contributors
 
 Licensed under the MIT License (the "License"); you may not use this work except in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:
 
