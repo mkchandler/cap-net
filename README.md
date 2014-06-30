@@ -7,7 +7,7 @@ CAPNet
 
 CAPNet is a Common Alerting Protocol (CAP) library for the .NET framework.
 
-More information on CAP can be found here: http://www.oasis-open.org/standards#capv1.1.
+More information on CAP can be found here: http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.html.
 
 
 Usage
