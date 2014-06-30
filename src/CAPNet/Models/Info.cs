@@ -8,40 +8,45 @@ namespace CAPNet.Models
     /// </summary>
     public class Info
     {
+        private string language;
+
+        private readonly ICollection<Parameter> parameters;
+
+        private readonly ICollection<EventCode> eventCodes;
+
+        private readonly ICollection<Category> categories;
+
+        private readonly ICollection<Resource> resources;
+
+        private readonly ICollection<Area> areas;
+
         /// <summary>
         /// 
         /// </summary>
         public Info()
         {
-            _parameters = new List<Parameter>();
-            _eventCodes = new List<EventCode>();
-            _categories = new List<Category>();
-            _resources = new List<Resource>();
-            _areas = new List<Area>();
+            parameters = new List<Parameter>();
+            eventCodes = new List<EventCode>();
+            categories = new List<Category>();
+            resources = new List<Resource>();
+            areas = new List<Area>();
         }
-
-        private string _language;
 
         /// <summary>
         /// Gets or sets the code denoting the language of the info sub-element of the alert message.
         /// </summary>
         public string Language
         {
-            get { return String.IsNullOrWhiteSpace(_language) ? "en-US" : _language; }
-            set { _language = value; }
+            get { return String.IsNullOrWhiteSpace(language) ? "en-US" : language; }
+            set { language = value; }
         }
-
-        private ICollection<Category> _categories;
 
         /// <summary>
         /// 
         /// </summary>
         public ICollection<Category> Categories
         {
-            get
-            {
-                return _categories;
-            }
+            get { return categories; }
         }
 
         /// <summary>
@@ -119,55 +124,38 @@ namespace CAPNet.Models
         /// </summary>
         public string Contact { get; set; }
 
-        private ICollection<Parameter> _parameters;
-
         /// <summary>
         /// System-specific additional parameters associated
         /// with the alert message (OPTIONAL)
         /// </summary>
         public ICollection<Parameter> Parameters
         {
-            get
-            {
-                return _parameters;
-            }
+            get { return parameters; }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private ICollection<EventCode> _eventCodes;
 
         /// <summary>
         /// 
         /// </summary>
         public ICollection<EventCode> EventCodes
         {
-            get
-            {
-                return _eventCodes;
-            }
+            get { return eventCodes; }
             
         }
-
-        private ICollection<Resource> _resources;
 
         /// <summary>
         /// 
         /// </summary>
         public ICollection<Resource> Resources
         {
-            get { return _resources; }
+            get { return resources; }
         }
-
-        private ICollection<Area> _areas;
 
         /// <summary>
         /// 
         /// </summary>
         public ICollection<Area> Areas
         {
-            get { return _areas; }
+            get { return areas; }
         }
     }
 }
