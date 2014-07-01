@@ -378,6 +378,10 @@ namespace CAPNet
             if (mimeTypeNode != null)
                 resource.MimeType = mimeTypeNode.Value;
 
+            var sizeNode = resourceElement.Element(XmlCreator.CAP12Namespace + "size");
+            if (sizeNode != null)
+                resource.Size = int.Parse(sizeNode.Value);
+
             var uriNode = resourceElement.Element(XmlCreator.CAP12Namespace + "uri");
             if (uriNode != null)
                 resource.Uri = new Uri(uriNode.Value);
