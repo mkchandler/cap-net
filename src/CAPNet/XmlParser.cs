@@ -275,7 +275,7 @@ namespace CAPNet
             var webNode = infoElement.Element(XmlCreator.CAP12Namespace + "web");
             if (webNode != null)
             {
-                info.Web = webNode.Value;
+                info.Web = new Uri(webNode.Value);
             }
 
             var contactNode = infoElement.Element(XmlCreator.CAP12Namespace + "contact");
@@ -361,7 +361,7 @@ namespace CAPNet
 
             var uriNode = resourceElement.Element(XmlCreator.CAP12Namespace + "uri");
             if (uriNode != null)
-                resource.Uri = uriNode.Value;
+                resource.Uri = new Uri(uriNode.Value);
 
             return resource;
         }

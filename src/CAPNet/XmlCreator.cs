@@ -87,7 +87,6 @@ namespace CAPNet
                     new XElement(CAP12Namespace + "uri", r.Uri),
                     new XElement(CAP12Namespace + "derefUri", r.DereferencedUri),
                     new XElement(CAP12Namespace + "digest", r.Digest)),
-
                 from area in info.Areas
                 select new XElement(
                     CAP12Namespace + "area",

@@ -193,7 +193,7 @@ namespace CAPNet.Tests
             //      <mimeType>image/gif</mimeType>
             Assert.Equal("image/jpg", firstResource.MimeType);
             //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
-            Assert.Equal("http://www.dhs.gov/dhspublic/getAdvisoryImage", firstResource.Uri);
+            Assert.Equal(new Uri("http://www.dhs.gov/dhspublic/getAdvisoryImage"), firstResource.Uri);
             //    </resource>
 
             //    <resource>
@@ -203,7 +203,7 @@ namespace CAPNet.Tests
             //      <mimeType>image/gif</mimeType>
             Assert.Equal("image/gif", lastResource.MimeType);
             //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryNoImage</uri>
-            Assert.Equal("http://www.dhs.gov/dhspublic/getAdvisoryNoImage", lastResource.Uri);
+            Assert.Equal(new Uri("http://www.dhs.gov/dhspublic/getAdvisoryNoImage"), lastResource.Uri);
             //    </resource>
         }
 
@@ -294,7 +294,7 @@ namespace CAPNet.Tests
             //    <instruction>A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.</instruction>
             Assert.Equal("A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.", info.Instruction);
             //    <web>http://www.dhs.gov/dhspublic/display?theme=29</web>
-            Assert.Equal("http://www.dhs.gov/dhspublic/display?theme=29", info.Web);
+            Assert.Equal(new Uri("http://www.dhs.gov/dhspublic/display?theme=29"), info.Web);
             //    <parameter>
             Assert.Equal(1, info.Parameters.Count);
             var parameter = info.Parameters.First();
@@ -311,7 +311,7 @@ namespace CAPNet.Tests
             //      <mimeType>image/gif</mimeType>
             Assert.Equal("image/gif", resource.MimeType);
             //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
-            Assert.Equal("http://www.dhs.gov/dhspublic/getAdvisoryImage", resource.Uri);
+            Assert.Equal(new Uri("http://www.dhs.gov/dhspublic/getAdvisoryImage"), resource.Uri);
             //    </resource>
             //    <area>
             Assert.Equal(1, info.Areas.Count);
