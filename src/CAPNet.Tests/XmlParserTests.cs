@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 
 using CAPNet.Models;
 
@@ -143,6 +144,39 @@ namespace CAPNet.Tests
 
             //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
             Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", polygons.First());
+        }
+
+        [Fact]
+        public void CanParseXmlWithMultipleGeoCodes()
+        {
+            var alert = XmlParser.Parse(Xml.Thunderstorm12Xml).First();
+            Assert.NotNull(alert);
+
+            ICollection<GeoCode> geoCodes = alert.Info.ElementAt(0).Areas.ElementAt(0).GeoCodes;
+            Assert.Equal(3, geoCodes.Count());
+
+
+            //<geocode>
+            //   <valueName>SAME</valueName>
+            //   <value>006109</value>
+            //</geocode>
+            Assert.Equal("SAME", geoCodes.ElementAt(0).ValueName);
+            Assert.Equal("006109", geoCodes.ElementAt(0).Value);
+
+            //<geocode>
+            //  <valueName>SAME</valueName>
+            //  <value>006009</value>
+            //</geocode>
+            Assert.Equal("SAME", geoCodes.ElementAt(1).ValueName);
+            Assert.Equal("006009", geoCodes.ElementAt(1).Value);
+
+            //<geocode>
+            //  <valueName>SAME</valueName>
+            //  <value>006003</value>
+            //</geocode>
+            Assert.Equal("SAME", geoCodes.ElementAt(2).ValueName);
+            Assert.Equal("006003", geoCodes.ElementAt(2).Value);
+
         }
 
         [Fact]
