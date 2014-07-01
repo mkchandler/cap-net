@@ -193,16 +193,13 @@ namespace CAPNet.Tests
                 //      <size>1</size>
                 Size = 1,
                 //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
-//<<<<<<< HEAD
                 Uri = new Uri("http://www.dhs.gov/dhspublic/getAdvisoryImage"),
                 //      <derefUri>derefUri</derefUri>
                 DereferencedUri = "derefUri",
                 //      <digest>digest</digest>
                 Digest = "digest",
-            //   </resource>
-//=======
             //    </resource>
-//>>>>>>> upstream/master
+
             });
 
                 //  <area>
