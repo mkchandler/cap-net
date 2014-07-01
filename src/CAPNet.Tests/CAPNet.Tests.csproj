@@ -45,10 +45,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Examples.cs" />
-    <Compile Include="ExamplesMultiple.cs" />
     <Compile Include="Models\InfoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Xml.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Xml.resx</DependentUpon>
+    </Compile>
     <Compile Include="XmlCreatorTests.cs" />
     <Compile Include="XmlParserTests.cs" />
   </ItemGroup>
@@ -60,6 +63,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Xml.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Xml.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Thunderstorm12Xml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThunderstormUpdate12Xml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VeryLikelyOrangeAlertXml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circleXml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OrangeAlertXml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Thunderstorm12AllDatesXml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MultipleAlertXml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MultipleCircleXml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MultipleParameterTestXml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MultipleThunderstorm12Xml.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

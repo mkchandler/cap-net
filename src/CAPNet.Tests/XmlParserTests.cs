@@ -12,7 +12,7 @@ namespace CAPNet.Tests
         [Fact]
         public void CanReadMultipleAlertsFromXML()
         {
-            var alertList = XmlParser.Parse(ExamplesMultiple.Thunderstorm12Xml);
+            var alertList = XmlParser.Parse(Xml.MultipleThunderstorm12Xml);
             Assert.Equal(2, alertList.Count());
         }
 
@@ -27,21 +27,21 @@ namespace CAPNet.Tests
         [Fact]
         public void CanReadCAP12Example()
         {
-            var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
+            var alert = XmlParser.Parse(Xml.Thunderstorm12Xml).First();
             Assert.NotNull(alert.Info.ElementAt(0).Areas.ElementAt(0).Polygons);
         }
 
         [Fact]
         public void SentTimeHasTimeZone()
         {
-            var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
+            var alert = XmlParser.Parse(Xml.Thunderstorm12Xml).First();
             Assert.Equal(TimeSpan.FromHours(-7), alert.Sent.Offset);
         }
 
         [Fact]
         public void DatesInInfoHaveTimeZones()
         {
-            var alert = XmlParser.Parse(Examples.Thunderstorm12AllDatesXml).First();
+            var alert = XmlParser.Parse(Xml.Thunderstorm12AllDatesXml).First();
 
             var info = alert.Info.ElementAt(0);
 
@@ -53,21 +53,21 @@ namespace CAPNet.Tests
         [Fact]
         public void CanReadAlertStatus()
         {
-            var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
+            var alert = XmlParser.Parse(Xml.Thunderstorm12Xml).First();
             Assert.Equal(Status.Actual, alert.Status);
         }
 
         [Fact]
         public void CanReadAlertMessageType()
         {
-            var alert = XmlParser.Parse(Examples.ThunderstormUpdate12Xml).First();
+            var alert = XmlParser.Parse(Xml.ThunderstormUpdate12Xml).First();
             Assert.Equal(MessageType.Update, alert.MessageType);
         }
 
         [Fact]
         public void CanReadAlertScope()
         {
-            var alert = XmlParser.Parse(Examples.ThunderstormUpdate12Xml).First();
+            var alert = XmlParser.Parse(Xml.ThunderstormUpdate12Xml).First();
             Assert.Equal(Scope.Restricted, alert.Scope);
             Assert.Contains("glasses", alert.Restriction);
         }
@@ -75,21 +75,21 @@ namespace CAPNet.Tests
         [Fact]
         public void InfoHasMetCategory()
         {
-            var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
+            var alert = XmlParser.Parse(Xml.Thunderstorm12Xml).First();
             Assert.Contains(Category.Met, alert.Info.ElementAt(0).Categories);
         }
 
         [Fact]
         public void UrgencyIsSet()
         {
-            var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
+            var alert = XmlParser.Parse(Xml.Thunderstorm12Xml).First();
             Assert.Equal(Urgency.Immediate, alert.Info.ElementAt(0).Urgency);
         }
 
         [Fact]
         public void CertaintyIsSet()
         {
-            var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
+            var alert = XmlParser.Parse(Xml.Thunderstorm12Xml).First();
             Assert.Equal(Certainty.Observed, alert.Info.ElementAt(0).Certainty);
         }
 
@@ -99,14 +99,14 @@ namespace CAPNet.Tests
         [Fact]
         public void VeryLikelyIsTreatedAsLikely()
         {
-            var alert = XmlParser.Parse(Examples.VeryLikelyOrangeAlertXml).First();
+            var alert = XmlParser.Parse(Xml.VeryLikelyOrangeAlertXml).First();
             Assert.Equal(Certainty.Likely, alert.Info.ElementAt(0).Certainty);
         }
 
         [Fact]
         public void CanParseXmlWithCircle()
         {
-            var alert = XmlParser.Parse(Examples.circleXml).First();
+            var alert = XmlParser.Parse(Xml.circleXml).First();
             Assert.NotNull(alert);
 
             var circle = alert.Info.ElementAt(0).Areas.ElementAt(0).Circles;
@@ -119,7 +119,7 @@ namespace CAPNet.Tests
         [Fact]
         public void CanParseXmlWithMultipleCircles()
         {
-            var alert = XmlParser.Parse(ExamplesMultiple.CircleXml).First();
+            var alert = XmlParser.Parse(Xml.MultipleCircleXml).First();
             Assert.NotNull(alert);
 
             var circles = alert.Info.ElementAt(0).Areas.ElementAt(0).Circles;
@@ -135,7 +135,7 @@ namespace CAPNet.Tests
         [Fact]
         public void CanParseXmlWithPolygon()
         {
-            var alert = XmlParser.Parse(Examples.Thunderstorm12Xml).First();
+            var alert = XmlParser.Parse(Xml.Thunderstorm12Xml).First();
             Assert.NotNull(alert);
 
             var polygons = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygons;
@@ -148,7 +148,7 @@ namespace CAPNet.Tests
         [Fact]
         public void CanParseXmlWithMultiplePolygons()
         {
-            var alert = XmlParser.Parse(ExamplesMultiple.Thunderstorm12Xml).First();
+            var alert = XmlParser.Parse(Xml.MultipleThunderstorm12Xml).First();
             Assert.NotNull(alert);
 
             var polygons = alert.Info.ElementAt(0).Areas.ElementAt(0).Polygons;
@@ -166,7 +166,7 @@ namespace CAPNet.Tests
         [Fact]
         public void CanParseXmlWithMultipleCategories()
         {
-            var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
+            var alert = XmlParser.Parse(Xml.MultipleParameterTestXml).First();
 
             var info = alert.Info.ElementAt(0);
             Assert.Equal(2, info.Categories.Count);
@@ -180,7 +180,7 @@ namespace CAPNet.Tests
         [Fact]
         public void CanParseXmlWithMultipleResources()
         {
-            var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
+            var alert = XmlParser.Parse(Xml.MultipleParameterTestXml).First();
 
             var info = alert.Info.ElementAt(0);
 
@@ -210,7 +210,7 @@ namespace CAPNet.Tests
         [Fact]
         public void CanParseXmlWithMultipleAreas()
         {
-            var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
+            var alert = XmlParser.Parse(Xml.MultipleParameterTestXml).First();
 
             var info = alert.Info.ElementAt(0);
 
@@ -230,7 +230,7 @@ namespace CAPNet.Tests
         [Fact]
         public void CanParseXmlWithMultipleParameters()
         {
-            var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
+            var alert = XmlParser.Parse(Xml.MultipleParameterTestXml).First();
            
             var info = alert.Info.ElementAt(0);
             Assert.Equal(2, info.Parameters.Count);
@@ -255,7 +255,7 @@ namespace CAPNet.Tests
         [Fact]
         public void OrangeAlertExampleIsParsedCorrectly()
         {
-            var alert = XmlParser.Parse(Examples.OrangeAlertXml).First();
+            var alert = XmlParser.Parse(Xml.OrangeAlertXml).First();
             //<?xml version="1.0" encoding="utf-8"?>
             //<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
             Assert.NotNull(alert);
