@@ -45,12 +45,19 @@
     <resource>
       <resourceDesc>Image file (GIF)</resourceDesc>
       <mimeType>image/gif</mimeType>
+      <size>1</size>
       <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
+      <derefUri>derefUri</derefUri>
+      <digest>digest</digest>
     </resource>
     <area>
       <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
       <altitude>altitude</altitude>
       <ceiling>ceiling</ceiling>
+      <polygon>1 2 3 4</polygon>
+      <polygon>1 22 33 4</polygon>
+      <circle>1 2</circle>
+      <circle>1 22</circle>
       <geocode>
         <valueName>valN</valueName>
         <value>val</value>

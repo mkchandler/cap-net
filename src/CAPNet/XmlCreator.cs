@@ -83,14 +83,23 @@ namespace CAPNet
                     CAP12Namespace + "resource",
                     new XElement(CAP12Namespace + "resourceDesc", r.Description),
                     new XElement(CAP12Namespace + "mimeType", r.MimeType),
-                    new XElement(CAP12Namespace + "uri", r.Uri)),
-                from a in info.Areas
+                    new XElement(CAP12Namespace + "size", r.Size),
+                    new XElement(CAP12Namespace + "uri", r.Uri),
+                    new XElement(CAP12Namespace + "derefUri", r.DereferencedUri),
+                    new XElement(CAP12Namespace + "digest", r.Digest)),
+                from area in info.Areas
                 select new XElement(
                     CAP12Namespace + "area",
-                    new XElement(CAP12Namespace + "areaDesc", a.Description),
-                    new XElement(CAP12Namespace + "altitude", a.Altitude),
-                    new XElement(CAP12Namespace + "ceiling", a.Ceiling),
-                    from geo in a.GeoCodes
+                    new XElement(CAP12Namespace + "areaDesc", area.Description),
+                    new XElement(CAP12Namespace + "altitude", area.Altitude),
+                    new XElement(CAP12Namespace + "ceiling", area.Ceiling),
+                    from polygon in area.Polygons
+                    select new XElement(
+                        CAP12Namespace+"polygon", polygon),
+                    from circle in area.Circles
+                    select new XElement(
+                        CAP12Namespace + "circle", circle),
+                    from geo in area.GeoCodes
                     select new XElement(
                         CAP12Namespace + "geocode",
                         new XElement(CAP12Namespace + "valueName", geo.ValueName),
