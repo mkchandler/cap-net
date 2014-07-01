@@ -79,9 +79,9 @@ namespace CAPNet.Tests
         }
 
         [Fact]
-        public void ExampleOrangeAlertIsSerializedCorrectly()
+        public void MultipleAlertXmlIsSerializedCorrectly()
         {
-            var orangeAlertElement = XmlCreator.Create(CreateOrangeAlert());
+            var orangeAlertElement = XmlCreator.Create(CreateMultipleAlertXmlAlert());
 
             var document = new XDocument(orangeAlertElement);
 
@@ -103,7 +103,7 @@ namespace CAPNet.Tests
 
         }
 
-        private static Alert CreateOrangeAlert()
+        private static Alert CreateMultipleAlertXmlAlert()
         {
             var orangeAlert = new Alert
             {
@@ -190,9 +190,16 @@ namespace CAPNet.Tests
                 Description = "Image file (GIF)",
                 //      <mimeType>image/gif</mimeType>
                 MimeType = "image/gif",
+                //      <size>1</size>
+                Size = 1,
                 //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
-                Uri = new Uri("http://www.dhs.gov/dhspublic/getAdvisoryImage")
+                Uri = new Uri("http://www.dhs.gov/dhspublic/getAdvisoryImage"),
+                //      <derefUri>derefUri</derefUri>
+                DereferencedUri = "derefUri",
+                //      <digest>digest</digest>
+                Digest = "digest",
             //    </resource>
+
             });
 
                 //  <area>
@@ -206,6 +213,14 @@ namespace CAPNet.Tests
                 Ceiling = "ceiling",        
             };
 
+            //<polygon>1 2 3 4</polygon>
+            //<polygon>1 22 33 4</polygon>
+            area.Polygons.Add("1 2 3 4");
+            area.Polygons.Add("1 22 33 4");
+            //<circle>1 2</circle>
+            //<circle>1 22</circle>
+            area.Circles.Add("1 2");
+            area.Circles.Add("1 22");
             //<geocode>
             //  <valueName>valN</valueName>
             //  <value>val</value>
