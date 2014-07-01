@@ -349,10 +349,6 @@ namespace CAPNet
 
                 area.GeoCodes.Add(new GeoCode(valueName, value)); 
             }
-            
-
-            
-
             return area;
         }
 
