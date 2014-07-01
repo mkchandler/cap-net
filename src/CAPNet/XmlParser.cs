@@ -342,6 +342,10 @@ namespace CAPNet
                                where geoCodeNode != null
                                select geoCodeNode;
 
+            var altitudeNode = areaElement.Element(XmlCreator.CAP12Namespace + "altitude");
+            if (altitudeNode != null)
+                area.Altitude = altitudeNode.Value;
+
             foreach(XElement geoCodeValue in geoCodeQuery)
             {
                 string valueName = geoCodeValue.Element(XmlCreator.CAP12Namespace + "valueName").Value;
