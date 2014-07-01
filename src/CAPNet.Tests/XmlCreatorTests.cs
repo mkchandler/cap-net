@@ -79,9 +79,9 @@ namespace CAPNet.Tests
         }
 
         [Fact]
-        public void ExampleOrangeAlertIsSerializedCorrectly()
+        public void MultipleAlertXmlIsSerializedCorrectly()
         {
-            var orangeAlertElement = XmlCreator.Create(CreateOrangeAlert());
+            var orangeAlertElement = XmlCreator.Create(CreateMultipleAlertXmlAlert());
 
             var document = new XDocument(orangeAlertElement);
 
@@ -103,7 +103,7 @@ namespace CAPNet.Tests
 
         }
 
-        private static Alert CreateOrangeAlert()
+        private static Alert CreateMultipleAlertXmlAlert()
         {
             var orangeAlert = new Alert
             {
