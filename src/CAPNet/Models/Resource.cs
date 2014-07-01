@@ -25,7 +25,7 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        public  Uri Uri { get; set; }
+        public Uri Uri { get; set; }
 
         /// <summary>
         /// 
