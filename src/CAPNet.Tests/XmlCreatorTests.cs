@@ -175,7 +175,7 @@ namespace CAPNet.Tests
             //    <instruction>A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.</instruction> 
             info.Instruction = "A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.";
             //    <web>http://www.dhs.gov/dhspublic/display?theme=29</web>
-            info.Web = "http://www.dhs.gov/dhspublic/display?theme=29";
+            info.Web = new Uri("http://www.dhs.gov/dhspublic/display?theme=29");
             //    <contact>contact</contact>
             info.Contact = "contact";
             //    <parameter>
@@ -191,7 +191,7 @@ namespace CAPNet.Tests
                 //      <mimeType>image/gif</mimeType>
                 MimeType = "image/gif",
                 //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
-                Uri = "http://www.dhs.gov/dhspublic/getAdvisoryImage"
+                Uri = new Uri("http://www.dhs.gov/dhspublic/getAdvisoryImage")
             //    </resource>
             });
 

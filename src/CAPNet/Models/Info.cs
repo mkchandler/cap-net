@@ -117,7 +117,7 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        public string Web { get; set; }
+        public Uri Web { get; set; }
 
         /// <summary>
         /// 
