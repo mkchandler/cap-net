@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 
 using CAPNet.Models;
-
 using Xunit;
 
 namespace CAPNet.Tests
@@ -113,7 +113,7 @@ namespace CAPNet.Tests
             Assert.Equal(1, circle.Count());
 
             //<circle>32.9525,-115.5527 0</circle>  
-            Assert.Equal("32.9525,-115.5527 0", circle.First()); 
+            Assert.Equal("32.9525,-115.5527 0", circle.First());
         }
 
         [Fact]
@@ -164,6 +164,39 @@ namespace CAPNet.Tests
         }
 
         [Fact]
+        public void CanParseXmlWithMultipleGeoCodes()
+        {
+            var alert = XmlParser.Parse(ExamplesMultiple.Thunderstorm12Xml).First();
+            Assert.NotNull(alert);
+
+            ICollection<GeoCode> geoCodes = alert.Info.ElementAt(0).Areas.ElementAt(0).GeoCodes;
+            Assert.Equal(3, geoCodes.Count());
+
+
+            //<geocode>
+            //   <valueName>SAME</valueName>
+            //   <value>006109</value>
+            //</geocode>
+            Assert.Equal("SAME", geoCodes.ElementAt(0).ValueName);
+            Assert.Equal("006109", geoCodes.ElementAt(0).Value);
+
+            //<geocode>
+            //  <valueName>SAME</valueName>
+            //  <value>006009</value>
+            //</geocode>
+            Assert.Equal("SAME", geoCodes.ElementAt(1).ValueName);
+            Assert.Equal("006009", geoCodes.ElementAt(1).Value);
+
+            //<geocode>
+            //  <valueName>SAME</valueName>
+            //  <value>006003</value>
+            //</geocode>
+            Assert.Equal("SAME", geoCodes.ElementAt(2).ValueName);
+            Assert.Equal("006003", geoCodes.ElementAt(2).Value);
+           
+        }
+
+        [Fact]
         public void CanParseXmlWithMultipleCategories()
         {
             var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
@@ -186,7 +219,7 @@ namespace CAPNet.Tests
 
             //    <resource>
             Assert.Equal(2, info.Resources.Count);
-            
+
             var firstResource = info.Resources.First();
             //      <resourceDesc>Image file (GIF)</resourceDesc>
             Assert.Equal("Image file (JPG)", firstResource.Description);
@@ -231,7 +264,7 @@ namespace CAPNet.Tests
         public void CanParseXmlWithMultipleParameters()
         {
             var alert = XmlParser.Parse(ExamplesMultiple.MultipleParameterTestXml).First();
-           
+
             var info = alert.Info.ElementAt(0);
             Assert.Equal(2, info.Parameters.Count);
 

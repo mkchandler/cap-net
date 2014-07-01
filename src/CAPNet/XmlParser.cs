@@ -337,7 +337,22 @@ namespace CAPNet
 
             foreach (var circleValue in circleQuery)
                 area.Circles.Add(circleValue);
+
+            var geoCodeQuery = from geoCodeNode in areaElement.Elements(XmlCreator.CAP12Namespace + "geocode")
+                               where geoCodeNode != null
+                               select geoCodeNode;
+
+            foreach(XElement geoCodeValue in geoCodeQuery)
+            {
+                string valueName = geoCodeValue.Element(XmlCreator.CAP12Namespace + "valueName").Value;
+                string value = geoCodeValue.Element(XmlCreator.CAP12Namespace + "value").Value;
+
+                area.GeoCodes.Add(new GeoCode(valueName, value)); 
+            }
             
+
+            
+
             return area;
         }
 
