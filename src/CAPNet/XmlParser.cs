@@ -337,7 +337,26 @@ namespace CAPNet
 
             foreach (var circleValue in circleQuery)
                 area.Circles.Add(circleValue);
-            
+
+            var geoCodeQuery = from geoCodeNode in areaElement.Elements(XmlCreator.CAP12Namespace + "geocode")
+                               where geoCodeNode != null
+                               select geoCodeNode;
+
+            var altitudeNode = areaElement.Element(XmlCreator.CAP12Namespace + "altitude");
+            if (altitudeNode != null)
+                area.Altitude = altitudeNode.Value;
+
+            var ceilingNode = areaElement.Element(XmlCreator.CAP12Namespace + "ceiling");
+            if (ceilingNode != null)
+                area.Ceiling = ceilingNode.Value;
+
+            foreach(XElement geoCodeValue in geoCodeQuery)
+            {
+                string valueName = geoCodeValue.Element(XmlCreator.CAP12Namespace + "valueName").Value;
+                string value = geoCodeValue.Element(XmlCreator.CAP12Namespace + "value").Value;
+
+                area.GeoCodes.Add(new GeoCode(valueName, value)); 
+            }
             return area;
         }
 
@@ -346,9 +365,12 @@ namespace CAPNet
             var resource = new Resource();
             
             //<resource>
-            //  <resourceDesc>Image file (GIF)</resourceDesc>
-            //  <mimeType>image/gif</mimeType>
-            //  <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
+            //    <resourceDesc>Image file (GIF)</resourceDesc>
+            //    <mimeType>image/gif</mimeType>
+            //    <size>1</size>
+            //    <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
+            //    <derefUri>derefUri</derefUri>
+            //    <digest>digest</digest>
             //</resource>
 
             var resourceDescNode = resourceElement.Element(XmlCreator.CAP12Namespace + "resourceDesc");
@@ -359,9 +381,21 @@ namespace CAPNet
             if (mimeTypeNode != null)
                 resource.MimeType = mimeTypeNode.Value;
 
+            var sizeNode = resourceElement.Element(XmlCreator.CAP12Namespace + "size");
+            if (sizeNode != null)
+                resource.Size = int.Parse(sizeNode.Value);
+
             var uriNode = resourceElement.Element(XmlCreator.CAP12Namespace + "uri");
             if (uriNode != null)
                 resource.Uri = new Uri(uriNode.Value);
+
+            var derefUriNode = resourceElement.Element(XmlCreator.CAP12Namespace + "derefUri");
+            if (derefUriNode != null)
+                resource.DereferencedUri = derefUriNode.Value;
+
+            var digestNode = resourceElement.Element(XmlCreator.CAP12Namespace + "digest");
+            if (digestNode != null)
+                resource.Digest = digestNode.Value;
 
             return resource;
         }

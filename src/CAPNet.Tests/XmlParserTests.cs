@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 
 using CAPNet.Models;
 
@@ -113,7 +114,7 @@ namespace CAPNet.Tests
             Assert.Equal(1, circle.Count());
 
             //<circle>32.9525,-115.5527 0</circle>  
-            Assert.Equal("32.9525,-115.5527 0", circle.First()); 
+            Assert.Equal("32.9525,-115.5527 0", circle.First());
         }
 
         [Fact]
@@ -143,6 +144,39 @@ namespace CAPNet.Tests
 
             //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
             Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", polygons.First());
+        }
+
+        [Fact]
+        public void CanParseXmlWithMultipleGeoCodes()
+        {
+            var alert = XmlParser.Parse(Xml.Thunderstorm12Xml).First();
+            Assert.NotNull(alert);
+
+            ICollection<GeoCode> geoCodes = alert.Info.ElementAt(0).Areas.ElementAt(0).GeoCodes;
+            Assert.Equal(3, geoCodes.Count());
+
+
+            //<geocode>
+            //   <valueName>SAME</valueName>
+            //   <value>006109</value>
+            //</geocode>
+            Assert.Equal("SAME", geoCodes.ElementAt(0).ValueName);
+            Assert.Equal("006109", geoCodes.ElementAt(0).Value);
+
+            //<geocode>
+            //  <valueName>SAME</valueName>
+            //  <value>006009</value>
+            //</geocode>
+            Assert.Equal("SAME", geoCodes.ElementAt(1).ValueName);
+            Assert.Equal("006009", geoCodes.ElementAt(1).Value);
+
+            //<geocode>
+            //  <valueName>SAME</valueName>
+            //  <value>006003</value>
+            //</geocode>
+            Assert.Equal("SAME", geoCodes.ElementAt(2).ValueName);
+            Assert.Equal("006003", geoCodes.ElementAt(2).Value);
+
         }
 
         [Fact]
@@ -186,7 +220,7 @@ namespace CAPNet.Tests
 
             //    <resource>
             Assert.Equal(2, info.Resources.Count);
-            
+
             var firstResource = info.Resources.First();
             //      <resourceDesc>Image file (GIF)</resourceDesc>
             Assert.Equal("Image file (JPG)", firstResource.Description);
@@ -231,7 +265,7 @@ namespace CAPNet.Tests
         public void CanParseXmlWithMultipleParameters()
         {
             var alert = XmlParser.Parse(Xml.MultipleParameterTestXml).First();
-           
+
             var info = alert.Info.ElementAt(0);
             Assert.Equal(2, info.Parameters.Count);
 
@@ -250,6 +284,88 @@ namespace CAPNet.Tests
             //      <value>ORANGE2</value>
             Assert.Equal("ORANGE2", parameter.Value);
             //    </parameter>
+        }
+
+        [Fact]
+        public void MultipleAlertXmlIsParsedCorrectly()
+        {
+            var alert = XmlParser.Parse(Xml.MultipleAlertXml).First();
+            //<?xml version="1.0" encoding="utf-8"?>
+            //<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+            Assert.NotNull(alert);
+            //  <identifier>43b080713727</identifier>
+            Assert.Equal("43b080713727", alert.Identifier);
+            //  <sender>hsas@dhs.gov</sender>
+            Assert.Equal("hsas@dhs.gov", alert.Sender);
+            //  <sent>2003-04-02T14:39:01-05:00</sent>
+            Assert.Equal(new DateTimeOffset(2003, 4, 2, 14, 39, 1, TimeSpan.FromHours(-5)), alert.Sent);
+            //  <status>Actual</status>
+            Assert.Equal(Status.Actual, alert.Status);
+            //  <msgType>Alert</msgType>
+            Assert.Equal(MessageType.Alert, alert.MessageType);
+            //  <scope>Public</scope>
+            Assert.Equal(Scope.Public, alert.Scope);
+            //  <info>
+            Assert.Equal(1, alert.Info.Count);
+            var info = alert.Info.ElementAt(0);
+            //    <category>Security</category>
+            Assert.Equal(1, info.Categories.Count);
+            Assert.Contains(Category.Security, info.Categories);
+            //    <event>Homeland Security Advisory System Update</event>
+            Assert.Equal("Homeland Security Advisory System Update", info.Event);
+            //    <urgency>Immediate</urgency>
+            Assert.Equal(Urgency.Immediate, info.Urgency);
+            //    <severity>Severe</severity>
+            Assert.Equal(Severity.Severe, info.Severity);
+            //    <certainty>Likely</certainty>
+            Assert.Equal(Certainty.Likely, info.Certainty);
+            //    <senderName>U.S. Government, Department of Homeland Security</senderName>
+            Assert.Equal("U.S. Government, Department of Homeland Security", info.SenderName);
+            //    <headline>Homeland Security Sets Code ORANGE</headline>
+            Assert.Equal("Homeland Security Sets Code ORANGE", info.Headline);
+            //    <description>The Department of Homeland Security has elevated the Homeland Security Advisory System threat level to ORANGE / High in response to intelligence which may indicate a heightened threat of terrorism.</description>
+            Assert.Equal("The Department of Homeland Security has elevated the Homeland Security Advisory System threat level to ORANGE / High in response to intelligence which may indicate a heightened threat of terrorism.", info.Description);
+            //    <instruction>A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.</instruction>
+            Assert.Equal("A High Condition is declared when there is a high risk of terrorist attacks. In addition to the Protective Measures taken in the previous Threat Conditions, Federal departments and agencies should consider agency-specific Protective Measures in accordance with their existing plans.", info.Instruction);
+            //    <web>http://www.dhs.gov/dhspublic/display?theme=29</web>
+            Assert.Equal(new Uri("http://www.dhs.gov/dhspublic/display?theme=29"), info.Web);
+            //    <parameter>
+            Assert.Equal(1, info.Parameters.Count);
+            var parameter = info.Parameters.First();
+            //      <valueName>HSAS</valueName>
+            Assert.Equal("HSAS", parameter.ValueName);
+            //      <value>ORANGE</value>
+            Assert.Equal("ORANGE", parameter.Value);
+            //    </parameter>
+            //    <resource>
+            Assert.Equal(1, info.Resources.Count);
+            var resource = info.Resources.First();
+            //      <resourceDesc>Image file (GIF)</resourceDesc>
+            Assert.Equal("Image file (GIF)", resource.Description);
+            //      <mimeType>image/gif</mimeType>
+            Assert.Equal("image/gif", resource.MimeType);
+            //      <size>1</size>
+            Assert.Equal(1, resource.Size);
+            //      <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
+            Assert.Equal(new Uri("http://www.dhs.gov/dhspublic/getAdvisoryImage"), resource.Uri);
+            //      <derefUri>derefUri</derefUri>
+            Assert.Equal("derefUri", resource.DereferencedUri);
+            //      <digest>digest</digest>
+            Assert.Equal("digest", resource.Digest);
+            //    </resource>
+            //    <area>
+            Assert.Equal(1, info.Areas.Count);
+            var area = info.Areas.First();
+            //      <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
+            Assert.Equal("U.S. nationwide and interests worldwide", area.Description);
+            //      <altitude>altitude</altitude>
+            Assert.Equal("altitude", area.Altitude);
+            //      <ceiling>ceiling</ceiling>
+            Assert.Equal("ceiling", area.Ceiling);
+
+            //    </area>
+            //  </info>
+            //</alert>
         }
 
         [Fact]
