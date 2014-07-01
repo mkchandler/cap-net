@@ -289,7 +289,7 @@ namespace CAPNet.Tests
         [Fact]
         public void OrangeAlertExampleIsParsedCorrectly()
         {
-            var alert = XmlParser.Parse(Xml.OrangeAlertXml).First();
+            var alert = XmlParser.Parse(Xml.MultipleAlertXml).First();
             //<?xml version="1.0" encoding="utf-8"?>
             //<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
             Assert.NotNull(alert);
@@ -352,6 +352,10 @@ namespace CAPNet.Tests
             var area = info.Areas.First();
             //      <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
             Assert.Equal("U.S. nationwide and interests worldwide", area.Description);
+            //      <altitude>altitude</altitude>
+            Assert.Equal("altitude", area.Altitude);
+            //      <ceiling>ceiling</ceiling>
+            Assert.Equal("ceiling", area.Ceiling);
             //    </area>
             //  </info>
             //</alert>
