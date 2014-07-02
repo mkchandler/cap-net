@@ -16,10 +16,12 @@ namespace CAPNet.Tests
         public void XmlTest()
         {
             Alert alert = XmlParser.Parse(Xml.OrangeAlertXml).First();
+            
             XElement alertElement = XmlCreator.Create(alert);
             string alertElementString = alertElement.ToString();
-            Assert.Equal(alertElementString, Xml.MultipleThunderstorm12Xml);
 
+            Assert.Equal(alertElementString, Xml.OrangeAlertXml);
         }
+
     }
 }

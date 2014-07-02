@@ -102,7 +102,9 @@
     <None Include="Resources\MultipleThunderstorm12Xml.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\SevereThundertromCap1.1.xml" />
+    <Content Include="Resources\SevereThundertromCap1.1.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
