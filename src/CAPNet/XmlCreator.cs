@@ -2,6 +2,12 @@ using System.Linq;
 using System.Xml.Linq;
 
 using CAPNet.Models;
+using System;
+using System.Globalization;
+using System.Collections.Generic;
+using System.Xml;
+using System.IO;
+using System.Text;
 
 namespace CAPNet
 {
@@ -21,10 +27,10 @@ namespace CAPNet
         public static readonly XNamespace CAP12Namespace = "urn:oasis:names:tc:emergency:cap:1.2";
 
         /// <summary>
-        /// Build a XML element representing the alert
+        /// 
         /// </summary>
-        /// <param name="alert">The alert</param>
-        /// <returns>An XML representation of the alert</returns>
+        /// <param name="alert"></param>
+        /// <returns></returns>
         public static XElement Create(Alert alert)
         {
             var alertElement = new XElement(
@@ -33,16 +39,16 @@ namespace CAPNet
                 new XElement(CAP12Namespace + "sender", alert.Sender),
                 // set milliseconds to 0
                 new XElement(CAP12Namespace + "sent", alert.Sent.AddMilliseconds(-alert.Sent.Millisecond)),
-                new XElement(CAP12Namespace + "status", alert.Status),
-                new XElement(CAP12Namespace + "msgType", alert.MessageType),
-                new XElement(CAP12Namespace + "scope", alert.Scope),
-                new XElement(CAP12Namespace + "source", alert.Source),
-                new XElement(CAP12Namespace + "restriction", alert.Restriction),
-                new XElement(CAP12Namespace + "addresses", alert.Addresses),
-                new XElement(CAP12Namespace + "code", alert.Code),
-                new XElement(CAP12Namespace + "note", alert.Note),
-                new XElement(CAP12Namespace + "references", alert.References),
-                new XElement(CAP12Namespace + "incidents", alert.Incidents),
+                AddElementIfHasContent("status", alert.Status),
+                AddElementIfHasContent("msgType", alert.MessageType),
+                AddElementIfHasContent("scope", alert.Scope),
+                AddElementIfHasContent("source", alert.Source),
+                AddElementIfHasContent("restriction", alert.Restriction),
+                AddElementIfHasContent("addresses", alert.Addresses),
+                AddElementIfHasContent("code", alert.Code),
+                AddElementIfHasContent("note", alert.Note),
+                AddElementIfHasContent("references", alert.References),
+                AddElementIfHasContent("incidents", alert.Incidents),
                 alert.Info.Select(Create));
 
             return alertElement;
@@ -54,59 +60,110 @@ namespace CAPNet
                 CAP12Namespace + "info",
                 info.Categories.Select(cat => new XElement(CAP12Namespace + "category", cat)),
                 new XElement(CAP12Namespace + "event", info.Event),
-                new XElement(CAP12Namespace + "responseType", info.ResponseType),
+                AddElementIfHasContent("responseType", info.ResponseType),
                 new XElement(CAP12Namespace + "urgency", info.Urgency),
                 new XElement(CAP12Namespace + "severity", info.Severity),
                 new XElement(CAP12Namespace + "certainty", info.Certainty),
-                new XElement(CAP12Namespace + "audience", info.Audience),
-                from e in info.EventCodes
+                AddElementIfHasContent("audience", info.Audience),
+                Create(info.EventCodes),
+                AddElementIfHasContent("effective", info.Effective),
+                AddElementIfHasContent("onset", info.Onset),
+                AddElementIfHasContent("expires", info.Expires),
+                AddElementIfHasContent("senderName", info.SenderName),
+                AddElementIfHasContent("headline", info.Headline),
+                AddElementIfHasContent("description", info.Description),
+                AddElementIfHasContent("instruction", info.Instruction),
+                AddElementIfHasContent("web", info.Web),
+                AddElementIfHasContent("contact", info.Contact),
+                Create(info.Parameters),
+                Create(info.Resources),
+                Create(info.Areas));
+
+            return infoElement;
+        }
+
+        private static IEnumerable<XElement> Create(IEnumerable<EventCode> codes)
+        {
+            IEnumerable<XElement> eventCodesElements =
+                from e in codes
                 select new XElement(
                     CAP12Namespace + "eventCode",
                     new XElement(CAP12Namespace + "valueName", e.ValueName),
-                    new XElement(CAP12Namespace + "value", e.Value)),
-                new XElement(CAP12Namespace + "effective", info.Effective),
-                new XElement(CAP12Namespace + "onset", info.Onset),
-                new XElement(CAP12Namespace + "expires", info.Expires),
-                new XElement(CAP12Namespace + "senderName", info.SenderName),
-                new XElement(CAP12Namespace + "headline", info.Headline),
-                new XElement(CAP12Namespace + "description", info.Description),
-                new XElement(CAP12Namespace + "instruction", info.Instruction),
-                new XElement(CAP12Namespace + "web", info.Web),
-                new XElement(CAP12Namespace + "contact", info.Contact),
-                from p in info.Parameters
+                    new XElement(CAP12Namespace + "value", e.Value));
+
+            return eventCodesElements;
+        }
+
+        private static IEnumerable<XElement> Create(IEnumerable<Parameter> parameters)
+        {
+            IEnumerable<XElement> parameterElements =
+                from parameter in parameters
                 select new XElement(
                     CAP12Namespace + "parameter",
-                    new XElement(CAP12Namespace + "valueName", p.ValueName),
-                    new XElement(CAP12Namespace + "value", p.Value)),
-                from r in info.Resources
+                    new XElement(CAP12Namespace + "valueName", parameter.ValueName),
+                    new XElement(CAP12Namespace + "value", parameter.Value));
+
+            return parameterElements;
+        }
+
+        private static IEnumerable<XElement> Create(IEnumerable<Resource> resources)
+        {
+            IEnumerable<XElement> resourceElements =
+                from resource in resources
                 select new XElement(
                     CAP12Namespace + "resource",
-                    new XElement(CAP12Namespace + "resourceDesc", r.Description),
-                    new XElement(CAP12Namespace + "mimeType", r.MimeType),
-                    new XElement(CAP12Namespace + "size", r.Size),
-                    new XElement(CAP12Namespace + "uri", r.Uri),
-                    new XElement(CAP12Namespace + "derefUri", r.DereferencedUri),
-                    new XElement(CAP12Namespace + "digest", r.Digest)),
-                from area in info.Areas
+                    new XElement(CAP12Namespace + "resourceDesc", resource.Description),
+                    AddElementIfHasContent("mimeType", resource.MimeType),
+                    AddElementIfHasContent("size", resource.Size),
+                    AddElementIfHasContent("uri", resource.Uri),
+                    AddElementIfHasContent("derefUri", resource.DereferencedUri),
+                    AddElementIfHasContent("digest", resource.Digest));
+
+            return resourceElements;
+        }
+
+        private static IEnumerable<XElement> Create(IEnumerable<GeoCode> geoCodes)
+        {
+            IEnumerable<XElement> geoCodeElements =
+                from geoCode in geoCodes
+                select new XElement(
+                    CAP12Namespace + "geocode",
+                    new XElement(CAP12Namespace + "valueName", geoCode.ValueName),
+                    new XElement(CAP12Namespace + "value", geoCode.Value));
+
+            return geoCodeElements;
+        }
+
+        private static IEnumerable<XElement> Create(IEnumerable<Area> areas)
+        {
+            IEnumerable<XElement> areaElements =
+                from area in areas
                 select new XElement(
                     CAP12Namespace + "area",
                     new XElement(CAP12Namespace + "areaDesc", area.Description),
-                    new XElement(CAP12Namespace + "altitude", area.Altitude),
-                    new XElement(CAP12Namespace + "ceiling", area.Ceiling),
+                    AddElementIfHasContent("altitude", area.Altitude),
+                    AddElementIfHasContent("ceiling", area.Ceiling),
+
                     from polygon in area.Polygons
                     select new XElement(
-                        CAP12Namespace+"polygon", polygon),
+                        CAP12Namespace + "polygon", polygon),
+
                     from circle in area.Circles
                     select new XElement(
                         CAP12Namespace + "circle", circle),
-                    from geo in area.GeoCodes
-                    select new XElement(
-                        CAP12Namespace + "geocode",
-                        new XElement(CAP12Namespace + "valueName", geo.ValueName),
-                        new XElement(CAP12Namespace + "value", geo.Value))
-                ));
 
-            return infoElement;
+                   Create(area.GeoCodes));
+
+            return areaElements;
+        }
+
+        private static XElement AddElementIfHasContent<T>(string name, T content)
+        {
+            if (content != null)
+                if (!content.ToString().Equals("") && !content.ToString().Equals(DateTimeOffset.MinValue.ToString()))
+                    return new XElement(CAP12Namespace + name, content);
+
+            return null;
         }
     }
 }
