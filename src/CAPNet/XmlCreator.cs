@@ -33,7 +33,7 @@ namespace CAPNet
         /// <returns></returns>
         public static string CreateDocumentString(Alert alert)
         {
-            
+
             var document = new XDocument(Create(alert));
 
             string alertAsString;
@@ -63,9 +63,9 @@ namespace CAPNet
                 new XElement(CAP12Namespace + "sender", alert.Sender),
                 // set milliseconds to 0
                 new XElement(CAP12Namespace + "sent", alert.Sent.AddMilliseconds(-alert.Sent.Millisecond)),
-                AddElementIfHasContent<Status>("status", alert.Status),
-                AddElementIfHasContent<MessageType>("msgType", alert.MessageType),
-                AddElementIfHasContent<Scope>("scope", alert.Scope),
+                AddElementIfHasContent("status", alert.Status),
+                AddElementIfHasContent("msgType", alert.MessageType),
+                AddElementIfHasContent("scope", alert.Scope),
                 AddElementIfHasContent("source", alert.Source),
                 AddElementIfHasContent("restriction", alert.Restriction),
                 AddElementIfHasContent("addresses", alert.Addresses),
@@ -90,9 +90,9 @@ namespace CAPNet
                 new XElement(CAP12Namespace + "certainty", info.Certainty),
                 AddElementIfHasContent("audience", info.Audience),
                 Create(info.EventCodes),
-                AddElementIfHasContent<DateTimeOffset>("effective", info.Effective),
-                AddElementIfHasContent<DateTimeOffset>("onset", info.Onset),
-                AddElementIfHasContent<DateTimeOffset>("expires", info.Expires),
+                AddElementIfHasContent("effective", info.Effective),
+                AddElementIfHasContent("onset", info.Onset),
+                AddElementIfHasContent("expires", info.Expires),
                 AddElementIfHasContent("senderName", info.SenderName),
                 AddElementIfHasContent("headline", info.Headline),
                 AddElementIfHasContent("description", info.Description),
@@ -186,7 +186,7 @@ namespace CAPNet
             if (content != null)
                 if (!content.ToString().Equals("") && !content.ToString().Equals(DateTimeOffset.MinValue.ToString()))
                     return new XElement(CAP12Namespace + name, content);
- 
+
             return null;
         }
     }
