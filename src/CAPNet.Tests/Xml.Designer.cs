@@ -83,6 +83,28 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot;?&gt;
+        ///&lt;alert xmlns = &quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///  &lt;identifier&gt;TRI13970876.2&lt;/identifier&gt; 
+        ///  &lt;sender&gt;trinet@caltech.edu&lt;/sender&gt; 
+        ///  &lt;sent&gt;2003-06-11T20:56:00-07:00&lt;/sent&gt;
+        ///  &lt;status&gt;Actual&lt;/status&gt; 
+        ///  &lt;msgType&gt;Update&lt;/msgType&gt;
+        ///  &lt;scope&gt;Public&lt;/scope&gt;
+        ///  &lt;references&gt;trinet@caltech.edu,TRI13970876.1,2003-06-11T20:30:00-07:00&lt;/references&gt;
+        ///  &lt;info&gt;
+        ///    &lt;category&gt;Geo&lt;/category&gt;
+        ///    &lt;event&gt;Earthquake&lt;/event&gt;   
+        ///    &lt;urgency&gt;Past&lt;/urgency&gt;   
+        ///    &lt;severit [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string InvalidXml {
+            get {
+                return ResourceManager.GetString("InvalidXml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;43b080713727&lt;/identifier&gt;
@@ -107,8 +129,8 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version = &quot;&quot;1.0&quot;&quot; encoding = &quot;&quot;UTF-8&quot;&quot;?&gt;
-        ///&lt;alert xmlns = &quot;&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&quot;&gt;
+        ///   Looks up a localized string similar to &lt;?xml version = &quot;1.0&quot; encoding = &quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns = &quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;TRI13970876.2&lt;/identifier&gt; 
         ///  &lt;sender&gt;trinet@caltech.edu&lt;/sender&gt; 
         ///  &lt;sent&gt;2003-06-11T20:56:00-07:00&lt;/sent&gt;
@@ -120,7 +142,7 @@ namespace CAPNet.Tests {
         ///    &lt;category&gt;Geo&lt;/category&gt;
         ///    &lt;event&gt;Earthquake&lt;/event&gt;   
         ///    &lt;urgency&gt;Past&lt;/urgency&gt;   
-        ///    &lt;s [rest of string was truncated]&quot;;.
+        ///    &lt;severit [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MultipleCircleXml {
             get {
