@@ -107,15 +107,15 @@ namespace CAPNet
         private static IEnumerable<XElement> Create(IEnumerable<Resource> resources)
         {
             IEnumerable<XElement> resourceElements =
-            from resource in resources
-            select new XElement(
-                CAP12Namespace + "resource",
-                new XElement(CAP12Namespace + "resourceDesc", resource.Description),
-                Validate<string>("mimeType", resource.MimeType),
-                Validate<int?>("size", resource.Size),
-                Validate<Uri>("uri", resource.Uri),
-                Validate<string>("derefUri", resource.DereferencedUri),
-                Validate<string>("digest", resource.Digest));
+                from resource in resources
+                select new XElement(
+                    CAP12Namespace + "resource",
+                    new XElement(CAP12Namespace + "resourceDesc", resource.Description),
+                    Validate<string>("mimeType", resource.MimeType),
+                    Validate<int?>("size", resource.Size),
+                    Validate<Uri>("uri", resource.Uri),
+                    Validate<string>("derefUri", resource.DereferencedUri),
+                    Validate<string>("digest", resource.Digest));
 
             return resourceElements;
         }
@@ -135,22 +135,22 @@ namespace CAPNet
         private static IEnumerable<XElement> Create(IEnumerable<Area> areas)
         {
             IEnumerable<XElement> areaElements =
-            from area in areas
-            select new XElement(
-                CAP12Namespace + "area",
-                new XElement(CAP12Namespace + "areaDesc", area.Description),
-                Validate<string>("altitude", area.Altitude),
-                Validate<string>("ceiling", area.Ceiling),
-
-                from polygon in area.Polygons
+                from area in areas
                 select new XElement(
-                    CAP12Namespace + "polygon", polygon),
+                    CAP12Namespace + "area",
+                    new XElement(CAP12Namespace + "areaDesc", area.Description),
+                    Validate<string>("altitude", area.Altitude),
+                    Validate<string>("ceiling", area.Ceiling),
 
-                from circle in area.Circles
-                select new XElement(
-                    CAP12Namespace + "circle", circle),
+                    from polygon in area.Polygons
+                    select new XElement(
+                        CAP12Namespace + "polygon", polygon),
 
-               Create(area.GeoCodes));
+                    from circle in area.Circles
+                    select new XElement(
+                        CAP12Namespace + "circle", circle),
+
+                   Create(area.GeoCodes));
 
             return areaElements;
         }
@@ -162,11 +162,10 @@ namespace CAPNet
                 string str = content.ToString();
                 if (!content.ToString().Equals("") && !content.ToString().Equals(DateTimeOffset.MinValue.ToString()))
                     return new XElement(CAP12Namespace + name, content);
-                else
-                    return null;
+
             }
-            else
-                return null;
+
+            return null;
         }
     }
 }

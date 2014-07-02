@@ -81,5 +81,15 @@ namespace CAPNet.Tests
             Assert.Equal(alertElementString, xmlContent);
         }
 
+        [Fact]
+        private void EarthquakeCap11GeneralTest()
+        {
+            string xmlContent = Xml.EarthquakeCap11;
+            Alert alert = XmlParser.Parse(xmlContent).First();
+            XElement alertElement = XmlCreator.Create(alert);
+            string alertElementString = alertElement.ToString();
+            Assert.Equal(alertElementString, xmlContent);
+        }
+
     }
 }
