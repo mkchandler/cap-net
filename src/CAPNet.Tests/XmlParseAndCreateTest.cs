@@ -17,9 +17,8 @@ namespace CAPNet.Tests
         {
             string xmlContent = Xml.OrangeAlertXml;
             Alert alert = XmlParser.Parse(xmlContent).First();
-            XElement alertElement = XmlCreator.Create(alert);
-            string alertElementString = alertElement.ToString();
-            Assert.Equal(alertElementString, xmlContent);
+            string alertElementCreated = XmlCreator.CreateDocumentString(alert);
+            Assert.Equal(alertElementCreated, xmlContent);
         }
 
         [Fact]
@@ -27,9 +26,8 @@ namespace CAPNet.Tests
         {
             string xmlContent = Xml.MultipleCircleXml;
             Alert alert = XmlParser.Parse(xmlContent).First();
-            XElement alertElement = XmlCreator.Create(alert);
-            string alertElementString = alertElement.ToString();
-            Assert.Equal(alertElementString, xmlContent);
+            string alertElementCreated = XmlCreator.CreateDocumentString(alert);
+            Assert.Equal(alertElementCreated, xmlContent);
         }
 
         [Fact]
@@ -46,9 +44,8 @@ namespace CAPNet.Tests
         {
             string xmlContent = Xml.Thunderstorm12AllDatesXml;
             Alert alert = XmlParser.Parse(xmlContent).First();
-            XElement alertElement = XmlCreator.Create(alert);
-            string alertElementString = alertElement.ToString();
-            Assert.Equal(alertElementString, xmlContent);
+            string alertElementCreated = XmlCreator.CreateDocumentString(alert);
+            Assert.Equal(alertElementCreated, xmlContent);
         }
 
         [Fact]
@@ -56,9 +53,8 @@ namespace CAPNet.Tests
         {
             string xmlContent = Xml.AllElementsFilledAlert;
             Alert alert = XmlParser.Parse(xmlContent).First();
-            XElement alertElement = XmlCreator.Create(alert);
-            string alertElementString = alertElement.ToString();
-            Assert.Equal(alertElementString, xmlContent);
+            string alertElementCreated = XmlCreator.CreateDocumentString(alert);
+            Assert.Equal(alertElementCreated, xmlContent);
         }
 
         [Fact]
@@ -66,9 +62,8 @@ namespace CAPNet.Tests
         {
             string xmlContent = Xml.SevereThundertromCap11;
             Alert alert = XmlParser.Parse(xmlContent).First();
-            XElement alertElement = XmlCreator.Create(alert);
-            string alertElementString = alertElement.ToString();
-            Assert.Equal(alertElementString, xmlContent);
+            string alertElementCreated = XmlCreator.CreateDocumentString(alert);
+            Assert.Equal(alertElementCreated, xmlContent);
         }
 
         [Fact]
@@ -76,9 +71,8 @@ namespace CAPNet.Tests
         {
             string xmlContent = Xml.HomeLandSecurityAlertCap11;
             Alert alert = XmlParser.Parse(xmlContent).First();
-            XElement alertElement = XmlCreator.Create(alert);
-            string alertElementString = alertElement.ToString();
-            Assert.Equal(alertElementString, xmlContent);
+            string alertElementCreated = XmlCreator.CreateDocumentString(alert);
+            Assert.Equal(alertElementCreated, xmlContent);
         }
 
         [Fact]
@@ -86,9 +80,8 @@ namespace CAPNet.Tests
         {
             string xmlContent = Xml.EarthquakeCap11;
             Alert alert = XmlParser.Parse(xmlContent).First();
-            XElement alertElement = XmlCreator.Create(alert);
-            string alertElementString = alertElement.ToString();
-            Assert.Equal(alertElementString, xmlContent);
+            string alertElementCreated = XmlCreator.CreateDocumentString(alert);
+            Assert.Equal(alertElementCreated, xmlContent);
         }
 
     }

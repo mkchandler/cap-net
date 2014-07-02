@@ -5,6 +5,9 @@ using CAPNet.Models;
 using System;
 using System.Globalization;
 using System.Collections.Generic;
+using System.Xml;
+using System.IO;
+using System.Text;
 
 namespace CAPNet
 {
@@ -24,11 +27,34 @@ namespace CAPNet
         public static readonly XNamespace CAP12Namespace = "urn:oasis:names:tc:emergency:cap:1.2";
 
         /// <summary>
-        /// Build a XML element representing the alert
+        /// 
         /// </summary>
-        /// <param name="alert">The alert</param>
-        /// <returns>An XML representation of the alert</returns>
+        /// <param name="alert"></param>
+        /// <returns></returns>
+        public static string CreateDocumentString(Alert alert)
+        {
+            
+            var document = new XDocument(Create(alert));
 
+            string alertAsString;
+            var writerSettings = new XmlWriterSettings { Indent = true, Encoding = Encoding.UTF8 };
+            using (var memoryStream = new MemoryStream())
+            {
+                var streamWriter = new StreamWriter(memoryStream, Encoding.UTF8);
+                using (var writer = XmlWriter.Create(streamWriter, writerSettings))
+                {
+                    document.Save(writer);
+                }
+
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                alertAsString = new StreamReader(memoryStream, Encoding.UTF8).ReadToEnd();
+            }
+
+            return alertAsString;
+
+        }
+
+        ///
         public static XElement Create(Alert alert)
         {
             var alertElement = new XElement(
@@ -37,16 +63,16 @@ namespace CAPNet
                 new XElement(CAP12Namespace + "sender", alert.Sender),
                 // set milliseconds to 0
                 new XElement(CAP12Namespace + "sent", alert.Sent.AddMilliseconds(-alert.Sent.Millisecond)),
-                Validate<Status>("status", alert.Status),
-                Validate<MessageType>("msgType", alert.MessageType),
-                Validate<Scope>("scope", alert.Scope),
-                Validate<string>("source", alert.Source),
-                Validate<string>("restriction", alert.Restriction),
-                Validate<string>("addresses", alert.Addresses),
-                Validate<string>("code", alert.Code),
-                Validate<string>("note", alert.Note),
-                Validate<string>("references", alert.References),
-                Validate<string>("incidents", alert.Incidents),
+                AddElementIfHasContent<Status>("status", alert.Status),
+                AddElementIfHasContent<MessageType>("msgType", alert.MessageType),
+                AddElementIfHasContent<Scope>("scope", alert.Scope),
+                AddElementIfHasContent("source", alert.Source),
+                AddElementIfHasContent("restriction", alert.Restriction),
+                AddElementIfHasContent("addresses", alert.Addresses),
+                AddElementIfHasContent("code", alert.Code),
+                AddElementIfHasContent("note", alert.Note),
+                AddElementIfHasContent("references", alert.References),
+                AddElementIfHasContent("incidents", alert.Incidents),
                 alert.Info.Select(Create));
 
             return alertElement;
@@ -58,21 +84,21 @@ namespace CAPNet
                 CAP12Namespace + "info",
                 info.Categories.Select(cat => new XElement(CAP12Namespace + "category", cat)),
                 new XElement(CAP12Namespace + "event", info.Event),
-                Validate<string>("responseType", info.ResponseType),
+                AddElementIfHasContent("responseType", info.ResponseType),
                 new XElement(CAP12Namespace + "urgency", info.Urgency),
                 new XElement(CAP12Namespace + "severity", info.Severity),
                 new XElement(CAP12Namespace + "certainty", info.Certainty),
-                Validate<string>("audience", info.Audience),
+                AddElementIfHasContent("audience", info.Audience),
                 Create(info.EventCodes),
-                Validate<DateTimeOffset>("effective", info.Effective),
-                Validate<DateTimeOffset>("onset", info.Onset),
-                Validate<DateTimeOffset>("expires", info.Expires),
-                Validate<string>("senderName", info.SenderName),
-                Validate<string>("headline", info.Headline),
-                Validate<string>("description", info.Description),
-                Validate<string>("instruction", info.Instruction),
-                Validate<Uri>("web", info.Web),
-                Validate<string>("contact", info.Contact),
+                AddElementIfHasContent<DateTimeOffset>("effective", info.Effective),
+                AddElementIfHasContent<DateTimeOffset>("onset", info.Onset),
+                AddElementIfHasContent<DateTimeOffset>("expires", info.Expires),
+                AddElementIfHasContent("senderName", info.SenderName),
+                AddElementIfHasContent("headline", info.Headline),
+                AddElementIfHasContent("description", info.Description),
+                AddElementIfHasContent("instruction", info.Instruction),
+                AddElementIfHasContent("web", info.Web),
+                AddElementIfHasContent("contact", info.Contact),
                 Create(info.Parameters),
                 Create(info.Resources),
                 Create(info.Areas));
@@ -111,11 +137,11 @@ namespace CAPNet
                 select new XElement(
                     CAP12Namespace + "resource",
                     new XElement(CAP12Namespace + "resourceDesc", resource.Description),
-                    Validate<string>("mimeType", resource.MimeType),
-                    Validate<int?>("size", resource.Size),
-                    Validate<Uri>("uri", resource.Uri),
-                    Validate<string>("derefUri", resource.DereferencedUri),
-                    Validate<string>("digest", resource.Digest));
+                    AddElementIfHasContent("mimeType", resource.MimeType),
+                    AddElementIfHasContent("size", resource.Size),
+                    AddElementIfHasContent("uri", resource.Uri),
+                    AddElementIfHasContent("derefUri", resource.DereferencedUri),
+                    AddElementIfHasContent("digest", resource.Digest));
 
             return resourceElements;
         }
@@ -139,8 +165,8 @@ namespace CAPNet
                 select new XElement(
                     CAP12Namespace + "area",
                     new XElement(CAP12Namespace + "areaDesc", area.Description),
-                    Validate<string>("altitude", area.Altitude),
-                    Validate<string>("ceiling", area.Ceiling),
+                    AddElementIfHasContent("altitude", area.Altitude),
+                    AddElementIfHasContent("ceiling", area.Ceiling),
 
                     from polygon in area.Polygons
                     select new XElement(
@@ -155,16 +181,12 @@ namespace CAPNet
             return areaElements;
         }
 
-        private static XElement Validate<T>(string name, T content)
+        private static XElement AddElementIfHasContent<T>(string name, T content)
         {
             if (content != null)
-            {
-                string str = content.ToString();
                 if (!content.ToString().Equals("") && !content.ToString().Equals(DateTimeOffset.MinValue.ToString()))
                     return new XElement(CAP12Namespace + name, content);
-
-            }
-
+ 
             return null;
         }
     }

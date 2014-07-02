@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
   <identifier>43b080713727</identifier>
   <sender>hsas@dhs.gov</sender>
