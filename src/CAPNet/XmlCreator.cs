@@ -136,7 +136,7 @@ namespace CAPNet
         private static XElement validateElement(this XElement element)
         {
             
-            if (element.Value != "" || element.Value != DateTimeOffset.MaxValue.ToString())
+            if (element.Value != "")
                 return element;
             else
                 return null;
