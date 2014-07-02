@@ -207,27 +207,6 @@ namespace CAPNet
                 info.EventCodes.Add(new EventCode(valueName, value));
             }
 
-            /*var eventCodeNode = infoElement.Element(XmlCreator.CAP12Namespace + "eventCode");
-            if (eventCodeNode != null)
-            {
-                string valueName = null;
-                string value = null;
-
-                var valueNameNode = eventCodeNode.Element(XmlCreator.CAP12Namespace + "valueName");
-                if (valueNameNode != null)
-                {
-                    valueName = valueNameNode.Value;
-                }
-
-                var valueNode = eventCodeNode.Element(XmlCreator.CAP12Namespace + "value");
-                if (valueNode != null)
-                {
-                    value = valueNode.Value;
-                } */
-
-                
-            //}
-
             var effectiveNode = infoElement.Element(XmlCreator.CAP12Namespace + "effective");
             if (effectiveNode != null)
             {

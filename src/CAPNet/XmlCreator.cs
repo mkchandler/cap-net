@@ -27,7 +27,7 @@ namespace CAPNet
         /// </summary>
         /// <param name="alert">The alert</param>
         /// <returns>An XML representation of the alert</returns>
-        
+
         public static XElement Create(Alert alert)
         {
             var alertElement = new XElement(

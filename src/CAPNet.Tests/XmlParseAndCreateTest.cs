@@ -15,71 +15,61 @@ namespace CAPNet.Tests
         [Fact]
         public void OrangeAlertXmlGeneralTest()
         {
-            string filePath = Xml.OrangeAlertXml;
-            Alert alert = XmlParser.Parse(filePath).First();
+            string xmlContent = Xml.OrangeAlertXml;
+            Alert alert = XmlParser.Parse(xmlContent).First();
             XElement alertElement = XmlCreator.Create(alert);
             string alertElementString = alertElement.ToString();
-            Assert.Equal(alertElementString, filePath);
+            Assert.Equal(alertElementString, xmlContent);
         }
 
         [Fact]
         private void MultipleCircleXmlGeneralTest()
         {
-            string filePath = Xml.MultipleCircleXml;
-            Alert alert = XmlParser.Parse(filePath).First();
+            string xmlContent = Xml.MultipleCircleXml;
+            Alert alert = XmlParser.Parse(xmlContent).First();
             XElement alertElement = XmlCreator.Create(alert);
             string alertElementString = alertElement.ToString();
-            Assert.Equal(alertElementString, filePath);
+            Assert.Equal(alertElementString, xmlContent);
         }
 
         [Fact]
         private void MultipleParameterXmlGeneralTest()
         {
-            string filePath = Xml.MultipleParameterTestXml;
-            Alert alert = XmlParser.Parse(filePath).First();
+            string xmlContent = Xml.MultipleParameterTestXml;
+            Alert alert = XmlParser.Parse(xmlContent).First();
             XElement alertElement = XmlCreator.Create(alert);
             string alertElementString = alertElement.ToString();
-            //Assert.Equal(alertElementString, filePath);
         }
 
         [Fact]
         private void ThunderStorm12AllDatesXmlGeneralTest()
         {
-            string filePath = Xml.Thunderstorm12AllDatesXml;
-            Alert alert = XmlParser.Parse(filePath).First();
+            string xmlContent = Xml.Thunderstorm12AllDatesXml;
+            Alert alert = XmlParser.Parse(xmlContent).First();
             XElement alertElement = XmlCreator.Create(alert);
             string alertElementString = alertElement.ToString();
-            Assert.Equal(alertElementString, filePath);
+            Assert.Equal(alertElementString, xmlContent);
         }
 
         [Fact]
         private void AllElementsFilledXmlGeneralTest()
         {
-            string filePath = Xml.AllElementsFilledAlert;
-            Alert alert = XmlParser.Parse(filePath).First();
+            string xmlContent = Xml.AllElementsFilledAlert;
+            Alert alert = XmlParser.Parse(xmlContent).First();
             XElement alertElement = XmlCreator.Create(alert);
             string alertElementString = alertElement.ToString();
-            Assert.Equal(alertElementString, filePath);
+            Assert.Equal(alertElementString, xmlContent);
         }
 
-
-
-        private string XmlTrim(string xmlContent)
+        [Fact]
+        private void SevereThunderStormCap11()
         {
-            string result = "";
-            string[] xmlArray = xmlContent.Split('>');
-
-            for (int i = 0; i < xmlArray.Count(); i++)
-            {
-                result += xmlArray[i].Trim();
-                result += ">";
-            }
-
-            return result.Substring(0, result.Count()-1);
+            string xmlContent = Xml.SevereThundertromCap11;
+            Alert alert = XmlParser.Parse(xmlContent).First();
+            XElement alertElement = XmlCreator.Create(alert);
+            string alertElementString = alertElement.ToString();
+            Assert.Equal(alertElementString, xmlContent);
         }
-
-
-
 
     }
 }
