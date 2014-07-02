@@ -35,16 +35,16 @@ namespace CAPNet
                 new XElement(CAP12Namespace + "sender", alert.Sender),
                 // set milliseconds to 0
                 new XElement(CAP12Namespace + "sent", alert.Sent.AddMilliseconds(-alert.Sent.Millisecond)),
-                Validator<Status>("status", alert.Status),
-                Validator<MessageType>("msgType", alert.MessageType),
-                Validator<Scope>("scope", alert.Scope),
-                Validator<string>("source", alert.Source),
-                Validator<string>("restriction", alert.Restriction),
-                Validator<string>("addresses", alert.Addresses),
-                Validator<string>("code", alert.Code),
-                Validator<string>("note", alert.Note),
-                Validator<string>("references", alert.References),
-                Validator<string>("incidents", alert.Incidents),
+                Validate<Status>("status", alert.Status),
+                Validate<MessageType>("msgType", alert.MessageType),
+                Validate<Scope>("scope", alert.Scope),
+                Validate<string>("source", alert.Source),
+                Validate<string>("restriction", alert.Restriction),
+                Validate<string>("addresses", alert.Addresses),
+                Validate<string>("code", alert.Code),
+                Validate<string>("note", alert.Note),
+                Validate<string>("references", alert.References),
+                Validate<string>("incidents", alert.Incidents),
                 alert.Info.Select(Create));
 
             return alertElement;
@@ -56,60 +56,59 @@ namespace CAPNet
                 CAP12Namespace + "info",
                 info.Categories.Select(cat => new XElement(CAP12Namespace + "category", cat)),
                 new XElement(CAP12Namespace + "event", info.Event),
-                Validator<string>("responseType", info.ResponseType),
+                Validate<string>("responseType", info.ResponseType),
                 new XElement(CAP12Namespace + "urgency", info.Urgency),
                 new XElement(CAP12Namespace + "severity", info.Severity),
                 new XElement(CAP12Namespace + "certainty", info.Certainty),
-                Validator<string>("audience", info.Audience),
+                Validate<string>("audience", info.Audience),
 
                 from e in info.EventCodes
                 select new XElement(
                     CAP12Namespace + "eventCode",
                     new XElement(CAP12Namespace + "valueName", e.ValueName),
                     new XElement(CAP12Namespace + "value", e.Value)),
-              
-                Validator<DateTimeOffset>("effective", info.Effective),
-                Validator<DateTimeOffset>("onset", info.Onset),
-                Validator<DateTimeOffset>("expires", info.Expires),
-                Validator<string>("senderName", info.SenderName),
-                Validator<string>("headline", info.Headline),
-                Validator<string>("description", info.Description),
-                Validator<string>("instruction", info.Instruction),
-                Validator<Uri>("web", info.Web),
-                Validator<string>("contact", info.Contact),
 
-                
+                Validate<DateTimeOffset>("effective", info.Effective),
+                Validate<DateTimeOffset>("onset", info.Onset),
+                Validate<DateTimeOffset>("expires", info.Expires),
+                Validate<string>("senderName", info.SenderName),
+                Validate<string>("headline", info.Headline),
+                Validate<string>("description", info.Description),
+                Validate<string>("instruction", info.Instruction),
+                Validate<Uri>("web", info.Web),
+                Validate<string>("contact", info.Contact),
+
                 from p in info.Parameters
                 select new XElement(
                     CAP12Namespace + "parameter",
                     new XElement(CAP12Namespace + "valueName", p.ValueName),
                     new XElement(CAP12Namespace + "value", p.Value)),
-                
+
                 from r in info.Resources
                 select new XElement(
                     CAP12Namespace + "resource",
                     new XElement(CAP12Namespace + "resourceDesc", r.Description),
                     new XElement(CAP12Namespace + "mimeType", r.MimeType),
-                    Validator<int?>("size", r.Size),
-                    Validator<Uri>("uri", r.Uri),
-                    Validator<string>("derefUri", r.DereferencedUri),
-                    Validator<string>("digest", r.Digest)),
-                
+                    Validate<int?>("size", r.Size),
+                    Validate<Uri>("uri", r.Uri),
+                    Validate<string>("derefUri", r.DereferencedUri),
+                    Validate<string>("digest", r.Digest)),
+
                 from area in info.Areas
                 select new XElement(
                     CAP12Namespace + "area",
                     new XElement(CAP12Namespace + "areaDesc", area.Description),
-                    Validator<string>("altitude", area.Altitude),
-                    Validator<string>("ceiling", area.Ceiling),
-                    
+                    Validate<string>("altitude", area.Altitude),
+                    Validate<string>("ceiling", area.Ceiling),
+
                 from polygon in area.Polygons
                 select new XElement(
                     CAP12Namespace + "polygon", polygon),
-                    
+
                 from circle in area.Circles
                 select new XElement(
                     CAP12Namespace + "circle", circle),
-                        
+
                 from geo in area.GeoCodes
                 select new XElement(
                     CAP12Namespace + "geocode",
@@ -119,7 +118,7 @@ namespace CAPNet
             return infoElement;
         }
 
-        private static XElement Validator<T>(string name, T content)
+        private static XElement Validate<T>(string name, T content)
         {
             if (content != null)
             {

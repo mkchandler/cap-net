@@ -13,15 +13,21 @@ namespace CAPNet.Tests
     public class XmlParseAndCreateTest
     {
         [Fact]
-        public void XmlTest()
+        public void AlertXmlGeneralTest()
         {
-            Alert alert = XmlParser.Parse(Xml.OrangeAlertXml).First();
-            
+            XmlGeneralTest(Xml.OrangeAlertXml);
+        }
+
+        private void XmlGeneralTest(string filePath)
+        {
+            Alert alert = XmlParser.Parse(filePath).First();
             XElement alertElement = XmlCreator.Create(alert);
             string alertElementString = alertElement.ToString();
-
-            Assert.Equal(alertElementString, Xml.OrangeAlertXml);
+            Assert.Equal(alertElementString, filePath);
         }
+
+
+
 
     }
 }
