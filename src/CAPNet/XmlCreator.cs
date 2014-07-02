@@ -31,30 +31,6 @@ namespace CAPNet
         /// </summary>
         /// <param name="alert"></param>
         /// <returns></returns>
-        public static string CreateDocumentString(Alert alert)
-        {
-
-            var document = new XDocument(Create(alert));
-
-            string alertAsString;
-            var writerSettings = new XmlWriterSettings { Indent = true, Encoding = Encoding.UTF8 };
-            using (var memoryStream = new MemoryStream())
-            {
-                var streamWriter = new StreamWriter(memoryStream, Encoding.UTF8);
-                using (var writer = XmlWriter.Create(streamWriter, writerSettings))
-                {
-                    document.Save(writer);
-                }
-
-                memoryStream.Seek(0, SeekOrigin.Begin);
-                alertAsString = new StreamReader(memoryStream, Encoding.UTF8).ReadToEnd();
-            }
-
-            return alertAsString;
-
-        }
-
-        ///
         public static XElement Create(Alert alert)
         {
             var alertElement = new XElement(
