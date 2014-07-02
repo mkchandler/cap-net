@@ -4,6 +4,7 @@ using System.Xml.Linq;
 using CAPNet.Models;
 using System;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace CAPNet
 {
@@ -62,13 +63,7 @@ namespace CAPNet
                 new XElement(CAP12Namespace + "severity", info.Severity),
                 new XElement(CAP12Namespace + "certainty", info.Certainty),
                 Validate<string>("audience", info.Audience),
-
-                from e in info.EventCodes
-                select new XElement(
-                    CAP12Namespace + "eventCode",
-                    new XElement(CAP12Namespace + "valueName", e.ValueName),
-                    new XElement(CAP12Namespace + "value", e.Value)),
-
+                Create(info.EventCodes),
                 Validate<DateTimeOffset>("effective", info.Effective),
                 Validate<DateTimeOffset>("onset", info.Onset),
                 Validate<DateTimeOffset>("expires", info.Expires),
@@ -78,29 +73,74 @@ namespace CAPNet
                 Validate<string>("instruction", info.Instruction),
                 Validate<Uri>("web", info.Web),
                 Validate<string>("contact", info.Contact),
+                Create(info.Parameters),
+                Create(info.Resources),
+                Create(info.Areas));
 
-                from p in info.Parameters
+            return infoElement;
+        }
+
+        private static IEnumerable<XElement> Create(IEnumerable<EventCode> codes)
+        {
+            IEnumerable<XElement> eventCodesElements =
+                from e in codes
+                select new XElement(
+                    CAP12Namespace + "eventCode",
+                    new XElement(CAP12Namespace + "valueName", e.ValueName),
+                    new XElement(CAP12Namespace + "value", e.Value));
+
+            return eventCodesElements;
+        }
+
+        private static IEnumerable<XElement> Create(IEnumerable<Parameter> parameters)
+        {
+            IEnumerable<XElement> parameterElements =
+                from parameter in parameters
                 select new XElement(
                     CAP12Namespace + "parameter",
-                    new XElement(CAP12Namespace + "valueName", p.ValueName),
-                    new XElement(CAP12Namespace + "value", p.Value)),
+                    new XElement(CAP12Namespace + "valueName", parameter.ValueName),
+                    new XElement(CAP12Namespace + "value", parameter.Value));
 
-                from r in info.Resources
-                select new XElement(
-                    CAP12Namespace + "resource",
-                    new XElement(CAP12Namespace + "resourceDesc", r.Description),
-                    new XElement(CAP12Namespace + "mimeType", r.MimeType),
-                    Validate<int?>("size", r.Size),
-                    Validate<Uri>("uri", r.Uri),
-                    Validate<string>("derefUri", r.DereferencedUri),
-                    Validate<string>("digest", r.Digest)),
+            return parameterElements;
+        }
 
-                from area in info.Areas
+        private static IEnumerable<XElement> Create(IEnumerable<Resource> resources)
+        {
+            IEnumerable<XElement> resourceElements =
+            from resource in resources
+            select new XElement(
+                CAP12Namespace + "resource",
+                new XElement(CAP12Namespace + "resourceDesc", resource.Description),
+                new XElement(CAP12Namespace + "mimeType", resource.MimeType),
+                Validate<int?>("size", resource.Size),
+                Validate<Uri>("uri", resource.Uri),
+                Validate<string>("derefUri", resource.DereferencedUri),
+                Validate<string>("digest", resource.Digest));
+
+            return resourceElements;
+        }
+
+        private static IEnumerable<XElement> Create(IEnumerable<GeoCode> geoCodes)
+        {
+            IEnumerable<XElement> geoCodeElements =
+                from geoCode in geoCodes
                 select new XElement(
-                    CAP12Namespace + "area",
-                    new XElement(CAP12Namespace + "areaDesc", area.Description),
-                    Validate<string>("altitude", area.Altitude),
-                    Validate<string>("ceiling", area.Ceiling),
+                    CAP12Namespace + "geocode",
+                    new XElement(CAP12Namespace + "valueName", geoCode.ValueName),
+                    new XElement(CAP12Namespace + "value", geoCode.Value));
+
+            return geoCodeElements;
+        }
+
+        private static IEnumerable<XElement> Create(IEnumerable<Area> areas)
+        {
+            IEnumerable<XElement> areaElements =
+            from area in areas
+            select new XElement(
+                CAP12Namespace + "area",
+                new XElement(CAP12Namespace + "areaDesc", area.Description),
+                Validate<string>("altitude", area.Altitude),
+                Validate<string>("ceiling", area.Ceiling),
 
                 from polygon in area.Polygons
                 select new XElement(
@@ -110,13 +150,9 @@ namespace CAPNet
                 select new XElement(
                     CAP12Namespace + "circle", circle),
 
-                from geo in area.GeoCodes
-                select new XElement(
-                    CAP12Namespace + "geocode",
-                    new XElement(CAP12Namespace + "valueName", geo.ValueName),
-                    new XElement(CAP12Namespace + "value", geo.Value))));
+               Create(area.GeoCodes));
 
-            return infoElement;
+            return areaElements;
         }
 
         private static XElement Validate<T>(string name, T content)
