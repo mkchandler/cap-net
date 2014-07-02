@@ -154,4 +154,7 @@
   <data name="SevereThundertromCap11" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\SevereThundertromCap11.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="HomeLandSecurityAlertCap11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\HomeLandSecurityAlertCap11.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
 </root>

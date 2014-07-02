@@ -200,10 +200,10 @@ namespace CAPNet
                 where ev != null
                 select ev;
 
-            foreach(XElement eventCode in eventCodesQuerry)
+            foreach (XElement eventCode in eventCodesQuerry)
             {
                 string valueName = eventCode.Element(XmlCreator.CAP12Namespace + "valueName").Value;
-                string value = eventCode.Element(XmlCreator.CAP12Namespace + "value").Value;;
+                string value = eventCode.Element(XmlCreator.CAP12Namespace + "value").Value; ;
                 info.EventCodes.Add(new EventCode(valueName, value));
             }
 
@@ -280,17 +280,17 @@ namespace CAPNet
                                  let valueNode = parameter.Element(XmlCreator.CAP12Namespace + "value")
                                  where valueNameNode != null && valueNode != null
                                  select new Parameter(valueNameNode.Value, valueNode.Value);
-                                 
+
             foreach (var parameter in parameterQuery)
             {
                 info.Parameters.Add(parameter);
             }
 
-            var resourceQuery = from resourceNode in infoElement.Elements(XmlCreator.CAP12Namespace+"resource")
+            var resourceQuery = from resourceNode in infoElement.Elements(XmlCreator.CAP12Namespace + "resource")
                                 where resourceNode != null
                                 select ParseResource(resourceNode);
 
-            foreach ( var resource in resourceQuery)
+            foreach (var resource in resourceQuery)
             {
                 info.Resources.Add(resource);
             }
@@ -299,7 +299,7 @@ namespace CAPNet
                             where areaNode != null
                             select ParseArea(areaNode);
 
-            foreach ( var area in areaQuery )
+            foreach (var area in areaQuery)
             {
                 info.Areas.Add(area);
             }
@@ -310,7 +310,7 @@ namespace CAPNet
         private static Area ParseArea(XElement areaElement)
         {
             var area = new Area();
-            
+
             var areaDescNode = areaElement.Element(XmlCreator.CAP12Namespace + "areaDesc");
             if (areaDescNode != null)
                 area.Description = areaDescNode.Value;
@@ -318,8 +318,8 @@ namespace CAPNet
             var polygonQuery = from polygonNode in areaElement.Elements(XmlCreator.CAP12Namespace + "polygon")
                                where polygonNode != null
                                select polygonNode.Value;
-            
-            foreach (var polygonValue in polygonQuery )
+
+            foreach (var polygonValue in polygonQuery)
                 area.Polygons.Add(polygonValue);
 
             var circleQuery = from circleNode in areaElement.Elements(XmlCreator.CAP12Namespace + "circle")
@@ -341,12 +341,12 @@ namespace CAPNet
             if (ceilingNode != null)
                 area.Ceiling = ceilingNode.Value;
 
-            foreach(XElement geoCodeValue in geoCodeQuery)
+            foreach (XElement geoCodeValue in geoCodeQuery)
             {
                 string valueName = geoCodeValue.Element(XmlCreator.CAP12Namespace + "valueName").Value;
                 string value = geoCodeValue.Element(XmlCreator.CAP12Namespace + "value").Value;
 
-                area.GeoCodes.Add(new GeoCode(valueName, value)); 
+                area.GeoCodes.Add(new GeoCode(valueName, value));
             }
             return area;
         }
@@ -354,7 +354,7 @@ namespace CAPNet
         private static Resource ParseResource(XElement resourceElement)
         {
             var resource = new Resource();
-            
+
             //<resource>
             //    <resourceDesc>Image file (GIF)</resourceDesc>
             //    <mimeType>image/gif</mimeType>

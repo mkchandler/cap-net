@@ -111,7 +111,7 @@ namespace CAPNet
             select new XElement(
                 CAP12Namespace + "resource",
                 new XElement(CAP12Namespace + "resourceDesc", resource.Description),
-                new XElement(CAP12Namespace + "mimeType", resource.MimeType),
+                Validate<string>("mimeType", resource.MimeType),
                 Validate<int?>("size", resource.Size),
                 Validate<Uri>("uri", resource.Uri),
                 Validate<string>("derefUri", resource.DereferencedUri),

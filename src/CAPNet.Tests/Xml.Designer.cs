@@ -107,6 +107,29 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot;?&gt;
+        ///&lt;alert xmlns = &quot;urn:oasis:names:tc:emergency:cap:1.1&quot;&gt;
+        ///  &lt;identifier&gt;43b080713727&lt;/identifier&gt;
+        ///  &lt;sender&gt;hsas@dhs.gov&lt;/sender&gt;
+        ///  &lt;sent&gt;2003-04-02T14:39:01-05:00&lt;/sent&gt;
+        ///  &lt;status&gt;Actual&lt;/status&gt;
+        ///  &lt;msgType&gt;Alert&lt;/msgType&gt;
+        ///  &lt;scope&gt;Public&lt;/scope&gt;
+        ///  &lt;info&gt;
+        ///    &lt;category&gt;Security&lt;/category&gt;
+        ///    &lt;event&gt;Homeland Security Advisory System Update&lt;/event&gt;
+        ///    &lt;urgency&gt;Immediate&lt;/urgency&gt;
+        ///    &lt;severity&gt;Severe&lt;/severity&gt;
+        ///    &lt;certainty&gt;Likely&lt;/certainty&gt;
+        ///    &lt;sen [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string HomeLandSecurityAlertCap11 {
+            get {
+                return ResourceManager.GetString("HomeLandSecurityAlertCap11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;43b080713727&lt;/identifier&gt;
@@ -221,21 +244,22 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot;?&gt;
-        ///&lt;alert xmlns = &quot;urn:oasis:names:tc:emergency:cap:1.1&quot;&gt;
-        ///   &lt;identifier&gt;KSTO1055887203&lt;/identifier&gt;
-        ///   &lt;sender&gt;KSTO@NWS.NOAA.GOV&lt;/sender&gt;
-        ///   &lt;sent&gt;2003-06-17T14:57:00-07:00&lt;/sent&gt;
-        ///   &lt;status&gt;Actual&lt;/status&gt;
-        ///   &lt;msgType&gt;Alert&lt;/msgType&gt;
-        ///   &lt;scope&gt;Public&lt;/scope&gt;
-        ///   &lt;info&gt;
-        ///     &lt;category&gt;Met&lt;/category&gt;
-        ///     &lt;event&gt;SEVERE THUNDERSTORM&lt;/event&gt;
-        ///     &lt;responseType&gt;Shelter&lt;/responseType&gt;
-        ///     &lt;urgency&gt;Immediate&lt;/urgency&gt;
-        ///     &lt;severity&gt;Severe&lt;/severity&gt;
-        ///     &lt;ce [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to &lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///  &lt;identifier&gt;KSTO1055887203&lt;/identifier&gt;
+        ///  &lt;sender&gt;KSTO@NWS.NOAA.GOV&lt;/sender&gt;
+        ///  &lt;sent&gt;2003-06-17T14:57:00-07:00&lt;/sent&gt;
+        ///  &lt;status&gt;Actual&lt;/status&gt;
+        ///  &lt;msgType&gt;Alert&lt;/msgType&gt;
+        ///  &lt;scope&gt;Public&lt;/scope&gt;
+        ///  &lt;info&gt;
+        ///    &lt;category&gt;Met&lt;/category&gt;
+        ///    &lt;event&gt;SEVERE THUNDERSTORM&lt;/event&gt;
+        ///    &lt;responseType&gt;Shelter&lt;/responseType&gt;
+        ///    &lt;urgency&gt;Immediate&lt;/urgency&gt;
+        ///    &lt;severity&gt;Severe&lt;/severity&gt;
+        ///    &lt;certainty&gt;Observed&lt;/certainty&gt;
+        ///    &lt;eventCode&gt;
+        ///      &lt;value [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SevereThundertromCap11 {
             get {

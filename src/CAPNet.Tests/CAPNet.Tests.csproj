@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\AllElementsFilledAlert.xml" />
+    <Content Include="Resources\HomeLandSecurityAlertCap11.xml" />
     <Content Include="Resources\SevereThundertromCap11.xml">
       <SubType>Designer</SubType>
     </Content>
