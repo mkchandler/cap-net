@@ -195,7 +195,19 @@ namespace CAPNet
                 info.Audience = audienceNode.Value;
             }
 
-            var eventCodeNode = infoElement.Element(XmlCreator.CAP12Namespace + "eventCode");
+            IEnumerable<XElement> eventCodesQuerry =
+                from ev in infoElement.Elements(XmlCreator.CAP12Namespace + "eventCode")
+                where ev != null
+                select ev;
+
+            foreach(XElement eventCode in eventCodesQuerry)
+            {
+                string valueName = eventCode.Element(XmlCreator.CAP12Namespace + "valueName").Value;
+                string value = eventCode.Element(XmlCreator.CAP12Namespace + "value").Value;;
+                info.EventCodes.Add(new EventCode(valueName, value));
+            }
+
+            /*var eventCodeNode = infoElement.Element(XmlCreator.CAP12Namespace + "eventCode");
             if (eventCodeNode != null)
             {
                 string valueName = null;
@@ -211,10 +223,10 @@ namespace CAPNet
                 if (valueNode != null)
                 {
                     value = valueNode.Value;
-                }
+                } */
 
-                info.EventCodes.Add(new EventCode(valueName, value));
-            }
+                
+            //}
 
             var effectiveNode = infoElement.Element(XmlCreator.CAP12Namespace + "effective");
             if (effectiveNode != null)

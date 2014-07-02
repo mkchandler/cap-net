@@ -102,7 +102,8 @@
     <None Include="Resources\MultipleThunderstorm12Xml.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\SevereThundertromCap1.1.xml">
+    <Content Include="Resources\AllElementsFilledAlert.xml" />
+    <Content Include="Resources\SevereThundertromCap11.xml">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
