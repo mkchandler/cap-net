@@ -8,7 +8,7 @@
         /// <summary>
         /// Extraordinary threat to life or property.
         /// </summary>
-        Extreme,
+        Extreme = 1,
         /// <summary>
         /// Signifcant threat to life or property.
         /// </summary>

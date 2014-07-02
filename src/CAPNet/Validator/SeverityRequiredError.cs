@@ -5,7 +5,10 @@ using System.Text;
 
 namespace CAPNet
 {
-    class SeverityRequiredError:RequiredFieldError
+    /// <summary>
+    /// 
+    /// </summary>
+    public class SeverityRequiredError:RequiredFieldError
     {
     }
 }

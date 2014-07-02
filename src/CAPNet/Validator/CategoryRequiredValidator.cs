@@ -25,13 +25,20 @@ namespace CAPNet
         {
             get
             {
-                bool ok = true;
+                bool ok = false;
+                int countCategories = 0;
+                int countOKs = 0;
 
-                foreach (var category in Enum.GetValues(typeof(Category)))
+                foreach (var category in Entity.Categories)
                 {
-                    if (!Enum.IsDefined(typeof(Category), Entity.Categories))
-                        ok = false;
+                    if (Enum.IsDefined(typeof(Category), category))
+                        countOKs = countOKs + 1;
+                    countCategories = countCategories + 1;
                 }
+
+                if (Entity.Categories.Count() > 0) //entity is not empty
+                    if (countOKs == countCategories)
+                        ok = true;
 
                 return ok;
             }

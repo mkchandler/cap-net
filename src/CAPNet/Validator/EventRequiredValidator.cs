@@ -7,10 +7,20 @@ using CAPNet.Models;
 
 namespace CAPNet
 {
-    class EventRequiredValidator : Validator<Info>
+    /// <summary>
+    /// 
+    /// </summary>
+    public class EventRequiredValidator : Validator<Info>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="info"></param>
         public EventRequiredValidator(Info info) : base(info) { }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override bool IsValid
         {
             get
@@ -19,6 +29,9 @@ namespace CAPNet
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override IEnumerable<Error> ValidationError
         {
             get

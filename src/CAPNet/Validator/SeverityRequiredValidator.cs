@@ -26,7 +26,9 @@ namespace CAPNet
         {
             get
             {
-                return Enum.IsDefined(typeof(Severity),Entity.Severity);
+                if (Entity.Severity.HasValue)
+                    return Enum.IsDefined(typeof(Severity),Entity.Severity.Value);
+                return false;
             }
         }
 
@@ -37,7 +39,8 @@ namespace CAPNet
         {
             get
             {
-                yield return (new SeverityRequiredError());
+                if (!IsValid)
+                     yield return new SeverityRequiredError();
             }
         }
     }

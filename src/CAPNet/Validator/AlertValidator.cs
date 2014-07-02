@@ -16,11 +16,13 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
+        public AlertValidator() : base(new Alert()) { }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="alert"></param>
-        public AlertValidator(Alert alert)
-            : base(alert)
-        {
-        }
+        public AlertValidator(Alert alert) : base(alert) { }
 
         /// <summary>
         /// 
@@ -40,7 +42,7 @@ namespace CAPNet
         {
             get
             {
-                IEnumerable<IEnumerable<Error>> errorLists = this.Errors(Entity);
+                IEnumerable<Error> errorLists = this.ValidationErrors();
                 if (errorLists.Count() == 0)
                     return true;
                 return false;
@@ -50,18 +52,22 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="alert"></param>
         /// <returns></returns>
-        public IEnumerable<IEnumerable<Error>> Errors(Alert alert)
+        public IEnumerable<Error> ValidationErrors()
         {
-
-            var errors = from info in alert.Info
-                         from error in GetErrors(info)
+            var errorList = from info in Entity.Info
+                         from errors in GetErrors(info)
+                         from error in errors
                          select error;
-
-            return errors;
+            
+            return errorList;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
         private IEnumerable<IEnumerable<Error>> GetErrors(Info info)
         {
             var infoValidators = new List<Validator<Info>>();

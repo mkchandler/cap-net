@@ -5,7 +5,10 @@ using System.Text;
 
 namespace CAPNet
 {
-    class EventRequiredError:RequiredFieldError
+    /// <summary>
+    /// 
+    /// </summary>
+    public class EventRequiredError:RequiredFieldError
     {
     }
 }
