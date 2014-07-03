@@ -26,9 +26,7 @@ namespace CAPNet
         {
             get
             {
-                if (Entity.Severity.HasValue)
-                    return Enum.IsDefined(typeof(Severity),Entity.Severity.Value);
-                return false;
+                return Enum.IsDefined(typeof(Severity),Entity.Severity);
             }
         }
 
