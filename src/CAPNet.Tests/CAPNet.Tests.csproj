@@ -57,7 +57,7 @@
     <Compile Include="ValidatorTests\Required\ResourceValidatorTests.cs" />
     <Compile Include="ValidatorTests\Required\Resource\ResourceDescriptionRequiredValidatorTests.cs" />
     <Compile Include="ValidatorTests\Required\Resource\MimeTypeRequiredValidatorTests.cs" />
-    <Compile Include="ValidatorTests\ValidCategoryTests.cs" />
+    <Compile Include="ValidatorTests\InvalidCategoryValidatorTests.cs" />
     <Compile Include="Xml.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
