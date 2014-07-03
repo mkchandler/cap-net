@@ -12,6 +12,9 @@ namespace CAPNet
     /// </summary>
     public static class XmlParser
     {
+
+        private static XNamespace _usedNameSpace;
+
         /// <summary>
         /// 
         /// </summary>
@@ -39,10 +42,16 @@ namespace CAPNet
 
         private static IEnumerable<Alert> ParseInternal(XDocument xdoc)
         {
+            XNamespace nameSpace = xdoc.Root.Name.Namespace;
+            if (nameSpace.ToString().Equals(""))
+                _usedNameSpace = XmlCreator.CAP12Namespace;
+            else
+                _usedNameSpace = nameSpace; 
+
             var elements = xdoc.Descendants(XmlCreator.CAP11Namespace + "alert");
             if (!elements.Any())
             {
-                elements = xdoc.Descendants(XmlCreator.CAP12Namespace + "alert");
+                elements = xdoc.Descendants(_usedNameSpace + "alert");
             }
 
             return from alertElement in elements
@@ -53,86 +62,86 @@ namespace CAPNet
         {
             Alert alert = new Alert();
 
-            var infoNode = alertElement.Element(XmlCreator.CAP12Namespace + "info");
+            var infoNode = alertElement.Element(_usedNameSpace + "info");
             if (infoNode != null)
             {
                 var info = ParseInfo(infoNode);
                 alert.Info.Add(info);
             }
 
-            var incidentsNode = alertElement.Element(XmlCreator.CAP12Namespace + "incidents");
+            var incidentsNode = alertElement.Element(_usedNameSpace + "incidents");
             if (incidentsNode != null)
             {
                 alert.Incidents = incidentsNode.Value;
             }
 
-            var referencesNode = alertElement.Element(XmlCreator.CAP12Namespace + "references");
+            var referencesNode = alertElement.Element(_usedNameSpace + "references");
             if (referencesNode != null)
             {
                 alert.References = referencesNode.Value;
             }
 
-            var noteNode = alertElement.Element(XmlCreator.CAP12Namespace + "note");
+            var noteNode = alertElement.Element(_usedNameSpace + "note");
             if (noteNode != null)
             {
                 alert.Note = noteNode.Value;
             }
 
-            var codeNode = alertElement.Element(XmlCreator.CAP12Namespace + "code");
+            var codeNode = alertElement.Element(_usedNameSpace + "code");
             if (codeNode != null)
             {
                 alert.Code = codeNode.Value;
             }
 
-            var addressesNode = alertElement.Element(XmlCreator.CAP12Namespace + "addresses");
+            var addressesNode = alertElement.Element(_usedNameSpace + "addresses");
             if (addressesNode != null)
             {
                 alert.Addresses = addressesNode.Value;
             }
 
-            var restrictionNode = alertElement.Element(XmlCreator.CAP12Namespace + "restriction");
+            var restrictionNode = alertElement.Element(_usedNameSpace + "restriction");
             if (restrictionNode != null)
             {
                 alert.Restriction = restrictionNode.Value;
             }
 
-            var scopeNode = alertElement.Element(XmlCreator.CAP12Namespace + "scope");
+            var scopeNode = alertElement.Element(_usedNameSpace + "scope");
             if (scopeNode != null)
             {
                 alert.Scope = (Scope)Enum.Parse(typeof(Scope), scopeNode.Value);
             }
 
-            var sourceNode = alertElement.Element(XmlCreator.CAP12Namespace + "source");
+            var sourceNode = alertElement.Element(_usedNameSpace + "source");
             if (sourceNode != null)
             {
                 alert.Source = sourceNode.Value;
             }
 
-            var msgTypeNode = alertElement.Element(XmlCreator.CAP12Namespace + "msgType");
+            var msgTypeNode = alertElement.Element(_usedNameSpace + "msgType");
             if (msgTypeNode != null)
             {
                 alert.MessageType = (MessageType)Enum.Parse(typeof(MessageType), msgTypeNode.Value);
             }
 
-            var statusNode = alertElement.Element(XmlCreator.CAP12Namespace + "status");
+            var statusNode = alertElement.Element(_usedNameSpace + "status");
             if (statusNode != null)
             {
                 alert.Status = (Status)Enum.Parse(typeof(Status), statusNode.Value);
             }
 
-            var sentNode = alertElement.Element(XmlCreator.CAP12Namespace + "sent");
+            var sentNode = alertElement.Element(_usedNameSpace + "sent");
             if (sentNode != null)
             {
                 alert.Sent = DateTimeOffset.Parse(sentNode.Value, CultureInfo.InvariantCulture);
             }
 
-            var senderNode = alertElement.Element(XmlCreator.CAP12Namespace + "sender");
+            var senderNode = alertElement.Element(_usedNameSpace + "sender");
             if (senderNode != null)
             {
                 alert.Sender = senderNode.Value;
             }
 
-            var identifierNode = alertElement.Element(XmlCreator.CAP12Namespace + "identifier");
+            var identifierNode = alertElement.Element(_usedNameSpace + "identifier");
             if (identifierNode != null)
             {
                 alert.Identifier = identifierNode.Value;
@@ -145,11 +154,11 @@ namespace CAPNet
         {
             var info = new Info();
 
-            var languageNode = infoElement.Element(XmlCreator.CAP12Namespace + "language");
+            var languageNode = infoElement.Element(_usedNameSpace + "language");
             if (languageNode != null)
                 info.Language = languageNode.Value;
 
-            var categoryQuery = from categoryNode in infoElement.Elements(XmlCreator.CAP12Namespace + "category")
+            var categoryQuery = from categoryNode in infoElement.Elements(_usedNameSpace + "category")
                                 where categoryNode != null
                                 select (Category)Enum.Parse(typeof(Category), categoryNode.Value);
 
@@ -158,25 +167,25 @@ namespace CAPNet
                 info.Categories.Add(category);
             }
 
-            var eventNode = infoElement.Element(XmlCreator.CAP12Namespace + "event");
+            var eventNode = infoElement.Element(_usedNameSpace + "event");
             if (eventNode != null)
             {
                 info.Event = eventNode.Value;
             }
 
-            var responseTypeNode = infoElement.Element(XmlCreator.CAP12Namespace + "responseType");
+            var responseTypeNode = infoElement.Element(_usedNameSpace + "responseType");
             if (responseTypeNode != null)
             {
                 info.ResponseType = responseTypeNode.Value;
             }
 
-            var urgencyNode = infoElement.Element(XmlCreator.CAP12Namespace + "urgency");
+            var urgencyNode = infoElement.Element(_usedNameSpace + "urgency");
             if (urgencyNode != null)
             {
                 info.Urgency = (Urgency)Enum.Parse(typeof(Urgency), urgencyNode.Value);
             }
 
-            var certaintyNode = infoElement.Element(XmlCreator.CAP12Namespace + "certainty");
+            var certaintyNode = infoElement.Element(_usedNameSpace + "certainty");
             if (certaintyNode != null)
             {
                 if (certaintyNode.Value == "Very Likely")
@@ -189,31 +198,31 @@ namespace CAPNet
                 }
             }
 
-            var audienceNode = infoElement.Element(XmlCreator.CAP12Namespace + "audience");
+            var audienceNode = infoElement.Element(_usedNameSpace + "audience");
             if (audienceNode != null)
             {
                 info.Audience = audienceNode.Value;
             }
 
             IEnumerable<XElement> eventCodesQuerry =
-                from ev in infoElement.Elements(XmlCreator.CAP12Namespace + "eventCode")
+                from ev in infoElement.Elements(_usedNameSpace + "eventCode")
                 where ev != null
                 select ev;
 
             foreach (XElement eventCode in eventCodesQuerry)
             {
-                string valueName = eventCode.Element(XmlCreator.CAP12Namespace + "valueName").Value;
-                string value = eventCode.Element(XmlCreator.CAP12Namespace + "value").Value; ;
+                string valueName = eventCode.Element(_usedNameSpace + "valueName").Value;
+                string value = eventCode.Element(_usedNameSpace + "value").Value; ;
                 info.EventCodes.Add(new EventCode(valueName, value));
             }
 
-            var effectiveNode = infoElement.Element(XmlCreator.CAP12Namespace + "effective");
+            var effectiveNode = infoElement.Element(_usedNameSpace + "effective");
             if (effectiveNode != null)
             {
                 info.Effective = DateTimeOffset.Parse(effectiveNode.Value, CultureInfo.InvariantCulture);
             }
 
-            var severityNode = infoElement.Element(XmlCreator.CAP12Namespace + "severity");
+            var severityNode = infoElement.Element(_usedNameSpace + "severity");
             if (severityNode != null)
             {
                 Severity severity;
@@ -227,57 +236,57 @@ namespace CAPNet
                 }
             }
 
-            var onsetNode = infoElement.Element(XmlCreator.CAP12Namespace + "onset");
+            var onsetNode = infoElement.Element(_usedNameSpace + "onset");
             if (onsetNode != null)
             {
                 info.Onset = DateTimeOffset.Parse(onsetNode.Value, CultureInfo.InvariantCulture);
             }
 
-            var expiresNode = infoElement.Element(XmlCreator.CAP12Namespace + "expires");
+            var expiresNode = infoElement.Element(_usedNameSpace + "expires");
             if (expiresNode != null)
             {
                 info.Expires = DateTimeOffset.Parse(expiresNode.Value, CultureInfo.InvariantCulture);
             }
 
-            var senderNameNode = infoElement.Element(XmlCreator.CAP12Namespace + "senderName");
+            var senderNameNode = infoElement.Element(_usedNameSpace + "senderName");
             if (senderNameNode != null)
             {
                 info.SenderName = senderNameNode.Value;
             }
 
-            var headlineNode = infoElement.Element(XmlCreator.CAP12Namespace + "headline");
+            var headlineNode = infoElement.Element(_usedNameSpace + "headline");
             if (headlineNode != null)
             {
                 info.Headline = headlineNode.Value;
             }
 
-            var descriptionNode = infoElement.Element(XmlCreator.CAP12Namespace + "description");
+            var descriptionNode = infoElement.Element(_usedNameSpace + "description");
             if (descriptionNode != null)
             {
                 info.Description = descriptionNode.Value;
             }
 
-            var instructionNode = infoElement.Element(XmlCreator.CAP12Namespace + "instruction");
+            var instructionNode = infoElement.Element(_usedNameSpace + "instruction");
             if (instructionNode != null)
             {
                 info.Instruction = instructionNode.Value;
             }
 
-            var webNode = infoElement.Element(XmlCreator.CAP12Namespace + "web");
+            var webNode = infoElement.Element(_usedNameSpace + "web");
             if (webNode != null)
             {
                 info.Web = new Uri(webNode.Value);
             }
 
-            var contactNode = infoElement.Element(XmlCreator.CAP12Namespace + "contact");
+            var contactNode = infoElement.Element(_usedNameSpace + "contact");
             if (contactNode != null)
             {
                 info.Contact = contactNode.Value;
             }
 
-            var parameterQuery = from parameter in infoElement.Elements(XmlCreator.CAP12Namespace + "parameter")
-                                 let valueNameNode = parameter.Element(XmlCreator.CAP12Namespace + "valueName")
-                                 let valueNode = parameter.Element(XmlCreator.CAP12Namespace + "value")
+            var parameterQuery = from parameter in infoElement.Elements(_usedNameSpace + "parameter")
+                                 let valueNameNode = parameter.Element(_usedNameSpace + "valueName")
+                                 let valueNode = parameter.Element(_usedNameSpace + "value")
                                  where valueNameNode != null && valueNode != null
                                  select new Parameter(valueNameNode.Value, valueNode.Value);
 
@@ -286,7 +295,7 @@ namespace CAPNet
                 info.Parameters.Add(parameter);
             }
 
-            var resourceQuery = from resourceNode in infoElement.Elements(XmlCreator.CAP12Namespace + "resource")
+            var resourceQuery = from resourceNode in infoElement.Elements(_usedNameSpace + "resource")
                                 where resourceNode != null
                                 select ParseResource(resourceNode);
 
@@ -295,7 +304,7 @@ namespace CAPNet
                 info.Resources.Add(resource);
             }
 
-            var areaQuery = from areaNode in infoElement.Elements(XmlCreator.CAP12Namespace + "area")
+            var areaQuery = from areaNode in infoElement.Elements(_usedNameSpace + "area")
                             where areaNode != null
                             select ParseArea(areaNode);
 
@@ -311,40 +320,40 @@ namespace CAPNet
         {
             var area = new Area();
 
-            var areaDescNode = areaElement.Element(XmlCreator.CAP12Namespace + "areaDesc");
+            var areaDescNode = areaElement.Element(_usedNameSpace + "areaDesc");
             if (areaDescNode != null)
                 area.Description = areaDescNode.Value;
 
-            var polygonQuery = from polygonNode in areaElement.Elements(XmlCreator.CAP12Namespace + "polygon")
+            var polygonQuery = from polygonNode in areaElement.Elements(_usedNameSpace + "polygon")
                                where polygonNode != null
                                select polygonNode.Value;
 
             foreach (var polygonValue in polygonQuery)
                 area.Polygons.Add(polygonValue);
 
-            var circleQuery = from circleNode in areaElement.Elements(XmlCreator.CAP12Namespace + "circle")
+            var circleQuery = from circleNode in areaElement.Elements(_usedNameSpace + "circle")
                               where circleNode != null
                               select circleNode.Value;
 
             foreach (var circleValue in circleQuery)
                 area.Circles.Add(circleValue);
 
-            var geoCodeQuery = from geoCodeNode in areaElement.Elements(XmlCreator.CAP12Namespace + "geocode")
+            var geoCodeQuery = from geoCodeNode in areaElement.Elements(_usedNameSpace + "geocode")
                                where geoCodeNode != null
                                select geoCodeNode;
 
-            var altitudeNode = areaElement.Element(XmlCreator.CAP12Namespace + "altitude");
+            var altitudeNode = areaElement.Element(_usedNameSpace + "altitude");
             if (altitudeNode != null)
                 area.Altitude = altitudeNode.Value;
 
-            var ceilingNode = areaElement.Element(XmlCreator.CAP12Namespace + "ceiling");
+            var ceilingNode = areaElement.Element(_usedNameSpace + "ceiling");
             if (ceilingNode != null)
                 area.Ceiling = ceilingNode.Value;
 
             foreach (XElement geoCodeValue in geoCodeQuery)
             {
-                string valueName = geoCodeValue.Element(XmlCreator.CAP12Namespace + "valueName").Value;
-                string value = geoCodeValue.Element(XmlCreator.CAP12Namespace + "value").Value;
+                string valueName = geoCodeValue.Element(_usedNameSpace + "valueName").Value;
+                string value = geoCodeValue.Element(_usedNameSpace + "value").Value;
 
                 area.GeoCodes.Add(new GeoCode(valueName, value));
             }
@@ -364,27 +373,27 @@ namespace CAPNet
             //    <digest>digest</digest>
             //</resource>
 
-            var resourceDescNode = resourceElement.Element(XmlCreator.CAP12Namespace + "resourceDesc");
+            var resourceDescNode = resourceElement.Element(_usedNameSpace + "resourceDesc");
             if (resourceDescNode != null)
                 resource.Description = resourceDescNode.Value;
 
-            var mimeTypeNode = resourceElement.Element(XmlCreator.CAP12Namespace + "mimeType");
+            var mimeTypeNode = resourceElement.Element(_usedNameSpace + "mimeType");
             if (mimeTypeNode != null)
                 resource.MimeType = mimeTypeNode.Value;
 
-            var sizeNode = resourceElement.Element(XmlCreator.CAP12Namespace + "size");
+            var sizeNode = resourceElement.Element(_usedNameSpace + "size");
             if (sizeNode != null)
                 resource.Size = int.Parse(sizeNode.Value);
 
-            var uriNode = resourceElement.Element(XmlCreator.CAP12Namespace + "uri");
+            var uriNode = resourceElement.Element(_usedNameSpace + "uri");
             if (uriNode != null)
                 resource.Uri = new Uri(uriNode.Value);
 
-            var derefUriNode = resourceElement.Element(XmlCreator.CAP12Namespace + "derefUri");
+            var derefUriNode = resourceElement.Element(_usedNameSpace + "derefUri");
             if (derefUriNode != null)
                 resource.DereferencedUri = derefUriNode.Value;
 
-            var digestNode = resourceElement.Element(XmlCreator.CAP12Namespace + "digest");
+            var digestNode = resourceElement.Element(_usedNameSpace + "digest");
             if (digestNode != null)
                 resource.Digest = digestNode.Value;
 
