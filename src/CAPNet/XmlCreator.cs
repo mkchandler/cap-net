@@ -183,7 +183,6 @@ namespace CAPNet
             return areaElement;
         }
 
-
         private static void AddElementIfHasContent<T>(XElement element, string name, T content)
         {
             if (content != null)
