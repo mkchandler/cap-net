@@ -8,7 +8,7 @@ namespace CAPNet
     /// <summary>
     /// 
     /// </summary>
-    public class SizeRequiredValidatorError : Error
+    public class SizeRequiredError : Error
     {
     }
 }

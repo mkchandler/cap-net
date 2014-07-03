@@ -79,7 +79,7 @@
     <Compile Include="Validator\Errors\InvalidCategoryError.cs" />
     <Compile Include="Validator\Errors\Required\MimeTypeRequiredError.cs" />
     <Compile Include="Validator\Errors\Required\ResourceRequiredError.cs" />
-    <Compile Include="Validator\Errors\Required\SizeRequiredValidatorError.cs" />
+    <Compile Include="Validator\Errors\Required\SizeRequiredError.cs" />
     <Compile Include="Validator\IValidator.cs" />
     <Compile Include="Validator\Errors\Required\RequiredFieldError.cs" />
     <Compile Include="Validator\Errors\Required\SeverityRequiredError.cs" />

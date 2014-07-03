@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using CAPNet.Models;
+using System.Reflection;
 
 namespace CAPNet
 {
@@ -49,10 +50,9 @@ namespace CAPNet
         /// <returns></returns>
         private IEnumerable<Error> GetErrors(Resource resource)
         {
-            var resourceValidators = new List<Validator<Resource>>();
-
-            resourceValidators.Add(new MimeTypeRequiredValidator(resource));
-            resourceValidators.Add(new ResourceDescriptionRequiredValidator(resource));
+            var resourceValidators = from type in Assembly.GetExecutingAssembly().GetTypes()
+                                     where typeof(IValidator<Resource>).IsAssignableFrom(type)
+                                     select (IValidator<Resource>)Activator.CreateInstance(type, resource);
 
             return from validator in resourceValidators
                    from error in validator.Errors

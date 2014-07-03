@@ -38,7 +38,7 @@ namespace CAPNet
             get
             {
                 if (!IsValid)
-                    yield return new SizeRequiredValidatorError();
+                    yield return new SizeRequiredError();
             }
         }
     }
