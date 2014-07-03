@@ -8,25 +8,28 @@ using CAPNet.Models;
 namespace CAPNet
 {
     /// <summary>
-    /// 
+    /// Verifies if all elements of category are ok
     /// </summary>
-    public class SeverityRequiredValidator : Validator<Info>
+    public class InvalidCategoryValidator : Validator<Info>
     {
-
         /// <summary>
-        /// 
+        /// Constructor with info parameter
         /// </summary>
         /// <param name="info"></param>
-        public SeverityRequiredValidator(Info info) : base(info) { }
+        public InvalidCategoryValidator(Info info) : base(info) { }
 
         /// <summary>
-        /// 
+        /// Validation Method
         /// </summary>
         public override bool IsValid
         {
             get
             {
-                return Enum.IsDefined(typeof(Severity),Entity.Severity);
+                var queryErrors = from category in Entity.Categories
+                                  where !Enum.IsDefined(typeof(Category), category)
+                                  select category;
+
+                return !queryErrors.Any();
             }
         }
 
@@ -38,7 +41,7 @@ namespace CAPNet
             get
             {
                 if (!IsValid)
-                     yield return new SeverityRequiredError();
+                    yield return new InvalidCategoryError();
             }
         }
     }

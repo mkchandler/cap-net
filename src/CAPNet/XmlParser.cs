@@ -223,7 +223,7 @@ namespace CAPNet
                 }
                 else
                 {
-                    info.Severity = null;
+                    info.Severity = 0;
                 }
             }
 

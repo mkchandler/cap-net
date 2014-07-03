@@ -50,7 +50,7 @@ namespace CAPNet.Cmd
                     Console.WriteLine("  " + info.Headline);
                     Console.WriteLine("  Effective: " + info.Effective.ToString());
                     Console.WriteLine("  Expires: " + info.Expires.ToString());
-                    Console.WriteLine("  Severity: " + (info.Severity.HasValue ? info.Severity.Value.ToString() : "n/a"));
+                    Console.WriteLine("  Severity: " + info.Severity.ToString());
 
                     string areas = String.Empty;
 
