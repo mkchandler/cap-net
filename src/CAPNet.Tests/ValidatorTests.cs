@@ -12,39 +12,15 @@ namespace CAPNet
     public class ValidatorTests
     {
         [Fact]
-        public void ValidUrgency()
+        public void InvalidCategory()
         {
-            var alert = new Alert();
-            alert.Info.Add(XmlParser.Parse(Xml.MultipleAlertXml).First().Info.ElementAt(0));
-            var urgencyValidator = new UrgencyRequiredValidator(alert.Info.ElementAt(0));
-            Assert.Equal(0, urgencyValidator.Errors.Count());
-            Assert.True(urgencyValidator.IsValid);
+            var categoryValidator = new InvalidCategoryValidator(new Info());
+            Assert.False(categoryValidator.IsValid);
+            Assert.Equal(1, categoryValidator.Errors.Count());
         }
 
         [Fact]
-        public void ValidSeverity()
-        {
-            var alert = new Alert();
-            alert.Info.Add(XmlParser.Parse(Xml.MultipleAlertXml).First().Info.ElementAt(0));
-            var severityValidator = new SeverityRequiredValidator(alert.Info.ElementAt(0));
-            Assert.True(severityValidator.IsValid);
-            Assert.Equal(0, severityValidator.Errors.Count());
-        }
-        
-        [Fact]
-        public void ValidInfo()
-        {
-            var alert = new Alert();
-            alert.Info.Add(XmlParser.Parse(Xml.MultipleAlertXml).First().Info.ElementAt(0));
-            var alertValidator = new AlertValidator(alert);
-            var validationErrors = alertValidator.Errors;
-            // 0 errors detected >> no subelement missing 
-            Assert.Equal(0, validationErrors.Count());
-            Assert.True(alertValidator.IsValid);
-        }
-
-        [Fact]
-        public void InvalidUrgency()
+        public void InvalidRequiredUrgency()
         {
             var urgencyValidator = new UrgencyRequiredValidator(new Info());
             Assert.Equal(1,urgencyValidator.Errors.Count());
@@ -52,7 +28,7 @@ namespace CAPNet
         }
 
         [Fact]
-        public void InvalidSeverity()
+        public void InvalidRequiredSeverity()
         {
             var severityValidator = new SeverityRequiredValidator(new Info());
 
@@ -61,7 +37,7 @@ namespace CAPNet
         }
 
         [Fact]
-        public void InvalidEvent()
+        public void InvalidRequiredEvent()
         {
             var eventValidator = new EventRequiredValidator(new Info());
             Assert.False(eventValidator.IsValid);
@@ -69,7 +45,7 @@ namespace CAPNet
         }
 
         [Fact]
-        public void InvalidCertainty()
+        public void InvalidRequiredCertainty()
         {
             var certaintyValidator = new CertaintyRequiredValidator(new Info());
             Assert.False(certaintyValidator.IsValid);
@@ -77,7 +53,7 @@ namespace CAPNet
         }
 
         [Fact]
-        public void InvalidCategories()
+        public void InvalidRequiredCategories()
         {
             var categoryValidator = new CategoryRequiredValidator(new Info());
             Assert.False(categoryValidator.IsValid);
@@ -85,7 +61,7 @@ namespace CAPNet
         }
 
         [Fact]
-        public void InvalidInfo()
+        public void InvalidRequiredInfo()
         {
             var alert = new Alert();
             alert.Info.Add(new Info());
