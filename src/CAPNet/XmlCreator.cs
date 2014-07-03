@@ -207,6 +207,5 @@ namespace CAPNet
                 element.Add(new XElement(CAP12Namespace + name, content));
         }
 
-
     }
 }
