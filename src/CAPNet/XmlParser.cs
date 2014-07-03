@@ -216,15 +216,7 @@ namespace CAPNet
             var severityNode = infoElement.Element(XmlCreator.CAP12Namespace + "severity");
             if (severityNode != null)
             {
-                Severity severity;
-                if (Enum.TryParse(severityNode.Value, out severity))
-                {
-                    info.Severity = severity;
-                }
-                else
-                {
-                    info.Severity = 0;
-                }
+                info.Severity = (Severity)Enum.Parse(typeof(Severity), severityNode.Value);
             }
 
             var onsetNode = infoElement.Element(XmlCreator.CAP12Namespace + "onset");
