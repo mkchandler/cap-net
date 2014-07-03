@@ -12,6 +12,24 @@ namespace CAPNet
     public class ResourceValidatorTests
     {
         [Fact]
+        public void ResourceWithUriAndNoSizeIsInvalid()
+        {
+            var info = new Info();
+            var resource = new Resource();
+            resource.Uri = new System.Uri("http://www.google.ro");
+            resource.Size = null;
+            info.Resources.Add(resource);
+
+            var resourceValidator = new ResourceValidator(info);
+            Assert.False(resourceValidator.IsValid);
+
+            var sizeErrors = from error in resourceValidator.Errors
+                             where error.GetType() == typeof(SizeRequiredError)
+                             select error;
+            Assert.NotEmpty(sizeErrors);
+        }
+
+        [Fact]
         public void ResourceWithDescriptionAndMimeTypeIsValid()
         {
             var info = CreateInfoWithResourceWithDescriptionAndMimeType("Description", "MimeType");
