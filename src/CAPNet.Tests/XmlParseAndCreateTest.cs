@@ -106,8 +106,8 @@ namespace CAPNet.Tests
         private void HomeLandSecurityAlertCap11GeneralTest()
         {
             string xmlContent = Xml.HomeLandSecurityAlertCap11;
-            xmlContent = xmlContent.Replace(XmlCreator.CAP11Namespace.ToString(), XmlCreator.CAP12Namespace.ToString());
-            XDocument originalDocument = XDocument.Parse(xmlContent);
+            string xmlContentToCap12 = xmlContent.Replace(XmlCreator.CAP11Namespace.ToString(), XmlCreator.CAP12Namespace.ToString());
+            XDocument originalDocument = XDocument.Parse(xmlContentToCap12);
 
             Alert alert = XmlParser.Parse(xmlContent).First();
             XElement createdElement = XmlCreator.Create(alert);
@@ -122,8 +122,8 @@ namespace CAPNet.Tests
         private void EarthquakeCap11GeneralTest()
         {
             string xmlContent = Xml.EarthquakeCap11;
-            xmlContent = xmlContent.Replace(XmlCreator.CAP11Namespace.ToString(),XmlCreator.CAP12Namespace.ToString());
-            XDocument originalDocument = XDocument.Parse(xmlContent);
+            string xmlContentToCap12 = xmlContent.Replace(XmlCreator.CAP11Namespace.ToString(), XmlCreator.CAP12Namespace.ToString());
+            XDocument originalDocument = XDocument.Parse(xmlContentToCap12);
             
             Alert alert = XmlParser.Parse(xmlContent).First();
             XElement createdElement = XmlCreator.Create(alert);

@@ -42,17 +42,14 @@ namespace CAPNet
 
         private static IEnumerable<Alert> ParseInternal(XDocument xdoc)
         {
-            XNamespace nameSpace = xdoc.Root.Name.Namespace;
-            if (nameSpace.ToString().Equals(""))
+            var elementsCap11 = xdoc.Descendants(XmlCreator.CAP11Namespace + "alert");
+
+            if (!elementsCap11.Any())
                 _usedNameSpace = XmlCreator.CAP12Namespace;
             else
-                _usedNameSpace = nameSpace; 
+                _usedNameSpace = XmlCreator.CAP11Namespace;
 
-            var elements = xdoc.Descendants(XmlCreator.CAP11Namespace + "alert");
-            if (!elements.Any())
-            {
-                elements = xdoc.Descendants(_usedNameSpace + "alert");
-            }
+            var elements = xdoc.Descendants(_usedNameSpace + "alert");
 
             return from alertElement in elements
                    select ParseAlert(alertElement);
