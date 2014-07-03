@@ -36,7 +36,8 @@ namespace CAPNet
         {
             get
             {
-                yield return (new EventRequiredError());
+                if (!IsValid)
+                    yield return (new EventRequiredError());
             }
         }
     }

@@ -37,7 +37,7 @@ namespace CAPNet
             var alert = new Alert();
             alert.Info.Add(XmlParser.Parse(Xml.MultipleAlertXml).First().Info.ElementAt(0));
             var alertValidator = new AlertValidator(alert);
-            var validationErrors = alertValidator.ValidationErrors();
+            var validationErrors = alertValidator.Errors;
             // 0 errors detected >> no subelement missing 
             Assert.Equal(0, validationErrors.Count());
             Assert.True(alertValidator.IsValid);
@@ -90,7 +90,7 @@ namespace CAPNet
             var alert = new Alert();
             alert.Info.Add(new Info());
             var alertValidator = new AlertValidator(alert);
-            var validationErrors = alertValidator.ValidationErrors();
+            var validationErrors = alertValidator.Errors;
             // 5 errors detected >> missing subelements : Category , Certainty , Event , Severity , Urgency
             Assert.Equal(5,validationErrors.Count());
             Assert.False(alertValidator.IsValid);

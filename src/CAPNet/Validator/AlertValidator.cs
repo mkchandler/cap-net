@@ -31,7 +31,9 @@ namespace CAPNet
         {
             get
             {
-                yield return new AlertError();
+                return from info in Entity.Info
+                       from error in GetErrors(info)
+                       select error;
             }
         }
 
@@ -42,25 +44,8 @@ namespace CAPNet
         {
             get
             {
-                IEnumerable<Error> errorLists = this.ValidationErrors();
-                if (errorLists.Count() == 0)
-                    return true;
-                return false;
+                return !Errors.Any();
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Error> ValidationErrors()
-        {
-            var errorList = from info in Entity.Info
-                         from errors in GetErrors(info)
-                         from error in errors
-                         select error;
-            
-            return errorList;
         }
 
         /// <summary>
@@ -68,7 +53,7 @@ namespace CAPNet
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        private IEnumerable<IEnumerable<Error>> GetErrors(Info info)
+        private IEnumerable<Error> GetErrors(Info info)
         {
             var infoValidators = new List<Validator<Info>>();
 
@@ -79,8 +64,8 @@ namespace CAPNet
             infoValidators.Add(new CategoryRequiredValidator(info));
 
             return from validator in infoValidators
-                   where !validator.IsValid
-                   select validator.Errors;
+                   from error in validator.Errors
+                   select error;
         }
     }
 }

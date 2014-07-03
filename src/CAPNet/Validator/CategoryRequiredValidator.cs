@@ -51,7 +51,8 @@ namespace CAPNet
         {
             get
             {
-                yield return new CategoryRequiredError();
+                if (!IsValid)
+                    yield return new CategoryRequiredError();
             }
         }
     }
