@@ -14,6 +14,7 @@
   <references>references</references>
   <incidents>incidents</incidents>
   <info>
+    <language>romanian</language>
     <category>Security</category>
     <event>Homeland Security Advisory System Update</event>
     <responseType>Shelter</responseType>

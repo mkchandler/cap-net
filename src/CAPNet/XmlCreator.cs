@@ -68,7 +68,7 @@ namespace CAPNet
         {
             var infoElement = new XElement(CAP12Namespace + "info");
             if(!info.Language.Equals(info.DefaultLanguage))
-                infoElement.Add(infoElement,"language",info.Language); 
+                infoElement.Add(new XElement(CAP12Namespace + "language", info.Language)); 
             infoElement.Add(info.Categories.Select(cat => new XElement(CAP12Namespace + "category", cat)));
             AddElementIfHasContent(infoElement, "event", info.Event);
             AddElementIfHasContent(infoElement, "responseType", info.ResponseType);
