@@ -46,7 +46,8 @@ namespace CAPNet.Tests
         private void MultipleParameterXmlGeneralTest()
         {
             string xmlContent = Xml.MultipleParameterTestXml;
-            XDocument originalDocument = XDocument.Parse(xmlContent);
+            string correctedXmlContent = xmlContent.Replace("Very Likely", "Likely");
+            XDocument originalDocument = XDocument.Parse(correctedXmlContent);
 
             Alert alert = XmlParser.Parse(xmlContent).First();
             XElement createdElement = XmlCreator.Create(alert);
@@ -54,7 +55,7 @@ namespace CAPNet.Tests
             XDocument createdDocument = new XDocument();
             createdDocument.Add(createdElement);
 
-            //Assert.Equal(createdDocument.ToString(), originalDocument.ToString());
+            Assert.Equal(createdDocument.ToString(), originalDocument.ToString());
         }
 
         [Fact]
