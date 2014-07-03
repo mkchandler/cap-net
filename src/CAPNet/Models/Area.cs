@@ -124,7 +124,7 @@ namespace CAPNet.Models
         ///     </description></item>
         ///   </list>
         /// </remarks>
-        public string Altitude { get; set; }
+        public int? Altitude { get; set; }
 
         /// <summary>
         /// The maximum altitude of the affected area of the alert message (CONDITIONAL)
@@ -139,6 +139,6 @@ namespace CAPNet.Models
         ///     </description></item>
         ///   </list>
         /// </remarks>
-        public string Ceiling { get; set; }
+        public int? Ceiling { get; set; }
     }
 }

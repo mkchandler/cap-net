@@ -212,9 +212,9 @@ namespace CAPNet.Tests
                 //  <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
                 Description = "U.S. nationwide and interests worldwide",
                 //  <altitude>altitude</altitude>
-                Altitude = "100",
+                Altitude = 100,
                 //  <ceiling>ceiling</ceiling>
-                Ceiling = "120",        
+                Ceiling = 120,        
             };
 
             //<polygon>1 2 3 4</polygon>

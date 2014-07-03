@@ -341,11 +341,11 @@ namespace CAPNet
 
             var altitudeNode = areaElement.Element(capNamespace + "altitude");
             if (altitudeNode != null)
-                area.Altitude = altitudeNode.Value;
+                area.Altitude = int.Parse(altitudeNode.Value);
 
             var ceilingNode = areaElement.Element(capNamespace + "ceiling");
             if (ceilingNode != null)
-                area.Ceiling = ceilingNode.Value;
+                area.Ceiling = int.Parse(ceilingNode.Value);
 
             foreach (XElement geoCodeValue in geoCodeQuery)
             {
