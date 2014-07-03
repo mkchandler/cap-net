@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Validator\InvalidCategoryValidator.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\Area.cs" />
     <Compile Include="Models\Category.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Models\GeoCode.cs" />
     <Compile Include="Models\Info.cs" />
     <Compile Include="Models\MessageType.cs" />
+    <Compile Include="Models\NamedValue.cs" />
     <Compile Include="Models\Parameter.cs" />
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\Scope.cs" />
@@ -58,6 +60,23 @@
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Urgency.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validator\AlertError.cs" />
+    <Compile Include="Validator\AlertValidator.cs" />
+    <Compile Include="Validator\CategoryRequiredError.cs" />
+    <Compile Include="Validator\CategoryRequiredValidator.cs" />
+    <Compile Include="Validator\CertaintyRequiredError.cs" />
+    <Compile Include="Validator\CertaintyRequiredValidator.cs" />
+    <Compile Include="Validator\Error.cs" />
+    <Compile Include="Validator\EventRequiredError.cs" />
+    <Compile Include="Validator\EventRequiredValidator.cs" />
+    <Compile Include="Validator\InvalidCategoryError.cs" />
+    <Compile Include="Validator\IValidator.cs" />
+    <Compile Include="Validator\RequiredFieldError.cs" />
+    <Compile Include="Validator\SeverityRequiredError.cs" />
+    <Compile Include="Validator\SeverityRequiredValidator.cs" />
+    <Compile Include="Validator\UrgencyRequiredError.cs" />
+    <Compile Include="Validator\UrgencyRequiredValidator.cs" />
+    <Compile Include="Validator\Validator.cs" />
     <Compile Include="Version.cs" />
     <Compile Include="XmlCreator.cs" />
     <Compile Include="XmlParser.cs" />

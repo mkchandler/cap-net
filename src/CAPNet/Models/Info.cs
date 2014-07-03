@@ -72,7 +72,7 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        public Severity? Severity { get; set; }
+        public Severity Severity { get; set; }
 
         /// <summary>
         /// 
