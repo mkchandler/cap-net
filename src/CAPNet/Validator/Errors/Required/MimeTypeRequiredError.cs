@@ -5,7 +5,10 @@ using System.Text;
 
 namespace CAPNet
 {
-    class AlertError:Error
+    /// <summary>
+    /// 
+    /// </summary>
+    public class MimeTypeRequiredError:RequiredFieldError
     {
     }
 }

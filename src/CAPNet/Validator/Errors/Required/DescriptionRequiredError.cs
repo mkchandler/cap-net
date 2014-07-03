@@ -5,7 +5,10 @@ using System.Text;
 
 namespace CAPNet
 {
-    class InvalidCategoryError:Error
+    /// <summary>
+    /// 
+    /// </summary>
+    public class DescriptionRequiredError:RequiredFieldError
     {
     }
 }
