@@ -85,6 +85,29 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot;?&gt;
+        ///&lt;alert xmlns = &quot;urn:oasis:names:tc:emergency:cap:1.1&quot;&gt;
+        ///  &lt;identifier&gt;KAR0-0306112239-SW&lt;/identifier&gt;
+        ///  &lt;sender&gt;KARO@CLETS.DOJ.CA.GOV&lt;/sender&gt;
+        ///  &lt;sent&gt;2003-06-11T22:39:00-07:00&lt;/sent&gt;
+        ///  &lt;status&gt;Actual&lt;/status&gt;
+        ///  &lt;msgType&gt;Alert&lt;/msgType&gt;
+        ///  &lt;source&gt;SW&lt;/source&gt;
+        ///  &lt;scope&gt;Public&lt;/scope&gt;
+        ///  &lt;info&gt;
+        ///    &lt;category&gt;Rescue&lt;/category&gt;
+        ///    &lt;event&gt;Child Abduction&lt;/event&gt;
+        ///    &lt;urgency&gt;Immediate&lt;/urgency&gt;
+        ///    &lt;severity&gt;Severe&lt;/severity&gt;
+        ///    &lt;certainty&gt;Likely&lt;/certainty [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AmberAlertCap11 {
+            get {
+                return ResourceManager.GetString("AmberAlertCap11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
         ///&lt;alert xmlns = &quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;TRI13970876.2&lt;/identifier&gt; 

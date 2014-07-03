@@ -124,7 +124,23 @@ namespace CAPNet.Tests
             string xmlContent = Xml.EarthquakeCap11;
             string xmlContentToCap12 = xmlContent.Replace(XmlCreator.CAP11Namespace.ToString(), XmlCreator.CAP12Namespace.ToString());
             XDocument originalDocument = XDocument.Parse(xmlContentToCap12);
-            
+
+            Alert alert = XmlParser.Parse(xmlContent).First();
+            XElement createdElement = XmlCreator.Create(alert);
+
+            XDocument createdDocument = new XDocument();
+            createdDocument.Add(createdElement);
+
+            Assert.Equal(createdDocument.ToString(), originalDocument.ToString());
+        }
+
+        [Fact]
+        private void AmberGeneralTest()
+        {
+            string xmlContent = Xml.AmberAlertCap11;
+            string xmlContentToCap12 = xmlContent.Replace(XmlCreator.CAP11Namespace.ToString(), XmlCreator.CAP12Namespace.ToString());
+            XDocument originalDocument = XDocument.Parse(xmlContentToCap12);
+
             Alert alert = XmlParser.Parse(xmlContent).First();
             XElement createdElement = XmlCreator.Create(alert);
 
@@ -145,7 +161,7 @@ namespace CAPNet.Tests
             IEnumerable<XElement> createdElements = XmlCreator.Create(alerts);
 
             XDocument createdDocument = new XDocument();
-            createdDocument.Add(new XElement(originalDocument.Root.Name.ToString(),createdElements));
+            createdDocument.Add(new XElement(originalDocument.Root.Name.ToString(), createdElements));
 
             Assert.Equal(createdDocument.ToString(), originalDocument.ToString());
         }
