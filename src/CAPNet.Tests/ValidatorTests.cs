@@ -11,7 +11,7 @@ namespace CAPNet
 {
     public class ValidatorTests
     {
-        private Info manualValidInfoCreate()
+        private Info createValidInfo()
         {
             var info = new Info();
 
@@ -34,7 +34,7 @@ namespace CAPNet
         [Fact]
         public void ValidCategory()
         {
-            var info = manualValidInfoCreate();
+            var info = createValidInfo();
             var categoryValidator = new InvalidCategoryValidator(info);
             Assert.True(categoryValidator.IsValid);
             Assert.Equal(0, categoryValidator.Errors.Count());
@@ -43,7 +43,7 @@ namespace CAPNet
         [Fact]
         public void ValidRequiredUrgency()
         {
-            var info = manualValidInfoCreate();
+            var info = createValidInfo();
             var urgencyValidator = new UrgencyRequiredValidator(info);
             Assert.True(urgencyValidator.IsValid);
             Assert.Equal(0, urgencyValidator.Errors.Count());
@@ -52,7 +52,7 @@ namespace CAPNet
         [Fact]
         public void ValidRequiredSeverity()
         {
-            var info = manualValidInfoCreate();
+            var info = createValidInfo();
             var severityValidator = new SeverityRequiredValidator(info);
             Assert.True(severityValidator.IsValid);
             Assert.Equal(0, severityValidator.Errors.Count());
@@ -61,7 +61,7 @@ namespace CAPNet
         [Fact]
         public void ValidRequiredEvent()
         {
-            var info = manualValidInfoCreate();
+            var info = createValidInfo();
             var eventValidator = new EventRequiredValidator(info);
             Assert.True(eventValidator.IsValid);
             Assert.Equal(0, eventValidator.Errors.Count());
@@ -70,7 +70,7 @@ namespace CAPNet
         [Fact]
         public void ValidRequiredCertainty()
         {
-            var info = manualValidInfoCreate();
+            var info = createValidInfo();
             var certaintyValidator = new CertaintyRequiredValidator(info);
             Assert.True(certaintyValidator.IsValid);
             Assert.Equal(0, certaintyValidator.Errors.Count());
@@ -79,7 +79,7 @@ namespace CAPNet
         [Fact]
         public void ValidRequiredCategories()
         {
-            var info = manualValidInfoCreate();
+            var info = createValidInfo();
             var categoriesValidator = new CategoryRequiredValidator(info);
             Assert.True(categoriesValidator.IsValid);
             Assert.Equal(0, categoriesValidator.Errors.Count());
@@ -89,7 +89,7 @@ namespace CAPNet
         public void ValidRequiredInfo()
         {
             var alert = new Alert();
-            var info = manualValidInfoCreate();
+            var info = createValidInfo();
 
             ///one info in alert
             alert.Info.Add(info);
