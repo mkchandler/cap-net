@@ -51,6 +51,7 @@
     <Compile Include="Models\GeoCode.cs" />
     <Compile Include="Models\Info.cs" />
     <Compile Include="Models\MessageType.cs" />
+    <Compile Include="Models\NamedValue.cs" />
     <Compile Include="Models\Parameter.cs" />
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\Scope.cs" />
