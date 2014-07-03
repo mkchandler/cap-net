@@ -9,10 +9,10 @@ using CAPNet.Models;
 
 namespace CAPNet
 {
-    public class ValidCategory
+    public class InvalidCategoryValidatorTests
     {
         [Fact]
-        public void Valid()
+        public void CategoryWithValidValueFromTheCategoryEnumIsValid()
         {
             var info = InfoCreator.CreateValidInfo();
             var categoryValidator = new InvalidCategoryValidator(info);
@@ -21,7 +21,7 @@ namespace CAPNet
         }
 
         [Fact]
-        public void Invalid()
+        public void CategoryWithInvalidValueFromTheCategoryEnumIsInvalid()
         {
             var info = InfoCreator.CreateInvalidCategory();
             var categoryValidator = new InvalidCategoryValidator(info);
