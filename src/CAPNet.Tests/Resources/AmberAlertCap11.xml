@@ -5,8 +5,8 @@
   <sent>2003-06-11T22:39:00-07:00</sent>
   <status>Actual</status>
   <msgType>Alert</msgType>
-  <scope>Public</scope>
   <source>SW</source>
+  <scope>Public</scope>
   <info>
     <category>Rescue</category>
     <event>Child Abduction</event>

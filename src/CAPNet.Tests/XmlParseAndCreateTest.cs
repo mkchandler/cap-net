@@ -91,7 +91,8 @@ namespace CAPNet.Tests
         private void SevereThunderStormCap11GeneralTest()
         {
             string xmlContent = Xml.SevereThundertromCap11;
-            XDocument originalDocument = XDocument.Parse(xmlContent);
+            string xmlContentToCap12 = xmlContent.Replace(XmlCreator.CAP11Namespace.ToString(), XmlCreator.CAP12Namespace.ToString());
+            XDocument originalDocument = XDocument.Parse(xmlContentToCap12);
 
             Alert alert = XmlParser.Parse(xmlContent).First();
             XElement createdElement = XmlCreator.Create(alert);

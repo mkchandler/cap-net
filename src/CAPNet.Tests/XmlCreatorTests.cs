@@ -141,6 +141,9 @@ namespace CAPNet.Tests
 
             //  <info>
             var info = new Info();
+
+            //    <language>en-US</language>
+            info.Language = "en-US";
             //    <category>Security</category>
             info.Categories.Add(Category.Security);
             //    <event>Homeland Security Advisory System Update</event>
@@ -209,9 +212,9 @@ namespace CAPNet.Tests
                 //  <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
                 Description = "U.S. nationwide and interests worldwide",
                 //  <altitude>altitude</altitude>
-                Altitude = "altitude",
+                Altitude = "100",
                 //  <ceiling>ceiling</ceiling>
-                Ceiling = "ceiling",        
+                Ceiling = "120",        
             };
 
             //<polygon>1 2 3 4</polygon>
