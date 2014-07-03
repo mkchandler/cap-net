@@ -61,7 +61,31 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot;?&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///  &lt;identifier&gt;43b080713727&lt;/identifier&gt;
+        ///  &lt;sender&gt;hsas@dhs.gov&lt;/sender&gt;
+        ///  &lt;sent&gt;2003-04-02T14:39:01-05:00&lt;/sent&gt;
+        ///  &lt;status&gt;Actual&lt;/status&gt;
+        ///  &lt;msgType&gt;Alert&lt;/msgType&gt;
+        ///  &lt;scope&gt;Public&lt;/scope&gt;
+        ///  &lt;source&gt;source&lt;/source&gt;
+        ///  &lt;restriction&gt;restriction&lt;/restriction&gt;
+        ///  &lt;addresses&gt;addresses&lt;/addresses&gt;
+        ///  &lt;code&gt;code&lt;/code&gt;
+        ///  &lt;note&gt;note&lt;/note&gt;
+        ///  &lt;references&gt;references&lt;/references&gt;
+        ///  &lt;incidents&gt;incidents&lt;/incidents&gt;
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AllElementsFilledAlert {
+            get {
+                return ResourceManager.GetString("AllElementsFilledAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
         ///&lt;alert xmlns = &quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;TRI13970876.2&lt;/identifier&gt; 
         ///  &lt;sender&gt;trinet@caltech.edu&lt;/sender&gt; 
@@ -74,7 +98,7 @@ namespace CAPNet.Tests {
         ///    &lt;category&gt;Geo&lt;/category&gt;
         ///    &lt;event&gt;Earthquake&lt;/event&gt;   
         ///    &lt;urgency&gt;Past&lt;/urgency&gt;   
-        ///    &lt;severit [rest of string was truncated]&quot;;.
+        ///    &lt;severity&gt;Mi [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string circleXml {
             get {
@@ -83,24 +107,49 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot;?&gt;
-        ///&lt;alert xmlns = &quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
-        ///  &lt;identifier&gt;TRI13970876.2&lt;/identifier&gt; 
-        ///  &lt;sender&gt;trinet@caltech.edu&lt;/sender&gt; 
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///  &lt;identifier&gt;TRI13970876.1&lt;/identifier&gt;
+        ///  &lt;sender&gt;trinet@caltech.edu&lt;/sender&gt;
         ///  &lt;sent&gt;2003-06-11T20:56:00-07:00&lt;/sent&gt;
-        ///  &lt;status&gt;Actual&lt;/status&gt; 
-        ///  &lt;msgType&gt;Update&lt;/msgType&gt;
+        ///  &lt;status&gt;Actual&lt;/status&gt;
+        ///  &lt;msgType&gt;Alert&lt;/msgType&gt;
         ///  &lt;scope&gt;Public&lt;/scope&gt;
-        ///  &lt;references&gt;trinet@caltech.edu,TRI13970876.1,2003-06-11T20:30:00-07:00&lt;/references&gt;
+        ///  &lt;incidents&gt;13970876&lt;/incidents&gt;
         ///  &lt;info&gt;
         ///    &lt;category&gt;Geo&lt;/category&gt;
-        ///    &lt;event&gt;Earthquake&lt;/event&gt;   
-        ///    &lt;urgency&gt;Past&lt;/urgency&gt;   
-        ///    &lt;severit [rest of string was truncated]&quot;;.
+        ///    &lt;event&gt;Earthquake&lt;/event&gt;
+        ///    &lt;urgency&gt;Past&lt;/urgency&gt;
+        ///    &lt;severity&gt;Minor&lt;/severity&gt;
+        ///    &lt;certainty&gt;Observed&lt;/certainty&gt;
+        ///    &lt;sender [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string InvalidXml {
+        internal static string EarthquakeCap11 {
             get {
-                return ResourceManager.GetString("InvalidXml", resourceCulture);
+                return ResourceManager.GetString("EarthquakeCap11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///  &lt;identifier&gt;43b080713727&lt;/identifier&gt;
+        ///  &lt;sender&gt;hsas@dhs.gov&lt;/sender&gt;
+        ///  &lt;sent&gt;2003-04-02T14:39:01-05:00&lt;/sent&gt;
+        ///  &lt;status&gt;Actual&lt;/status&gt;
+        ///  &lt;msgType&gt;Alert&lt;/msgType&gt;
+        ///  &lt;scope&gt;Public&lt;/scope&gt;
+        ///  &lt;info&gt;
+        ///    &lt;category&gt;Security&lt;/category&gt;
+        ///    &lt;event&gt;Homeland Security Advisory System Update&lt;/event&gt;
+        ///    &lt;urgency&gt;Immediate&lt;/urgency&gt;
+        ///    &lt;severity&gt;Severe&lt;/severity&gt;
+        ///    &lt;certainty&gt;Likely&lt;/certainty&gt;
+        ///    &lt;senderNam [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string HomeLandSecurityAlertCap11 {
+            get {
+                return ResourceManager.GetString("HomeLandSecurityAlertCap11", resourceCulture);
             }
         }
         
@@ -129,20 +178,20 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version = &quot;1.0&quot; encoding = &quot;utf-8&quot;?&gt;
-        ///&lt;alert xmlns = &quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
-        ///  &lt;identifier&gt;TRI13970876.2&lt;/identifier&gt; 
-        ///  &lt;sender&gt;trinet@caltech.edu&lt;/sender&gt; 
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///  &lt;identifier&gt;TRI13970876.2&lt;/identifier&gt;
+        ///  &lt;sender&gt;trinet@caltech.edu&lt;/sender&gt;
         ///  &lt;sent&gt;2003-06-11T20:56:00-07:00&lt;/sent&gt;
-        ///  &lt;status&gt;Actual&lt;/status&gt; 
+        ///  &lt;status&gt;Actual&lt;/status&gt;
         ///  &lt;msgType&gt;Update&lt;/msgType&gt;
         ///  &lt;scope&gt;Public&lt;/scope&gt;
         ///  &lt;references&gt;trinet@caltech.edu,TRI13970876.1,2003-06-11T20:30:00-07:00&lt;/references&gt;
         ///  &lt;info&gt;
         ///    &lt;category&gt;Geo&lt;/category&gt;
-        ///    &lt;event&gt;Earthquake&lt;/event&gt;   
-        ///    &lt;urgency&gt;Past&lt;/urgency&gt;   
-        ///    &lt;severit [rest of string was truncated]&quot;;.
+        ///    &lt;event&gt;Earthquake&lt;/event&gt;
+        ///    &lt;urgency&gt;Past&lt;/urgency&gt;
+        ///    &lt;severity&gt;Minor&lt;/severi [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MultipleCircleXml {
             get {
@@ -220,21 +269,44 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot;?&gt;
-        ///&lt;alert xmlns = &quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
-        ///  &lt;identifier&gt;KSTO1055887203&lt;/identifier&gt; 
-        ///  &lt;sender&gt;KSTO@NWS.NOAA.GOV&lt;/sender&gt; 
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///  &lt;identifier&gt;KSTO1055887203&lt;/identifier&gt;
+        ///  &lt;sender&gt;KSTO@NWS.NOAA.GOV&lt;/sender&gt;
         ///  &lt;sent&gt;2003-06-17T14:57:00-07:00&lt;/sent&gt;
-        ///  &lt;status&gt;Actual&lt;/status&gt; 
+        ///  &lt;status&gt;Actual&lt;/status&gt;
         ///  &lt;msgType&gt;Alert&lt;/msgType&gt;
-        ///  &lt;scope&gt;Public&lt;/scope&gt; 
+        ///  &lt;scope&gt;Public&lt;/scope&gt;
         ///  &lt;info&gt;
-        ///    &lt;category&gt;Met&lt;/category&gt;   
+        ///    &lt;category&gt;Met&lt;/category&gt;
         ///    &lt;event&gt;SEVERE THUNDERSTORM&lt;/event&gt;
-        ///    &lt;responseType&gt;Shelter&lt;/responseType&gt; 
-        ///    &lt;urgency&gt;Immediate&lt;/urgency&gt;   
-        ///    &lt;severity&gt;Severe&lt;/severity&gt;   
-        ///    &lt;c [rest of string was truncated]&quot;;.
+        ///    &lt;responseType&gt;Shelter&lt;/responseType&gt;
+        ///    &lt;urgency&gt;Immediate&lt;/urgency&gt;
+        ///    &lt;severity&gt;Severe&lt;/severity&gt;
+        ///    &lt;certainty&gt;Observed&lt;/c [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SevereThundertromCap11 {
+            get {
+                return ResourceManager.GetString("SevereThundertromCap11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///  &lt;identifier&gt;KSTO1055887203&lt;/identifier&gt;
+        ///  &lt;sender&gt;KSTO@NWS.NOAA.GOV&lt;/sender&gt;
+        ///  &lt;sent&gt;2003-06-17T14:57:00-07:00&lt;/sent&gt;
+        ///  &lt;status&gt;Actual&lt;/status&gt;
+        ///  &lt;msgType&gt;Alert&lt;/msgType&gt;
+        ///  &lt;scope&gt;Public&lt;/scope&gt;
+        ///  &lt;info&gt;
+        ///    &lt;category&gt;Met&lt;/category&gt;
+        ///    &lt;event&gt;SEVERE THUNDERSTORM&lt;/event&gt;
+        ///    &lt;responseType&gt;Shelter&lt;/responseType&gt;
+        ///    &lt;urgency&gt;Immediate&lt;/urgency&gt;
+        ///    &lt;severity&gt;Severe&lt;/severity&gt;
+        ///    &lt;certainty&gt;Observed&lt;/c [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Thunderstorm12AllDatesXml {
             get {

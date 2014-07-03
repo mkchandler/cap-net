@@ -54,6 +54,7 @@
       <DependentUpon>Xml.resx</DependentUpon>
     </Compile>
     <Compile Include="XmlCreatorTests.cs" />
+    <Compile Include="XmlParseAndCreateTest.cs" />
     <Compile Include="XmlParserTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +101,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\MultipleThunderstorm12Xml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\AllElementsFilledAlert.xml" />
+    <Content Include="Resources\EarthquakeCap11.xml" />
+    <Content Include="Resources\HomeLandSecurityAlertCap11.xml" />
+    <Content Include="Resources\SevereThundertromCap11.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

@@ -1,4 +1,4 @@
-<?xml version = "1.0" encoding = "UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <alert xmlns = "urn:oasis:names:tc:emergency:cap:1.2">
   <identifier>TRI13970876.2</identifier> 
   <sender>trinet@caltech.edu</sender> 

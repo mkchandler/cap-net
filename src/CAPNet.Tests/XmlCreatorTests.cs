@@ -103,6 +103,7 @@ namespace CAPNet.Tests
 
         }
 
+
         private static Alert CreateMultipleAlertXmlAlert()
         {
             var orangeAlert = new Alert
