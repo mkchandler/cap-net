@@ -359,9 +359,9 @@ namespace CAPNet.Tests
             //      <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
             Assert.Equal("U.S. nationwide and interests worldwide", area.Description);
             //      <altitude>altitude</altitude>
-            Assert.Equal("altitude", area.Altitude);
+            Assert.Equal(100, area.Altitude);
             //      <ceiling>ceiling</ceiling>
-            Assert.Equal("ceiling", area.Ceiling);
+            Assert.Equal(120, area.Ceiling);
 
             //    </area>
             //  </info>

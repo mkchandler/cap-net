@@ -5,8 +5,8 @@
   <sent>2003-04-02T14:39:01-05:00</sent>
   <status>Actual</status>
   <msgType>Alert</msgType>
-  <scope>Public</scope>
   <source>source</source>
+  <scope>Public</scope>
   <restriction>restriction</restriction>
   <addresses>addresses</addresses>
   <code>code</code>
@@ -14,6 +14,7 @@
   <references>references</references>
   <incidents>incidents</incidents>
   <info>
+    <language>romanian</language>
     <category>Security</category>
     <event>Homeland Security Advisory System Update</event>
     <responseType>Shelter</responseType>
@@ -52,8 +53,6 @@
     </resource>
     <area>
       <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
-      <altitude>altitude</altitude>
-      <ceiling>ceiling</ceiling>
       <polygon>1 2 3 4</polygon>
       <polygon>1 22 33 4</polygon>
       <circle>1 2</circle>
@@ -66,6 +65,25 @@
         <valueName>valN1</valueName>
         <value>val1</value>
       </geocode>
+      <altitude>100</altitude>
+      <ceiling>120</ceiling>
+    </area>
+    <area>
+      <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
+      <polygon>1 2 3 4</polygon>
+      <polygon>1 22 33 4</polygon>
+      <circle>1 2</circle>
+      <circle>1 22</circle>
+      <geocode>
+        <valueName>valN</valueName>
+        <value>val</value>
+      </geocode>
+      <geocode>
+        <valueName>valN1</valueName>
+        <value>val1</value>
+      </geocode>
+      <altitude>100</altitude>
+      <ceiling>120</ceiling>
     </area>
   </info>
 </alert>

@@ -23,6 +23,11 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
+        public readonly string DefaultLanguage = "en-US";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Info()
         {
             parameters = new List<Parameter>();
@@ -37,7 +42,7 @@ namespace CAPNet.Models
         /// </summary>
         public string Language
         {
-            get { return String.IsNullOrWhiteSpace(language) ? "en-US" : language; }
+            get { return String.IsNullOrWhiteSpace(language) ? DefaultLanguage : language; }
             set { language = value; }
         }
 
