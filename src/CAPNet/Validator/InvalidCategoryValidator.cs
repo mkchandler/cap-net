@@ -29,7 +29,7 @@ namespace CAPNet
                                   where !Enum.IsDefined(typeof(Category), category)
                                   select category;
 
-                return queryErrors.Any();
+                return !queryErrors.Any();
             }
         }
 
