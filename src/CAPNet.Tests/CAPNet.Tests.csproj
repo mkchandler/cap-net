@@ -54,9 +54,9 @@
     <Compile Include="ValidatorTests\Required\Info\RequiredUrgencyTests.cs" />
     <Compile Include="ValidatorTests\Required\RequiredInfoTests.cs" />
     <Compile Include="ValidatorTests\InfoCreator.cs" />
-    <Compile Include="ValidatorTests\Required\RequiredResourceTest.cs" />
-    <Compile Include="ValidatorTests\Required\Resource\RequiredDescriptionTest.cs" />
-    <Compile Include="ValidatorTests\Required\Resource\RequiredMimeTypeTest.cs" />
+    <Compile Include="ValidatorTests\Required\ResourceValidatorTests.cs" />
+    <Compile Include="ValidatorTests\Required\Resource\ResourceDescriptionRequiredValidatorTests.cs" />
+    <Compile Include="ValidatorTests\Required\Resource\MimeTypeRequiredValidatorTests.cs" />
     <Compile Include="ValidatorTests\ValidCategoryTests.cs" />
     <Compile Include="Xml.Designer.cs">
       <AutoGen>True</AutoGen>
