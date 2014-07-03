@@ -10,26 +10,22 @@ namespace CAPNet
     /// <summary>
     /// 
     /// </summary>
-    public class MimeTypeRequiredValidator:Validator<Alert>
+    public class MimeTypeRequiredValidator : Validator<Resource>
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="alert"></param>
-        public MimeTypeRequiredValidator(Alert alert) : base(alert) { }
+        /// <param name="resource"></param>
+        public MimeTypeRequiredValidator(Resource resource) : base(resource) { }
 
         /// <summary>
         /// 
         /// </summary>
         public override bool IsValid
         {
-            get 
+            get
             {
-                var invalidMimeType = from info in Entity.Info
-                                      from resource in info.Resources
-                                      where string.IsNullOrEmpty(resource.MimeType)
-                                      select resource.MimeType;
-                return !invalidMimeType.Any();
+                return !string.IsNullOrEmpty(Entity.MimeType);
             }
         }
 
@@ -41,7 +37,7 @@ namespace CAPNet
             get
             {
                 if (!IsValid)
-                        yield return new MimeTypeRequiredError();
+                    yield return new MimeTypeRequiredError();
             }
         }
     }

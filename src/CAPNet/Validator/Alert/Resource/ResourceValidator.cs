@@ -6,24 +6,24 @@ using System.Text;
 using CAPNet.Models;
 
 namespace CAPNet
-{   
+{
     /// <summary>
     /// 
     /// </summary>
-    public class ResourceValidator:Validator<Alert>
+    public class ResourceValidator : Validator<Info>
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="alert"></param>
-        public ResourceValidator(Alert alert) : base(alert) { }
+        /// <param name="info"></param>
+        public ResourceValidator(Info info) : base(info) { }
 
         /// <summary>
         /// 
         /// </summary>
         public override bool IsValid
         {
-            get 
+            get
             {
                 return !Errors.Any();
             }
@@ -34,9 +34,10 @@ namespace CAPNet
         /// </summary>
         public override IEnumerable<Error> Errors
         {
-            get 
+            get
             {
-                return from error in GetErrors(Entity)
+                return from resource in Entity.Resources
+                       from error in GetErrors(resource)
                        select error;
             }
         }
@@ -44,14 +45,14 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="alert"></param>
+        /// <param name="resource"></param>
         /// <returns></returns>
-        private IEnumerable<Error> GetErrors(Alert alert)
+        private IEnumerable<Error> GetErrors(Resource resource)
         {
-            var resourceValidators = new List<Validator<Alert>>();
+            var resourceValidators = new List<Validator<Resource>>();
 
-            resourceValidators.Add(new MimeTypeRequiredValidator(alert));
-            resourceValidators.Add(new DescriptionRequiredValidator(alert));
+            resourceValidators.Add(new MimeTypeRequiredValidator(resource));
+            resourceValidators.Add(new ResourceDescriptionRequiredValidator(resource));
 
             return from validator in resourceValidators
                    from error in validator.Errors

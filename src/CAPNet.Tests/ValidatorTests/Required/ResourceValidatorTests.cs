@@ -9,22 +9,22 @@ using CAPNet.Models;
 
 namespace CAPNet
 {
-    public class RequiredResourceTest
+    public class ResourceValidatorTests
     {
         [Fact]
-        public void ValidResource()
+        public void ResourceWithDescriptionAndMimeTypeIsValid()
         {
-            var alert = ResourceCreator("Description","MimeType");
+            var info = CreateInfoWithResourceWithDescriptionAndMimeType("Description", "MimeType");
 
-            var resourceValidator = new ResourceValidator(alert);
+            var resourceValidator = new ResourceValidator(info);
             Assert.True(resourceValidator.IsValid);
             Assert.Equal(0, resourceValidator.Errors.Count());
         }
 
         [Fact]
-        public void SemiInvalidResource()
+        public void ResourceWithNoMimeTypeIsInvalid()
         {
-            var alert = ResourceCreator("Description", null);
+            var alert = CreateInfoWithResourceWithDescriptionAndMimeType("Description", null);
 
             var resourceValidator = new ResourceValidator(alert);
             Assert.False(resourceValidator.IsValid);
@@ -32,26 +32,24 @@ namespace CAPNet
         }
 
         [Fact]
-        public void CompleteInvalidResource()
+        public void ResourceWithoutMimeTypeAndDescriptionHasTwoErrors()
         {
-            var alert = ResourceCreator(null, null);
+            var alert = CreateInfoWithResourceWithDescriptionAndMimeType(null, null);
 
             var resourceValidator = new ResourceValidator(alert);
             Assert.False(resourceValidator.IsValid);
             Assert.Equal(2, resourceValidator.Errors.Count());
         }
 
-        private static Alert ResourceCreator(string description,string mimeType)
+        private static Info CreateInfoWithResourceWithDescriptionAndMimeType(string description, string mimeType)
         {
-            var alert = new Alert();
-            var info = InfoCreator.CreateValidInfo();
+            var info = new Info();
             var resource = new Resource();
             resource.Description = description;
             resource.MimeType = mimeType;
             info.Resources.Add(resource);
-            alert.Info.Add(info);
 
-            return alert;
+            return info;
         }
     }
 }

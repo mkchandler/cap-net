@@ -10,13 +10,13 @@ namespace CAPNet
     /// <summary>
     /// Required Component of Resource
     /// </summary>
-    public class DescriptionRequiredValidator:Validator<Alert>
+    public class ResourceDescriptionRequiredValidator : Validator<Resource>
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="alert"></param>
-        public DescriptionRequiredValidator(Alert alert) : base(alert) { }
+        /// <param name="resource"></param>
+        public ResourceDescriptionRequiredValidator(Resource resource) : base(resource) { }
 
         /// <summary>
         /// 
@@ -26,7 +26,7 @@ namespace CAPNet
             get
             {
                 if (!IsValid)
-                        yield return new DescriptionRequiredError();
+                    yield return new ResourceDescriptionRequiredError();
             }
         }
 
@@ -35,13 +35,9 @@ namespace CAPNet
         /// </summary>
         public override bool IsValid
         {
-            get 
+            get
             {
-                var invalidDescription = from info in Entity.Info
-                                         from resource in info.Resources
-                                         where string.IsNullOrEmpty(resource.Description)
-                                         select resource.Description;
-                return !invalidDescription.Any();
+                return !string.IsNullOrEmpty(Entity.Description);
             }
         }
     }
