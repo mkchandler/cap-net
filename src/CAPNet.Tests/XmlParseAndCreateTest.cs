@@ -134,6 +134,22 @@ namespace CAPNet.Tests
             Assert.Equal(createdDocument.ToString(), originalDocument.ToString());
         }
 
+        [Fact]
+        private void MultipleThunderstorm12GeneralTest()
+        {
+            string xmlContent = Xml.MultipleThunderstorm12Xml;
+            string xmlContentToCap12 = xmlContent.Replace(XmlCreator.CAP11Namespace.ToString(), XmlCreator.CAP12Namespace.ToString());
+            XDocument originalDocument = XDocument.Parse(xmlContentToCap12);
+
+            IEnumerable<Alert> alerts = XmlParser.Parse(xmlContent);
+            IEnumerable<XElement> createdElements = XmlCreator.Create(alerts);
+
+            XDocument createdDocument = new XDocument();
+            createdDocument.Add(new XElement(originalDocument.Root.Name.ToString(),createdElements));
+
+            Assert.Equal(createdDocument.ToString(), originalDocument.ToString());
+        }
+
 
     }
 }

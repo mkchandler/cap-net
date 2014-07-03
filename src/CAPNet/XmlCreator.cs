@@ -29,6 +29,16 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="alerts"></param>
+        /// <returns></returns>
+        public static IEnumerable<XElement> Create(IEnumerable<Alert> alerts)
+        {
+            return from alert in alerts
+                   select Create(alert);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="alert"></param>
         /// <returns></returns>
         public static XElement Create(Alert alert)
