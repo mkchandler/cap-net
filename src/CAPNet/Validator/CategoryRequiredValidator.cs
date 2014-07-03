@@ -25,9 +25,7 @@ namespace CAPNet
         {
             get
             {
-                if (!Entity.Categories.Any())
-                    return false;
-                return true ;
+                return Entity.Categories.Any();
             }
         }
 
