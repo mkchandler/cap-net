@@ -17,16 +17,6 @@ namespace CAPNet.Models
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="infos"></param>
-        public Alert(Info infos)
-        {
-            info = new List<Info>();
-            info.Add(infos);
-        }
-
-        /// <summary>
         /// The identifier of the alert message 
         /// </summary>
         /// <remarks>

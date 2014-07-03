@@ -12,7 +12,7 @@ namespace CAPNet
     public class ValidatorTests
     {
         [Fact]
-        public void ValidUrgency()
+        public void InvalidUrgency()
         {
             var urgencyValidator = new UrgencyRequiredValidator(new Info());
             Assert.Equal(1,urgencyValidator.ValidationError.Count());
@@ -20,7 +20,7 @@ namespace CAPNet
         }
 
         [Fact]
-        public void ValidSeverity()
+        public void InvalidSeverity()
         {
             var severityValidator = new SeverityRequiredValidator(new Info());
 
@@ -29,7 +29,7 @@ namespace CAPNet
         }
 
         [Fact]
-        public void ValidEvent()
+        public void InvalidEvent()
         {
             var eventValidator = new EventRequiredValidator(new Info());
             Assert.False(eventValidator.IsValid);
@@ -37,7 +37,7 @@ namespace CAPNet
         }
 
         [Fact]
-        public void ValidCertainty()
+        public void InvalidCertainty()
         {
             var certaintyValidator = new CertaintyRequiredValidator(new Info());
             Assert.False(certaintyValidator.IsValid);
@@ -45,7 +45,7 @@ namespace CAPNet
         }
 
         [Fact]
-        public void ValidCategories()
+        public void InvalidCategories()
         {
             var categoryValidator = new CategoryRequiredValidator(new Info());
             Assert.False(categoryValidator.IsValid);
@@ -55,7 +55,8 @@ namespace CAPNet
         [Fact]
         public void InvalidInfo()
         {
-            var alert = new Alert(new Info());
+            var alert = new Alert();
+            alert.Info.Add(new Info());
             var alertValidator = new AlertValidator(alert);
             var validationErrors = alertValidator.ValidationErrors();
             // 5 errors detected >> missing subelements : Category , Certainty , Event , Severity , Urgency
@@ -66,7 +67,8 @@ namespace CAPNet
         [Fact]
         public void ValidInfo()
         {
-            var alert = new Alert(XmlParser.Parse(Xml.MultipleAlertXml).First().Info.ElementAt(0));
+            var alert = new Alert();
+            alert.Info.Add(XmlParser.Parse(Xml.MultipleAlertXml).First().Info.ElementAt(0));
             var alertValidator = new AlertValidator(alert);
             var validationErrors = alertValidator.ValidationErrors();
             // 0 errors detected >> no subelement missing 
