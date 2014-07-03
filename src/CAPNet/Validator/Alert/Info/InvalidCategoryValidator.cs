@@ -25,11 +25,11 @@ namespace CAPNet
         {
             get
             {
-                var queryErrors = from category in Entity.Categories
-                                  where !Enum.IsDefined(typeof(Category), category)
-                                  select category;
+                var invalidCategories = from category in Entity.Categories
+                                        where !Enum.IsDefined(typeof(Category), category)
+                                        select category;
 
-                return !queryErrors.Any();
+                return !invalidCategories.Any();
             }
         }
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CAPNet
 {
-    class InvalidCategoryError:Error
+    public class AlertError:Error
     {
     }
 }

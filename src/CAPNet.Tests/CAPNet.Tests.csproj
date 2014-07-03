@@ -47,7 +47,14 @@
   <ItemGroup>
     <Compile Include="Models\InfoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValidatorTests.cs" />
+    <Compile Include="ValidatorTests\Required\Info\RequiredCategoriesTests.cs" />
+    <Compile Include="ValidatorTests\Required\Info\RequiredCertaintyTests.cs" />
+    <Compile Include="ValidatorTests\Required\Info\RequiredEventTests.cs" />
+    <Compile Include="ValidatorTests\Required\Info\RequiredSeverityTests.cs" />
+    <Compile Include="ValidatorTests\Required\Info\RequiredUrgencyTests.cs" />
+    <Compile Include="ValidatorTests\Required\RequiredInfoTests.cs" />
+    <Compile Include="ValidatorTests\InfoCreator.cs" />
+    <Compile Include="ValidatorTests\ValidCategoryTests.cs" />
     <Compile Include="Xml.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
