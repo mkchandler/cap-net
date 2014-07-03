@@ -61,7 +61,8 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;43b080713727&lt;/identifier&gt;
         ///  &lt;sender&gt;hsas@dhs.gov&lt;/sender&gt;
         ///  &lt;sent&gt;2003-04-02T14:39:01-05:00&lt;/sent&gt;
@@ -75,8 +76,7 @@ namespace CAPNet.Tests {
         ///  &lt;note&gt;note&lt;/note&gt;
         ///  &lt;references&gt;references&lt;/references&gt;
         ///  &lt;incidents&gt;incidents&lt;/incidents&gt;
-        ///  &lt;info&gt;
-        ///    &lt;category&gt;Security&lt;/catego [rest of string was truncated]&quot;;.
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AllElementsFilledAlert {
             get {
@@ -85,7 +85,7 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot;?&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
         ///&lt;alert xmlns = &quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;TRI13970876.2&lt;/identifier&gt; 
         ///  &lt;sender&gt;trinet@caltech.edu&lt;/sender&gt; 
@@ -98,7 +98,7 @@ namespace CAPNet.Tests {
         ///    &lt;category&gt;Geo&lt;/category&gt;
         ///    &lt;event&gt;Earthquake&lt;/event&gt;   
         ///    &lt;urgency&gt;Past&lt;/urgency&gt;   
-        ///    &lt;severit [rest of string was truncated]&quot;;.
+        ///    &lt;severity&gt;Mi [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string circleXml {
             get {
@@ -107,7 +107,8 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;TRI13970876.1&lt;/identifier&gt;
         ///  &lt;sender&gt;trinet@caltech.edu&lt;/sender&gt;
         ///  &lt;sent&gt;2003-06-11T20:56:00-07:00&lt;/sent&gt;
@@ -121,7 +122,7 @@ namespace CAPNet.Tests {
         ///    &lt;urgency&gt;Past&lt;/urgency&gt;
         ///    &lt;severity&gt;Minor&lt;/severity&gt;
         ///    &lt;certainty&gt;Observed&lt;/certainty&gt;
-        ///    &lt;senderName&gt;Southern California Seismic Network [rest of string was truncated]&quot;;.
+        ///    &lt;sender [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string EarthquakeCap11 {
             get {
@@ -130,7 +131,8 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;43b080713727&lt;/identifier&gt;
         ///  &lt;sender&gt;hsas@dhs.gov&lt;/sender&gt;
         ///  &lt;sent&gt;2003-04-02T14:39:01-05:00&lt;/sent&gt;
@@ -143,7 +145,7 @@ namespace CAPNet.Tests {
         ///    &lt;urgency&gt;Immediate&lt;/urgency&gt;
         ///    &lt;severity&gt;Severe&lt;/severity&gt;
         ///    &lt;certainty&gt;Likely&lt;/certainty&gt;
-        ///    &lt;senderName&gt;U.S. Government, Department of Homelan [rest of string was truncated]&quot;;.
+        ///    &lt;senderNam [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string HomeLandSecurityAlertCap11 {
             get {
@@ -176,7 +178,8 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;TRI13970876.2&lt;/identifier&gt;
         ///  &lt;sender&gt;trinet@caltech.edu&lt;/sender&gt;
         ///  &lt;sent&gt;2003-06-11T20:56:00-07:00&lt;/sent&gt;
@@ -188,8 +191,7 @@ namespace CAPNet.Tests {
         ///    &lt;category&gt;Geo&lt;/category&gt;
         ///    &lt;event&gt;Earthquake&lt;/event&gt;
         ///    &lt;urgency&gt;Past&lt;/urgency&gt;
-        ///    &lt;severity&gt;Minor&lt;/severity&gt;
-        ///    &lt;certainty&gt;Observed&lt;/certainty&gt; [rest of string was truncated]&quot;;.
+        ///    &lt;severity&gt;Minor&lt;/severi [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MultipleCircleXml {
             get {
@@ -198,7 +200,8 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;43b080713727&lt;/identifier&gt;
         ///  &lt;sender&gt;hsas@dhs.gov&lt;/sender&gt;
         ///  &lt;sent&gt;2003-04-02T14:39:01-05:00&lt;/sent&gt;
@@ -211,8 +214,7 @@ namespace CAPNet.Tests {
         ///    &lt;event&gt;Homeland Security Advisory System Update&lt;/event&gt;
         ///    &lt;urgency&gt;Immediate&lt;/urgency&gt;
         ///    &lt;severity&gt;Severe&lt;/severity&gt;
-        ///    &lt;certainty&gt;Very Likely&lt;/certainty&gt;
-        ///    &lt;senderName&gt; [rest of string was truncated]&quot;;.
+        ///    &lt;certainty&gt;V [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MultipleParameterTestXml {
             get {
@@ -244,7 +246,8 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;43b080713727&lt;/identifier&gt;
         ///  &lt;sender&gt;hsas@dhs.gov&lt;/sender&gt;
         ///  &lt;sent&gt;2003-04-02T14:39:01-05:00&lt;/sent&gt;
@@ -257,7 +260,7 @@ namespace CAPNet.Tests {
         ///    &lt;urgency&gt;Immediate&lt;/urgency&gt;
         ///    &lt;severity&gt;Severe&lt;/severity&gt;
         ///    &lt;certainty&gt;Likely&lt;/certainty&gt;
-        ///    &lt;senderName&gt;U.S. Government, Department of Homelan [rest of string was truncated]&quot;;.
+        ///    &lt;senderNam [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string OrangeAlertXml {
             get {
@@ -266,7 +269,8 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;KSTO1055887203&lt;/identifier&gt;
         ///  &lt;sender&gt;KSTO@NWS.NOAA.GOV&lt;/sender&gt;
         ///  &lt;sent&gt;2003-06-17T14:57:00-07:00&lt;/sent&gt;
@@ -279,9 +283,7 @@ namespace CAPNet.Tests {
         ///    &lt;responseType&gt;Shelter&lt;/responseType&gt;
         ///    &lt;urgency&gt;Immediate&lt;/urgency&gt;
         ///    &lt;severity&gt;Severe&lt;/severity&gt;
-        ///    &lt;certainty&gt;Observed&lt;/certainty&gt;
-        ///    &lt;eventCode&gt;
-        ///      &lt;value [rest of string was truncated]&quot;;.
+        ///    &lt;certainty&gt;Observed&lt;/c [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SevereThundertromCap11 {
             get {
@@ -290,7 +292,8 @@ namespace CAPNet.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;alert xmlns=&quot;urn:oasis:names:tc:emergency:cap:1.2&quot;&gt;
         ///  &lt;identifier&gt;KSTO1055887203&lt;/identifier&gt;
         ///  &lt;sender&gt;KSTO@NWS.NOAA.GOV&lt;/sender&gt;
         ///  &lt;sent&gt;2003-06-17T14:57:00-07:00&lt;/sent&gt;
@@ -303,9 +306,7 @@ namespace CAPNet.Tests {
         ///    &lt;responseType&gt;Shelter&lt;/responseType&gt;
         ///    &lt;urgency&gt;Immediate&lt;/urgency&gt;
         ///    &lt;severity&gt;Severe&lt;/severity&gt;
-        ///    &lt;certainty&gt;Observed&lt;/certainty&gt;
-        ///    &lt;eventCode&gt;
-        ///      &lt;value [rest of string was truncated]&quot;;.
+        ///    &lt;certainty&gt;Observed&lt;/c [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Thunderstorm12AllDatesXml {
             get {

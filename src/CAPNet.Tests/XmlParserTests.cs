@@ -210,7 +210,7 @@ namespace CAPNet.Tests
             //    <category>Safety</category>
             Assert.Contains(Category.Safety, info.Categories);
         }
-
+        
         [Fact]
         public void CanParseXmlWithMultipleResources()
         {

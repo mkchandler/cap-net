@@ -8,7 +8,7 @@
         /// <summary>
         /// Determined to have occurred or to be ongoing
         /// </summary>
-        Observed,
+        Observed = 1,
         /// <summary>
         /// Likely (p > ~50%)
         /// </summary>

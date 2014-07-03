@@ -8,7 +8,7 @@
         /// <summary>
         /// Responsive action SHOULD be taken immediately
         /// </summary>
-        Immediate,
+        Immediate = 1,
         /// <summary>
         /// Responsive action SHOULD be taken soon (within next hour)
         /// </summary>
