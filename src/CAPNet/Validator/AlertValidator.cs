@@ -27,7 +27,7 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        public override IEnumerable<Error> ValidationError
+        public override IEnumerable<Error> Errors
         {
             get
             {
@@ -80,7 +80,7 @@ namespace CAPNet
 
             return from validator in infoValidators
                    where !validator.IsValid
-                   select validator.ValidationError;
+                   select validator.Errors;
         }
     }
 }

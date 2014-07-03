@@ -47,7 +47,7 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        public override IEnumerable<Error> ValidationError
+        public override IEnumerable<Error> Errors
         {
             get
             {

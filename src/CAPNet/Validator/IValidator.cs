@@ -32,7 +32,7 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        IEnumerable<Error> ValidationError
+        IEnumerable<Error> Errors
         {
             get;
         }

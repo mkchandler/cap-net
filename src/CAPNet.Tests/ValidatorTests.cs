@@ -17,7 +17,7 @@ namespace CAPNet
             var alert = new Alert();
             alert.Info.Add(XmlParser.Parse(Xml.MultipleAlertXml).First().Info.ElementAt(0));
             var urgencyValidator = new UrgencyRequiredValidator(alert.Info.ElementAt(0));
-            Assert.Equal(0, urgencyValidator.ValidationError.Count());
+            Assert.Equal(0, urgencyValidator.Errors.Count());
             Assert.True(urgencyValidator.IsValid);
         }
 
@@ -28,7 +28,7 @@ namespace CAPNet
             alert.Info.Add(XmlParser.Parse(Xml.MultipleAlertXml).First().Info.ElementAt(0));
             var severityValidator = new SeverityRequiredValidator(alert.Info.ElementAt(0));
             Assert.True(severityValidator.IsValid);
-            Assert.Equal(0, severityValidator.ValidationError.Count());
+            Assert.Equal(0, severityValidator.Errors.Count());
         }
         
         [Fact]
@@ -47,7 +47,7 @@ namespace CAPNet
         public void InvalidUrgency()
         {
             var urgencyValidator = new UrgencyRequiredValidator(new Info());
-            Assert.Equal(1,urgencyValidator.ValidationError.Count());
+            Assert.Equal(1,urgencyValidator.Errors.Count());
             Assert.False(urgencyValidator.IsValid);
         }
 
@@ -57,7 +57,7 @@ namespace CAPNet
             var severityValidator = new SeverityRequiredValidator(new Info());
 
             Assert.False(severityValidator.IsValid);
-            Assert.Equal(1,severityValidator.ValidationError.Count());
+            Assert.Equal(1,severityValidator.Errors.Count());
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace CAPNet
         {
             var eventValidator = new EventRequiredValidator(new Info());
             Assert.False(eventValidator.IsValid);
-            Assert.Equal(1, eventValidator.ValidationError.Count());
+            Assert.Equal(1, eventValidator.Errors.Count());
         }
 
         [Fact]
@@ -73,7 +73,7 @@ namespace CAPNet
         {
             var certaintyValidator = new CertaintyRequiredValidator(new Info());
             Assert.False(certaintyValidator.IsValid);
-            Assert.Equal(1, certaintyValidator.ValidationError.Count());
+            Assert.Equal(1, certaintyValidator.Errors.Count());
         }
 
         [Fact]
@@ -81,7 +81,7 @@ namespace CAPNet
         {
             var categoryValidator = new CategoryRequiredValidator(new Info());
             Assert.False(categoryValidator.IsValid);
-            Assert.Equal(1, categoryValidator.ValidationError.Count());
+            Assert.Equal(1, categoryValidator.Errors.Count());
         }
 
         [Fact]
