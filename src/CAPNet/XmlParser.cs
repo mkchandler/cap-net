@@ -170,7 +170,7 @@ namespace CAPNet
 
             var responseTypeQuery = from responseTypeNode in infoElement.Elements(capNamespace + "responseType")
                                     where responseTypeNode != null
-                                    select (ResponseType)Enum.Parse(typeof(ResponseType), responseTypeNode.Value);
+                                    select (ResponseType)Enum.Parse(typeof(ResponseType), responseTypeNode.Value,true);
 
             foreach (var responseType in responseTypeQuery)
             {
