@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Models\InfoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidatorTests\Required\Area\AreaDescriptionRequiredValidatorTests.cs" />
     <Compile Include="ValidatorTests\Required\Info\RequiredCategoriesTests.cs" />
     <Compile Include="ValidatorTests\Required\Info\RequiredCertaintyTests.cs" />
     <Compile Include="ValidatorTests\Required\Info\RequiredEventTests.cs" />
