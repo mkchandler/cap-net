@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CAPNet.Models;
 using System.Linq;
-using System.Text;
-
 using Xunit;
-using CAPNet.Models;
 
 namespace CAPNet
 {
