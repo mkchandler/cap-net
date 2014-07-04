@@ -24,11 +24,11 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="coordonate"></param>
+        /// <param name="coordinate"></param>
         /// <param name="radius"></param>
-        public Circle(Coordinate coordonate, double radius)
+        public Circle(Coordinate coordinate, double radius)
         {
-            this.Center = coordonate;
+            this.Center = coordinate;
             this.Radius = radius;
         }
 
