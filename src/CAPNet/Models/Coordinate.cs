@@ -16,9 +16,9 @@ namespace CAPNet.Models
         /// <param name="stringRepresentation"></param>
         public Coordinate(string stringRepresentation)
         {
-            string[] splitted = stringRepresentation.Split(',');
-            this.X = double.Parse(splitted[0]);
-            this.Y = double.Parse(splitted[1]);
+            var splitCoordinate = stringRepresentation.Split(',');
+            this.X = double.Parse(splitCoordinate[0]);
+            this.Y = double.Parse(splitCoordinate[1]);
         }
 
         /// <summary>

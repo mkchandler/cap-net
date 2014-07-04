@@ -16,9 +16,10 @@ namespace CAPNet.Models
         /// <param name="stringRepresentation">The circular area is represented by a central point given as a [WGS 84] coordinate pair followed by a space character and a radius value in kilometers.</param>
         public Circle(string stringRepresentation)
         {
-            string[] splittedString = stringRepresentation.Split(' ');
-            this.Center = new Coordinate(splittedString[0]);
-            this.Radius = double.Parse(splittedString[1]);
+            var circleCenterAndRadius = stringRepresentation.Split(' ');
+            this.Center = new Coordinate(circleCenterAndRadius[0]);
+            this.Radius = double.Parse(circleCenterAndRadius[1]);
+
         }
 
         /// <summary>
