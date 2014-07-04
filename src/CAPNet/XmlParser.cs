@@ -168,10 +168,13 @@ namespace CAPNet
                 info.Event = eventNode.Value;
             }
 
-            var responseTypeNode = infoElement.Element(capNamespace + "responseType");
-            if (responseTypeNode != null)
+            var responseTypeQuery = from responseTypeNode in infoElement.Elements(capNamespace + "responseType")
+                                    where responseTypeNode != null
+                                    select (ResponseType)Enum.Parse(typeof(ResponseType), responseTypeNode.Value);
+
+            foreach (var responseType in responseTypeQuery)
             {
-                info.ResponseType = responseTypeNode.Value;
+                info.ResponseTypes.Add(responseType);
             }
 
             var urgencyNode = infoElement.Element(capNamespace + "urgency");

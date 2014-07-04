@@ -20,6 +20,8 @@ namespace CAPNet.Models
 
         private readonly ICollection<Area> areas;
 
+        private readonly ICollection<ResponseType> responseTypes;
+
         /// <summary>
         /// 
         /// </summary>
@@ -35,6 +37,7 @@ namespace CAPNet.Models
             categories = new List<Category>();
             resources = new List<Resource>();
             areas = new List<Area>();
+            responseTypes = new List<ResponseType>();
         }
 
         /// <summary>
@@ -49,6 +52,17 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
+        public ICollection<ResponseType> ResponseTypes
+        {
+            get
+            {
+                return responseTypes;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ICollection<Category> Categories
         {
             get { return categories; }
@@ -58,11 +72,6 @@ namespace CAPNet.Models
         /// 
         /// </summary>
         public string Event { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string ResponseType { get; set; }
 
         /// <summary>
         /// 
@@ -144,7 +153,7 @@ namespace CAPNet.Models
         public ICollection<EventCode> EventCodes
         {
             get { return eventCodes; }
-            
+
         }
 
         /// <summary>
