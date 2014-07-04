@@ -8,13 +8,13 @@ namespace CAPNet.Models
     /// <summary>
     /// 
     /// </summary>
-    public class Coordonate
+    public class Coordinate
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="stringRepresentation"></param>
-        public Coordonate(string stringRepresentation)
+        public Coordinate(string stringRepresentation)
         {
             string[] splitted = stringRepresentation.Split(',');
             this.X = double.Parse(splitted[0]);
@@ -26,7 +26,7 @@ namespace CAPNet.Models
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public Coordonate(double x, double y)
+        public Coordinate(double x, double y)
         {
             X = x;
             Y = y;

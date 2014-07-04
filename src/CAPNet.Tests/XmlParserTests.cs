@@ -123,8 +123,8 @@ namespace CAPNet.Tests
         {
             var alert = XmlParser.Parse(Xml.circleXml).First();
             Circle circle =  alert.Info.First().Areas.First().Circles.First();
-            Coordonate centralPoint = circle.CentralPoint;
-            double radius = circle.RadiusValue;
+            Coordinate centralPoint = circle.Center;
+            decimal radius = circle.Radius;
             //<circle>32.9525,-115.5527 0</circle>  
             Assert.Equal(centralPoint.X.ToString(), "32.9525");
             Assert.Equal(centralPoint.Y.ToString(), "-115.5527");

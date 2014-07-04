@@ -13,12 +13,12 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        private ICollection<Coordonate> coordonates;
+        private ICollection<Coordinate> coordonates;
 
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<Coordonate> Coordonates
+        public ICollection<Coordinate> Coordonates
         {
             get { return coordonates; }
             private set { coordonates = value; }
@@ -31,11 +31,11 @@ namespace CAPNet.Models
         /// <param name="stringRepresentation">The geographic polygon is represented by a whitespace-delimited list of [WGS 84] coordinate pairs</param>
         public Polygon(string stringRepresentation)
         {
-            coordonates = new List<Coordonate>();
+            coordonates = new List<Coordinate>();
             string[] splittedString = stringRepresentation.Split(' ');
 
             foreach (string coordonate in splittedString)
-                coordonates.Add(new Coordonate(coordonate));
+                coordonates.Add(new Coordinate(coordonate));
         }
 
         /// <summary>

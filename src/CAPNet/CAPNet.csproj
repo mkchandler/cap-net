@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Circle.cs" />
-    <Compile Include="Models\Coordonate.cs" />
+    <Compile Include="Models\Coordinate.cs" />
     <Compile Include="Models\Polygon.cs" />
     <Compile Include="Validator\Alert\Info\InvalidCategoryValidator.cs" />
     <Compile Include="Models\Alert.cs" />

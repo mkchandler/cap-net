@@ -17,8 +17,8 @@ namespace CAPNet.Models
         public Circle(string stringRepresentation)
         {
             string[] splittedString = stringRepresentation.Split(' ');
-            this.CentralPoint = new Coordonate(splittedString[0]);
-            this.RadiusValue = double.Parse(splittedString[1]);
+            this.Center = new Coordinate(splittedString[0]);
+            this.Radius = decimal.Parse(splittedString[1]);
         }
 
         /// <summary>
@@ -26,16 +26,16 @@ namespace CAPNet.Models
         /// </summary>
         /// <param name="coordonate"></param>
         /// <param name="radius"></param>
-        public Circle(Coordonate coordonate, double radius)
+        public Circle(Coordinate coordonate, decimal radius)
         {
-            this.CentralPoint = coordonate;
-            this.RadiusValue = radius;
+            this.Center = coordonate;
+            this.Radius = radius;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public double RadiusValue 
+        public decimal Radius 
         {
             get; 
             private set; 
@@ -44,7 +44,7 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        public Coordonate CentralPoint 
+        public Coordinate Center 
         { 
             get; 
             private set; 
@@ -56,7 +56,7 @@ namespace CAPNet.Models
         /// <returns></returns>
         public override string ToString()
         {
-            return CentralPoint + " " + RadiusValue.ToString();
+            return Center + " " + Radius.ToString();
         }
 
     }
