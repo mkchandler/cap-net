@@ -17,8 +17,8 @@ namespace CAPNet.Models
         public Coordinate(string stringRepresentation)
         {
             string[] splitted = stringRepresentation.Split(',');
-            this.X = double.Parse(splitted[0]);
-            this.Y = double.Parse(splitted[1]);
+            this.X = decimal.Parse(splitted[0]);
+            this.Y = decimal.Parse(splitted[1]);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace CAPNet.Models
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public Coordinate(double x, double y)
+        public Coordinate(decimal x, decimal y)
         {
             X = x;
             Y = y;
@@ -35,7 +35,7 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        public double X
+        public decimal X
         {
             get;
             private set;
@@ -44,7 +44,7 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        public double Y
+        public decimal Y
         {
             get;
             private set;
