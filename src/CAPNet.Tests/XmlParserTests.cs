@@ -126,9 +126,9 @@ namespace CAPNet.Tests
             Coordinate centralPoint = circle.Center;
             var radius = circle.Radius;
             //<circle>32.9525,-115.5527 0</circle>  
-            Assert.Equal(centralPoint.X.ToString(), "32.9525");
-            Assert.Equal(centralPoint.Y.ToString(), "-115.5527");
-            Assert.Equal(radius.ToString(), "0");
+            Assert.Equal(centralPoint.X, 32.9525);
+            Assert.Equal(centralPoint.Y, -115.5527);
+            Assert.Equal(radius, 0);
         }
 
         [Fact]
