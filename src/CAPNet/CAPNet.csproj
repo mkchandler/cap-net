@@ -41,10 +41,12 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Circle.cs" />
+    <Compile Include="Models\Coordinate.cs" />
+    <Compile Include="Models\Polygon.cs" />
     <Compile Include="Models\ResponseType.cs" />
     <Compile Include="Validator\Alert\Area\AreaDescriptionRequiredValidator.cs" />
     <Compile Include="Validator\Alert\Area\CeilingExistanceValidator.cs" />

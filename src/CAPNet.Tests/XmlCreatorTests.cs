@@ -219,12 +219,12 @@ namespace CAPNet.Tests
 
             //<polygon>1 2 3 4</polygon>
             //<polygon>1 22 33 4</polygon>
-            area.Polygons.Add("1 2 3 4");
-            area.Polygons.Add("1 22 33 4");
+            area.Polygons.Add(new Polygon("1,2 2,2 3,3 4,4"));
+            area.Polygons.Add(new Polygon("1,1 22,1 33,1 1,1"));
             //<circle>1 2</circle>
             //<circle>1 22</circle>
-            area.Circles.Add("1 2");
-            area.Circles.Add("1 22");
+            area.Circles.Add(new Circle("1,2 2"));
+            area.Circles.Add(new Circle("1,2 22"));
             //<geocode>
             //  <valueName>valN</valueName>
             //  <value>val</value>

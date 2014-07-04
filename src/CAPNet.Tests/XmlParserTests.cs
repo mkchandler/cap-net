@@ -110,11 +110,25 @@ namespace CAPNet.Tests
             var alert = XmlParser.Parse(Xml.circleXml).First();
             Assert.NotNull(alert);
 
-            var circle = alert.Info.ElementAt(0).Areas.ElementAt(0).Circles;
-            Assert.Equal(1, circle.Count());
+            var circles = alert.Info.ElementAt(0).Areas.ElementAt(0).Circles;
+            Assert.Equal(1, circles.Count());
 
+            //<circle>32.9525,-115.5527 0</circle>
+            Assert.Equal("32.9525,-115.5527 0", circles.First().ToString());
+            
+        }
+
+        [Fact]
+        public void CanGetCircleValues()
+        {
+            var alert = XmlParser.Parse(Xml.circleXml).First();
+            Circle circle =  alert.Info.First().Areas.First().Circles.First();
+            Coordinate centralPoint = circle.Center;
+            var radius = circle.Radius;
             //<circle>32.9525,-115.5527 0</circle>  
-            Assert.Equal("32.9525,-115.5527 0", circle.First());
+            Assert.Equal(centralPoint.X, 32.9525);
+            Assert.Equal(centralPoint.Y, -115.5527);
+            Assert.Equal(radius, 0);
         }
 
         [Fact]
@@ -127,10 +141,10 @@ namespace CAPNet.Tests
             Assert.Equal(2, circles.Count());
 
             //<circle>32.9525,-115.5527 0</circle>  
-            Assert.Equal("32.9525,-115.5527 0", circles.First());
+            Assert.Equal("32.9525,-115.5527 0", circles.First().ToString());
 
             //<circle>62.9525,-55.5527 0</circle>
-            Assert.Equal("62.9525,-55.5527 0", circles.Last());
+            Assert.Equal("62.9525,-55.5527 0", circles.Last().ToString());
         }
 
         [Fact]
@@ -143,7 +157,7 @@ namespace CAPNet.Tests
             Assert.Equal(1, polygons.Count());
 
             //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
-            Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", polygons.First());
+            Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", polygons.First().ToString());
         }
 
         [Fact]
@@ -190,12 +204,29 @@ namespace CAPNet.Tests
 
             //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
             var firstPolygon = polygons.First();
-            Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", firstPolygon);
+            Assert.Equal("38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14", firstPolygon.ToString());
 
             //<polygon>58.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
             var lastPolygon = polygons.Last();
-            Assert.Equal("58.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 58.47,-120.14", lastPolygon);
+            Assert.Equal("58.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 58.47,-120.14", lastPolygon.ToString());
         }
+
+        [Fact]
+        public void CanGetPolygonValues()
+        {
+            var alert = XmlParser.Parse(Xml.MultipleThunderstorm12Xml).First();
+            var polygon = alert.Info.ElementAt(0).Areas.First().Polygons.First();
+            var coordonates = polygon.Coordinates;
+
+            //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
+            Assert.Equal(coordonates.ElementAt(0).ToString(), "38.47,-120.14");
+            Assert.Equal(coordonates.ElementAt(1).ToString(), "38.34,-119.95");
+            Assert.Equal(coordonates.ElementAt(2).ToString(), "38.52,-119.74");
+            Assert.Equal(coordonates.ElementAt(3).ToString(), "38.62,-119.89");
+            Assert.Equal(coordonates.ElementAt(4).ToString(), "38.47,-120.14");
+
+        }
+
 
         [Fact]
         public void CanParseXmlWithMultipleCategories()

@@ -52,10 +52,10 @@
     </resource>
     <area>
       <areaDesc>U.S. nationwide and interests worldwide</areaDesc>
-      <polygon>1 2 3 4</polygon>
-      <polygon>1 22 33 4</polygon>
-      <circle>1 2</circle>
-      <circle>1 22</circle>
+      <polygon>1,2 2,2 3,3 4,4</polygon>
+      <polygon>1,1 22,1 33,1 1,1</polygon>
+      <circle>1,2 2</circle>
+      <circle>1,2 22</circle>
       <geocode>
         <valueName>valN</valueName>
         <value>val</value>
