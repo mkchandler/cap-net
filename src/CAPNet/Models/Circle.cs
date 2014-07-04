@@ -18,7 +18,7 @@ namespace CAPNet.Models
         {
             string[] splittedString = stringRepresentation.Split(' ');
             this.Center = new Coordinate(splittedString[0]);
-            this.Radius = decimal.Parse(splittedString[1]);
+            this.Radius = double.Parse(splittedString[1]);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace CAPNet.Models
         /// </summary>
         /// <param name="coordonate"></param>
         /// <param name="radius"></param>
-        public Circle(Coordinate coordonate, decimal radius)
+        public Circle(Coordinate coordonate, double radius)
         {
             this.Center = coordonate;
             this.Radius = radius;
@@ -35,7 +35,7 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        public decimal Radius 
+        public double Radius 
         {
             get; 
             private set; 
