@@ -1,31 +1,27 @@
-﻿using System;
+﻿using CAPNet.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using CAPNet.Models;
 
 namespace CAPNet
 {
     /// <summary>
-    /// 
+    /// A text description of the affected area is required ! 
     /// </summary>
-    public class CategoryRequiredValidator : Validator<Info>
+    public class AreaDescriptionRequiredValidator : Validator<Area>
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="info"></param>
-        public CategoryRequiredValidator(Info info) : base(info) { }
+        /// <param name="area"></param>
+        public AreaDescriptionRequiredValidator(Area area) : base(area) { }
 
         /// <summary>
-        /// 
+        /// Area description should not be null or empty
         /// </summary>
         public override bool IsValid
         {
             get
             {
-                return Entity.Categories.Any();
+                return !(string.IsNullOrEmpty(Entity.Description));
             }
         }
 
@@ -37,8 +33,9 @@ namespace CAPNet
             get
             {
                 if (!IsValid)
-                    yield return new CategoryRequiredError();
+                    yield return new AreaDescriptionRequiredError();
             }
         }
+
     }
 }

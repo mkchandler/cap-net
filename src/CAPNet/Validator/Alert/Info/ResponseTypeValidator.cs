@@ -10,13 +10,13 @@ namespace CAPNet
     /// <summary>
     /// 
     /// </summary>
-    public class CategoryRequiredValidator : Validator<Info>
+    public class ResponseTypeValidator : Validator<ResponseType>
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="info"></param>
-        public CategoryRequiredValidator(Info info) : base(info) { }
+        /// <param name="responseType"></param>
+        public ResponseTypeValidator(ResponseType responseType) : base(responseType) { }
 
         /// <summary>
         /// 
@@ -25,7 +25,7 @@ namespace CAPNet
         {
             get
             {
-                return Entity.Categories.Any();
+                return Enum.IsDefined(typeof(ResponseType), Entity); 
             }
         }
 
@@ -37,7 +37,7 @@ namespace CAPNet
             get
             {
                 if (!IsValid)
-                    yield return new CategoryRequiredError();
+                    yield return new ResponseTypeError();
             }
         }
     }
