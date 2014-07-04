@@ -149,7 +149,7 @@ namespace CAPNet.Tests
             //    <event>Homeland Security Advisory System Update</event>
             info.Event = "Homeland Security Advisory System Update";
             //    <responsetype>Shelter</responsetype>
-            info.ResponseType = "Shelter";
+            info.ResponseTypes.Add(ResponseType.Shelter);
             //    <urgency>Immediate</urgency>
             info.Urgency = Urgency.Immediate;
             //    <severity>Severe</severity>

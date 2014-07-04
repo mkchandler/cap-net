@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="Models\InfoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidatorTests\Required\Area\AreaDescriptionRequiredValidatorTests.cs" />
+    <Compile Include="ValidatorTests\Required\Area\CeilingExistanceValidatorTests.cs" />
     <Compile Include="ValidatorTests\Required\Info\RequiredCategoriesTests.cs" />
     <Compile Include="ValidatorTests\Required\Info\RequiredCertaintyTests.cs" />
     <Compile Include="ValidatorTests\Required\Info\RequiredEventTests.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="ValidatorTests\Required\Resource\MimeTypeRequiredValidatorTests.cs" />
     <Compile Include="ValidatorTests\InvalidCategoryValidatorTests.cs" />
     <Compile Include="ValidatorTests\Required\Resource\SizeRequiredValidatorTests.cs" />
+    <Compile Include="ValidatorTests\ResponseTypeValidatorTests.cs" />
     <Compile Include="Xml.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
