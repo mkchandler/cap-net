@@ -169,11 +169,11 @@ namespace CAPNet
 
                 from polygon in area.Polygons
                 select new XElement(
-                    CAP12Namespace + "polygon", polygon),
+                    CAP12Namespace + "polygon", polygon.GetCodeValue()),
 
                 from circle in area.Circles
                 select new XElement(
-                    CAP12Namespace + "circle", circle),
+                    CAP12Namespace + "circle", circle.GetCodeValue()),
 
                 Create(area.GeoCodes));
 

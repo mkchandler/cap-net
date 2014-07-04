@@ -26,9 +26,9 @@ namespace CAPNet.Models
     /// </remarks>
     public class Area
     {
-        private readonly ICollection<string> circles;
+        private readonly ICollection<Circle> circles;
 
-        private readonly ICollection<string> polygons;
+        private readonly ICollection<Polygon> polygons;
 
         private readonly ICollection<GeoCode> geoCodes;
 
@@ -38,8 +38,8 @@ namespace CAPNet.Models
         public Area()
         {
             geoCodes = new List<GeoCode>();
-            polygons = new List<string>();
-            circles = new List<string>();
+            polygons = new List<Polygon>();
+            circles = new List<Circle>();
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace CAPNet.Models
         ///     </description></item>
         ///   </list>
         /// </remarks>
-        public ICollection<string> Polygons
+        public ICollection<Polygon> Polygons
         {
             get { return polygons; }
         }
@@ -72,7 +72,7 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<string> Circles
+        public ICollection<Circle> Circles
         {
             get { return circles; }
         }

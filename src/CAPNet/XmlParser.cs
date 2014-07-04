@@ -318,14 +318,14 @@ namespace CAPNet
                                select polygonNode.Value;
 
             foreach (var polygonValue in polygonQuery)
-                area.Polygons.Add(polygonValue);
+                area.Polygons.Add(new Polygon(polygonValue));
 
             var circleQuery = from circleNode in areaElement.Elements(capNamespace + "circle")
                               where circleNode != null
                               select circleNode.Value;
 
             foreach (var circleValue in circleQuery)
-                area.Circles.Add(circleValue);
+                area.Circles.Add(new Circle(circleValue));
 
             var geoCodeQuery = from geoCodeNode in areaElement.Elements(capNamespace + "geocode")
                                where geoCodeNode != null
