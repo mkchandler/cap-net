@@ -13,10 +13,10 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="codeValue"></param>
-        public Coordonate(string codeValue)
+        /// <param name="stringRepresentation"></param>
+        public Coordonate(string stringRepresentation)
         {
-            string[] splitted = codeValue.Split(',');
+            string[] splitted = stringRepresentation.Split(',');
             this.X = double.Parse(splitted[0]);
             this.Y = double.Parse(splitted[1]);
         }

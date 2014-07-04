@@ -28,11 +28,11 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="codeValue"></param>
-        public Polygon(string codeValue)
+        /// <param name="stringRepresentation">The geographic polygon is represented by a whitespace-delimited list of [WGS 84] coordinate pairs</param>
+        public Polygon(string stringRepresentation)
         {
             coordonates = new List<Coordonate>();
-            string[] splittedString = codeValue.Split(' ');
+            string[] splittedString = stringRepresentation.Split(' ');
 
             foreach (string coordonate in splittedString)
                 coordonates.Add(new Coordonate(coordonate));
