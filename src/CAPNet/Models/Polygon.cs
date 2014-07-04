@@ -42,14 +42,9 @@ namespace CAPNet.Models
         /// 
         /// </summary>
         /// <returns></returns>
-        public string GetCodeValue()
+        public override string ToString()
         {
-            StringBuilder codeValueBuilder = new StringBuilder("");
-
-            foreach (Coordonate coordonate in coordonates)
-                codeValueBuilder.Append(coordonate.GetCodeValue()+" ");
-
-            return codeValueBuilder.ToString().Trim();
+            return string.Join(" ", coordonates);
         }
 
         

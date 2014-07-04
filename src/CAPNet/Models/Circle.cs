@@ -54,9 +54,9 @@ namespace CAPNet.Models
         /// 
         /// </summary>
         /// <returns></returns>
-        public string GetCodeValue()
+        public override string ToString()
         {
-            return CentralPoint.GetCodeValue() + " " + RadiusValue.ToString();
+            return CentralPoint + " " + RadiusValue.ToString();
         }
 
     }

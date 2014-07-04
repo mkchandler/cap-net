@@ -54,7 +54,7 @@ namespace CAPNet.Models
         /// 
         /// </summary>
         /// <returns></returns>
-        public string GetCodeValue()
+        public override string ToString()
         {
             return X.ToString() + "," + Y.ToString();
         }
