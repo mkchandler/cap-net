@@ -216,7 +216,7 @@ namespace CAPNet.Tests
         {
             var alert = XmlParser.Parse(Xml.MultipleThunderstorm12Xml).First();
             var polygon = alert.Info.ElementAt(0).Areas.First().Polygons.First();
-            var coordonates = polygon.Coordonates;
+            var coordonates = polygon.Coordinates;
 
             //<polygon>38.47,-120.14 38.34,-119.95 38.52,-119.74 38.62,-119.89 38.47,-120.14</polygon>
             Assert.Equal(coordonates.ElementAt(0).ToString(), "38.47,-120.14");

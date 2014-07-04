@@ -18,7 +18,7 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
-        public IEnumerable<Coordinate> Coordonates
+        public IEnumerable<Coordinate> Coordinates
         {
             get { return coordinates; }
             private set { coordinates = value; }
