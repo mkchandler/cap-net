@@ -101,7 +101,7 @@ namespace CAPNet
             var scopeNode = alertElement.Element(capNamespace + "scope");
             if (scopeNode != null)
             {
-                alert.Scope = (Scope)Enum.Parse(typeof(Scope), scopeNode.Value);
+                alert.Scope = (Scope)Enum.Parse(typeof(Scope), scopeNode.Value, true);
             }
 
             var sourceNode = alertElement.Element(capNamespace + "source");
@@ -113,13 +113,13 @@ namespace CAPNet
             var msgTypeNode = alertElement.Element(capNamespace + "msgType");
             if (msgTypeNode != null)
             {
-                alert.MessageType = (MessageType)Enum.Parse(typeof(MessageType), msgTypeNode.Value);
+                alert.MessageType = (MessageType)Enum.Parse(typeof(MessageType), msgTypeNode.Value, true);
             }
 
             var statusNode = alertElement.Element(capNamespace + "status");
             if (statusNode != null)
             {
-                alert.Status = (Status)Enum.Parse(typeof(Status), statusNode.Value);
+                alert.Status = (Status)Enum.Parse(typeof(Status), statusNode.Value, true);
             }
 
             var sentNode = alertElement.Element(capNamespace + "sent");
@@ -155,7 +155,7 @@ namespace CAPNet
 
             var categoryQuery = from categoryNode in infoElement.Elements(capNamespace + "category")
                                 where categoryNode != null
-                                select (Category)Enum.Parse(typeof(Category), categoryNode.Value);
+                                select (Category)Enum.Parse(typeof(Category), categoryNode.Value, true);
 
             foreach (var category in categoryQuery)
             {
@@ -177,7 +177,7 @@ namespace CAPNet
             var urgencyNode = infoElement.Element(capNamespace + "urgency");
             if (urgencyNode != null)
             {
-                info.Urgency = (Urgency)Enum.Parse(typeof(Urgency), urgencyNode.Value);
+                info.Urgency = (Urgency)Enum.Parse(typeof(Urgency), urgencyNode.Value, true);
             }
 
             var certaintyNode = infoElement.Element(capNamespace + "certainty");
@@ -189,7 +189,7 @@ namespace CAPNet
                 }
                 else
                 {
-                    info.Certainty = (Certainty)Enum.Parse(typeof(Certainty), certaintyNode.Value);
+                    info.Certainty = (Certainty)Enum.Parse(typeof(Certainty), certaintyNode.Value, true);
                 }
             }
 
@@ -220,7 +220,7 @@ namespace CAPNet
             var severityNode = infoElement.Element(capNamespace + "severity");
             if (severityNode != null)
             {
-                info.Severity = (Severity)Enum.Parse(typeof(Severity), severityNode.Value);
+                info.Severity = (Severity)Enum.Parse(typeof(Severity), severityNode.Value, true);
             }
 
             var onsetNode = infoElement.Element(capNamespace + "onset");
