@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2834992F-FA0C-4837-9916-1928847EA9C3}</ProjectGuid>
@@ -13,7 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>Profile19</TargetFrameworkProfile>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\CAPNet.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,19 +41,68 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Circle.cs" />
+    <Compile Include="Models\Coordinate.cs" />
+    <Compile Include="Models\Polygon.cs" />
+    <Compile Include="Models\ResponseType.cs" />
+    <Compile Include="Validator\Alert\Area\AreaDescriptionRequiredValidator.cs" />
+    <Compile Include="Validator\Alert\Area\CeilingExistanceValidator.cs" />
+    <Compile Include="Validator\Alert\Info\InvalidCategoryValidator.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\Area.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Certainty.cs" />
+    <Compile Include="Models\EventCode.cs" />
+    <Compile Include="Models\GeoCode.cs" />
     <Compile Include="Models\Info.cs" />
+    <Compile Include="Models\MessageType.cs" />
+    <Compile Include="Models\NamedValue.cs" />
+    <Compile Include="Models\Parameter.cs" />
     <Compile Include="Models\Resource.cs" />
+    <Compile Include="Models\Scope.cs" />
+    <Compile Include="Models\Severity.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\Urgency.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validator\Alert\Info\ResponseTypeValidator.cs" />
+    <Compile Include="Validator\Alert\Resource\DescriptionRequiredValidator.cs" />
+    <Compile Include="Validator\Alert\Resource\MimeTypeRequiredValidator.cs" />
+    <Compile Include="Validator\Alert\Resource\SizeRequiredValidator.cs" />
+    <Compile Include="Validator\Errors\CeilingExistanceError.cs" />
+    <Compile Include="Validator\Errors\Required\AreaDescriptionRequiredError.cs" />
+    <Compile Include="Validator\Errors\Required\ResourceDescriptionRequiredError.cs" />
+    <Compile Include="Validator\Alert\Resource\ResourceValidator.cs" />
+    <Compile Include="Validator\Errors\AlertError.cs" />
+    <Compile Include="Validator\Alert\AlertValidator.cs" />
+    <Compile Include="Validator\Errors\Required\AlertRequiredError.cs" />
+    <Compile Include="Validator\Errors\Required\CategoryRequiredError.cs" />
+    <Compile Include="Validator\Alert\Info\CategoryRequiredValidator.cs" />
+    <Compile Include="Validator\Errors\Required\CertaintyRequiredError.cs" />
+    <Compile Include="Validator\Alert\Info\CertaintyRequiredValidator.cs" />
+    <Compile Include="Validator\Errors\Error.cs" />
+    <Compile Include="Validator\Errors\Required\DescriptionRequiredError.cs" />
+    <Compile Include="Validator\Errors\Required\EventRequiredError.cs" />
+    <Compile Include="Validator\Alert\Info\EventRequiredValidator.cs" />
+    <Compile Include="Validator\Errors\InvalidCategoryError.cs" />
+    <Compile Include="Validator\Errors\Required\MimeTypeRequiredError.cs" />
+    <Compile Include="Validator\Errors\Required\ResourceRequiredError.cs" />
+    <Compile Include="Validator\Errors\Required\SizeRequiredError.cs" />
+    <Compile Include="Validator\Errors\ResponseTypeError.cs" />
+    <Compile Include="Validator\IValidator.cs" />
+    <Compile Include="Validator\Errors\Required\RequiredFieldError.cs" />
+    <Compile Include="Validator\Errors\Required\SeverityRequiredError.cs" />
+    <Compile Include="Validator\Alert\Info\SeverityRequiredValidator.cs" />
+    <Compile Include="Validator\Errors\Required\UrgencyRequiredError.cs" />
+    <Compile Include="Validator\Alert\Info\UrgencyRequiredValidator.cs" />
+    <Compile Include="Validator\Validator.cs" />
     <Compile Include="Version.cs" />
+    <Compile Include="XmlCreator.cs" />
     <Compile Include="XmlParser.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

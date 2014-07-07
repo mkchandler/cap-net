@@ -1,5 +1,4 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
-<!-- Copyright OASIS Open 2010 All Rights Reserved -->
 <schema xmlns = "http://www.w3.org/2001/XMLSchema"
    targetNamespace = "urn:oasis:names:tc:emergency:cap:1.2"
    xmlns:cap = "urn:oasis:names:tc:emergency:cap:1.2"

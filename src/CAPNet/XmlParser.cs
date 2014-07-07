@@ -1,24 +1,28 @@
-﻿using System;
-using System.Xml;
+﻿using CAPNet.Models;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace CAPNet
 {
     /// <summary>
     /// 
     /// </summary>
-    public class XmlParser
+    public static class XmlParser
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public static Alert Parse(string xml)
+        public static IEnumerable<Alert> Parse(string xml)
         {
-            var document = new XmlDocument();
-            document.LoadXml(xml);
-            var alert = ParseInternal(document);
-            return alert;
+            var document = XDocument.Parse(xml);
+            var alertList = ParseInternal(document);
+
+            return alertList;
         }
 
         /// <summary>
@@ -26,162 +30,368 @@ namespace CAPNet
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public static Alert Parse(XmlDocument xml)
+        public static IEnumerable<Alert> Parse(XDocument xml)
         {
-            var alert = ParseInternal(xml);
-            return alert;
+            var alertList = ParseInternal(xml);
+
+            return alertList;
         }
 
-        private static Alert ParseInternal(XmlDocument document)
+        private static IEnumerable<Alert> ParseInternal(XDocument xdoc)
         {
-            var alert = new Alert();
-
-            XmlNodeList elements = document.GetElementsByTagName("alert", "urn:oasis:names:tc:emergency:cap:1.1");
-
-            foreach (XmlNode element in elements)
+            var elements = xdoc.Descendants(XmlCreator.CAP12Namespace + "alert");
+            if (!elements.Any())
             {
-                foreach (XmlNode alertNode in element.ChildNodes)
-                {
-                    switch (alertNode.Name)
-                    {
-                        case "identifier":
-                            alert.Identifier = alertNode.InnerText;
-                            break;
-                        case "sender":
-                            alert.Sender = alertNode.InnerText;
-                            break;
-                        case "sent":
-                            alert.Sent = DateTime.Parse(alertNode.InnerText);
-                            break;
-                        case "status":
-                            // TODO: Parse status to enum
-                            alert.Status = Status.Test;
-                            break;
-                        case "msgType":
-                            // TODO: Parse message type to enum
-                            alert.MessageType = MessageType.Alert;
-                            break;
-                        case "source":
-                            alert.Source = alertNode.InnerText;
-                            break;
-                        case "scope":
-                            // TODO: Parse scope to enum
-                            alert.Scope = Scope.Public;
-                            break;
-                        case "restriction":
-                            alert.Restriction = alertNode.InnerText;
-                            break;
-                        case "addresses":
-                            alert.Addresses = alertNode.InnerText;
-                            break;
-                        case "code":
-                            alert.Code = alertNode.InnerText;
-                            break;
-                        case "note":
-                            alert.Note = alertNode.InnerText;
-                            break;
-                        case "references":
-                            alert.References = alertNode.InnerText;
-                            break;
-                        case "incidents":
-                            alert.Incidents = alertNode.InnerText;
-                            break;
-                        case "info":
-                            var info = new Info();
-                            foreach (XmlNode infoNode in alertNode.ChildNodes)
-                            {
-                                switch (infoNode.Name)
-                                {
-                                    case "language":
-                                        info.Language = infoNode.InnerText;
-                                        break;
-                                    case "category":
-                                        //info.Category = infoNode.InnerText;
-                                        break;
-                                    case "event":
-                                        info.Event = infoNode.InnerText;
-                                        break;
-                                    case "responseType":
-                                        info.ResponseType = infoNode.InnerText;
-                                        break;
-                                    case "urgency":
-                                        info.Urgency = infoNode.InnerText;
-                                        break;
-                                    case "severity":
-                                        Severity severity;
-                                        if (Enum.TryParse(infoNode.InnerText, out severity))
-                                        {
-                                            info.Severity = severity;
-                                        }
-                                        else
-                                        {
-                                            info.Severity = null;
-                                        }
-                                        break;
-                                    case "certainty":
-                                        info.Certainty = infoNode.InnerText;
-                                        break;
-                                    case "audience":
-                                        info.Audience = infoNode.InnerText;
-                                        break;
-                                    case "eventCode":
-                                        info.EventCode = infoNode.InnerText;
-                                        break;
-                                    case "effective":
-                                        info.Effective = DateTime.Parse(infoNode.InnerText);
-                                        break;
-                                    case "onset":
-                                        info.Onset = DateTime.Parse(infoNode.InnerText);
-                                        break;
-                                    case "expires":
-                                        info.Expires = DateTime.Parse(infoNode.InnerText);
-                                        break;
-                                    case "senderName":
-                                        info.SenderName = infoNode.InnerText;
-                                        break;
-                                    case "headline":
-                                        info.Headline = infoNode.InnerText;
-                                        break;
-                                    case "description":
-                                        info.Description = infoNode.InnerText;
-                                        break;
-                                    case "instruction":
-                                        info.Instruction = infoNode.InnerText;
-                                        break;
-                                    case "web":
-                                        info.Web = infoNode.InnerText;
-                                        break;
-                                    case "contact":
-                                        info.Contact = infoNode.InnerText;
-                                        break;
-                                    case "area":
-                                        var area = new Area();
-                                        foreach (XmlNode areaNode in infoNode.ChildNodes)
-                                        {
-                                            switch (areaNode.Name)
-                                            {
-                                                case "areaDesc":
-                                                    area.Description = areaNode.InnerText;
-                                                    break;
-                                                default:
-                                                    break;
-                                            }
-                                        }
-                                        info.Areas.Add(area);
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                            alert.Info.Add(info);
-                            break;
-                        default:
-                            break;
-                    }
-                }
+                elements = xdoc.Descendants(XmlCreator.CAP11Namespace + "alert");
+            }
+
+            return from alertElement in elements
+                   select ParseAlert(alertElement);
+        }
+
+        private static Alert ParseAlert(XElement alertElement)
+        {
+            Alert alert = new Alert();
+
+            var capNamespace = alertElement.Name.Namespace;
+
+            var infoNode = alertElement.Element(capNamespace + "info");
+            if (infoNode != null)
+            {
+                var info = ParseInfo(infoNode);
+                alert.Info.Add(info);
+            }
+
+            var incidentsNode = alertElement.Element(capNamespace + "incidents");
+            if (incidentsNode != null)
+            {
+                alert.Incidents = incidentsNode.Value;
+            }
+
+            var referencesNode = alertElement.Element(capNamespace + "references");
+            if (referencesNode != null)
+            {
+                alert.References = referencesNode.Value;
+            }
+
+            var noteNode = alertElement.Element(capNamespace + "note");
+            if (noteNode != null)
+            {
+                alert.Note = noteNode.Value;
+            }
+
+            var codeNode = alertElement.Element(capNamespace + "code");
+            if (codeNode != null)
+            {
+                alert.Code = codeNode.Value;
+            }
+
+            var addressesNode = alertElement.Element(capNamespace + "addresses");
+            if (addressesNode != null)
+            {
+                alert.Addresses = addressesNode.Value;
+            }
+
+            var restrictionNode = alertElement.Element(capNamespace + "restriction");
+            if (restrictionNode != null)
+            {
+                alert.Restriction = restrictionNode.Value;
+            }
+
+            var scopeNode = alertElement.Element(capNamespace + "scope");
+            if (scopeNode != null)
+            {
+                alert.Scope = (Scope)Enum.Parse(typeof(Scope), scopeNode.Value, true);
+            }
+
+            var sourceNode = alertElement.Element(capNamespace + "source");
+            if (sourceNode != null)
+            {
+                alert.Source = sourceNode.Value;
+            }
+
+            var msgTypeNode = alertElement.Element(capNamespace + "msgType");
+            if (msgTypeNode != null)
+            {
+                alert.MessageType = (MessageType)Enum.Parse(typeof(MessageType), msgTypeNode.Value, true);
+            }
+
+            var statusNode = alertElement.Element(capNamespace + "status");
+            if (statusNode != null)
+            {
+                alert.Status = (Status)Enum.Parse(typeof(Status), statusNode.Value, true);
+            }
+
+            var sentNode = alertElement.Element(capNamespace + "sent");
+            if (sentNode != null)
+            {
+                alert.Sent = DateTimeOffset.Parse(sentNode.Value, CultureInfo.InvariantCulture);
+            }
+
+            var senderNode = alertElement.Element(capNamespace + "sender");
+            if (senderNode != null)
+            {
+                alert.Sender = senderNode.Value;
+            }
+
+            var identifierNode = alertElement.Element(capNamespace + "identifier");
+            if (identifierNode != null)
+            {
+                alert.Identifier = identifierNode.Value;
             }
 
             return alert;
+        }
+
+        private static Info ParseInfo(XElement infoElement)
+        {
+            var info = new Info();
+
+            var capNamespace = infoElement.Name.Namespace;
+
+            var languageNode = infoElement.Element(capNamespace + "language");
+            if (languageNode != null)
+                info.Language = languageNode.Value;
+
+            var categoryQuery = from categoryNode in infoElement.Elements(capNamespace + "category")
+                                where categoryNode != null
+                                select (Category)Enum.Parse(typeof(Category), categoryNode.Value, true);
+
+            foreach (var category in categoryQuery)
+            {
+                info.Categories.Add(category);
+            }
+
+            var eventNode = infoElement.Element(capNamespace + "event");
+            if (eventNode != null)
+            {
+                info.Event = eventNode.Value;
+            }
+
+            var responseTypeQuery = from responseTypeNode in infoElement.Elements(capNamespace + "responseType")
+                                    where responseTypeNode != null
+                                    select (ResponseType)Enum.Parse(typeof(ResponseType), responseTypeNode.Value,true);
+
+            foreach (var responseType in responseTypeQuery)
+            {
+                info.ResponseTypes.Add(responseType);
+            }
+
+            var urgencyNode = infoElement.Element(capNamespace + "urgency");
+            if (urgencyNode != null)
+            {
+                info.Urgency = (Urgency)Enum.Parse(typeof(Urgency), urgencyNode.Value, true);
+            }
+
+            var certaintyNode = infoElement.Element(capNamespace + "certainty");
+            if (certaintyNode != null)
+            {
+                if (certaintyNode.Value == "Very Likely")
+                {
+                    info.Certainty = Certainty.Likely;
+                }
+                else
+                {
+                    info.Certainty = (Certainty)Enum.Parse(typeof(Certainty), certaintyNode.Value, true);
+                }
+            }
+
+            var audienceNode = infoElement.Element(capNamespace + "audience");
+            if (audienceNode != null)
+            {
+                info.Audience = audienceNode.Value;
+            }
+
+            IEnumerable<XElement> eventCodesQuerry =
+                from ev in infoElement.Elements(capNamespace + "eventCode")
+                where ev != null
+                select ev;
+
+            foreach (XElement eventCode in eventCodesQuerry)
+            {
+                string valueName = eventCode.Element(capNamespace + "valueName").Value;
+                string value = eventCode.Element(capNamespace + "value").Value; ;
+                info.EventCodes.Add(new EventCode(valueName, value));
+            }
+
+            var effectiveNode = infoElement.Element(capNamespace + "effective");
+            if (effectiveNode != null)
+            {
+                info.Effective = DateTimeOffset.Parse(effectiveNode.Value, CultureInfo.InvariantCulture);
+            }
+
+            var severityNode = infoElement.Element(capNamespace + "severity");
+            if (severityNode != null)
+            {
+                info.Severity = (Severity)Enum.Parse(typeof(Severity), severityNode.Value, true);
+            }
+
+            var onsetNode = infoElement.Element(capNamespace + "onset");
+            if (onsetNode != null)
+            {
+                info.Onset = DateTimeOffset.Parse(onsetNode.Value, CultureInfo.InvariantCulture);
+            }
+
+            var expiresNode = infoElement.Element(capNamespace + "expires");
+            if (expiresNode != null)
+            {
+                info.Expires = DateTimeOffset.Parse(expiresNode.Value, CultureInfo.InvariantCulture);
+            }
+
+            var senderNameNode = infoElement.Element(capNamespace + "senderName");
+            if (senderNameNode != null)
+            {
+                info.SenderName = senderNameNode.Value;
+            }
+
+            var headlineNode = infoElement.Element(capNamespace + "headline");
+            if (headlineNode != null)
+            {
+                info.Headline = headlineNode.Value;
+            }
+
+            var descriptionNode = infoElement.Element(capNamespace + "description");
+            if (descriptionNode != null)
+            {
+                info.Description = descriptionNode.Value;
+            }
+
+            var instructionNode = infoElement.Element(capNamespace + "instruction");
+            if (instructionNode != null)
+            {
+                info.Instruction = instructionNode.Value;
+            }
+
+            var webNode = infoElement.Element(capNamespace + "web");
+            if (webNode != null)
+            {
+                info.Web = new Uri(webNode.Value);
+            }
+
+            var contactNode = infoElement.Element(capNamespace + "contact");
+            if (contactNode != null)
+            {
+                info.Contact = contactNode.Value;
+            }
+
+            var parameterQuery = from parameter in infoElement.Elements(capNamespace + "parameter")
+                                 let valueNameNode = parameter.Element(capNamespace + "valueName")
+                                 let valueNode = parameter.Element(capNamespace + "value")
+                                 where valueNameNode != null && valueNode != null
+                                 select new Parameter(valueNameNode.Value, valueNode.Value);
+
+            foreach (var parameter in parameterQuery)
+            {
+                info.Parameters.Add(parameter);
+            }
+
+            var resourceQuery = from resourceNode in infoElement.Elements(capNamespace + "resource")
+                                where resourceNode != null
+                                select ParseResource(resourceNode);
+
+            foreach (var resource in resourceQuery)
+            {
+                info.Resources.Add(resource);
+            }
+
+            var areaQuery = from areaNode in infoElement.Elements(capNamespace + "area")
+                            where areaNode != null
+                            select ParseArea(areaNode);
+
+            foreach (var area in areaQuery)
+            {
+                info.Areas.Add(area);
+            }
+
+            return info;
+        }
+
+        private static Area ParseArea(XElement areaElement)
+        {
+            var area = new Area();
+
+            var capNamespace = areaElement.Name.Namespace;
+
+            var areaDescNode = areaElement.Element(capNamespace + "areaDesc");
+            if (areaDescNode != null)
+                area.Description = areaDescNode.Value;
+
+            var polygonQuery = from polygonNode in areaElement.Elements(capNamespace + "polygon")
+                               where polygonNode != null
+                               select polygonNode.Value;
+
+            foreach (var polygonValue in polygonQuery)
+                area.Polygons.Add(new Polygon(polygonValue));
+
+            var circleQuery = from circleNode in areaElement.Elements(capNamespace + "circle")
+                              where circleNode != null
+                              select circleNode.Value;
+
+            foreach (var circleValue in circleQuery)
+                area.Circles.Add(new Circle(circleValue));
+
+            var geoCodeQuery = from geoCodeNode in areaElement.Elements(capNamespace + "geocode")
+                               where geoCodeNode != null
+                               select geoCodeNode;
+
+            var altitudeNode = areaElement.Element(capNamespace + "altitude");
+            if (altitudeNode != null)
+                area.Altitude = int.Parse(altitudeNode.Value);
+
+            var ceilingNode = areaElement.Element(capNamespace + "ceiling");
+            if (ceilingNode != null)
+                area.Ceiling = int.Parse(ceilingNode.Value);
+
+            foreach (XElement geoCodeValue in geoCodeQuery)
+            {
+                string valueName = geoCodeValue.Element(capNamespace + "valueName").Value;
+                string value = geoCodeValue.Element(capNamespace + "value").Value;
+
+                area.GeoCodes.Add(new GeoCode(valueName, value));
+            }
+            return area;
+        }
+
+        private static Resource ParseResource(XElement resourceElement)
+        {
+            var resource = new Resource();
+
+            var capNamespace = resourceElement.Name.Namespace;
+
+            //<resource>
+            //    <resourceDesc>Image file (GIF)</resourceDesc>
+            //    <mimeType>image/gif</mimeType>
+            //    <size>1</size>
+            //    <uri>http://www.dhs.gov/dhspublic/getAdvisoryImage</uri>
+            //    <derefUri>derefUri</derefUri>
+            //    <digest>digest</digest>
+            //</resource>
+
+            var resourceDescNode = resourceElement.Element(capNamespace + "resourceDesc");
+            if (resourceDescNode != null)
+                resource.Description = resourceDescNode.Value;
+
+            var mimeTypeNode = resourceElement.Element(capNamespace + "mimeType");
+            if (mimeTypeNode != null)
+                resource.MimeType = mimeTypeNode.Value;
+
+            var sizeNode = resourceElement.Element(capNamespace + "size");
+            if (sizeNode != null)
+                resource.Size = int.Parse(sizeNode.Value);
+
+            var uriNode = resourceElement.Element(capNamespace + "uri");
+            if (uriNode != null)
+                resource.Uri = new Uri(uriNode.Value);
+
+            var derefUriNode = resourceElement.Element(capNamespace + "derefUri");
+            if (derefUriNode != null)
+                resource.DereferencedUri = derefUriNode.Value;
+
+            var digestNode = resourceElement.Element(capNamespace + "digest");
+            if (digestNode != null)
+                resource.Digest = digestNode.Value;
+
+            return resource;
         }
     }
 }

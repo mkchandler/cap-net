@@ -1,4 +1,6 @@
-﻿namespace CAPNet
+﻿using System;
+
+namespace CAPNet.Models
 {
     /// <summary>
     /// 
@@ -23,7 +25,7 @@
         /// <summary>
         /// 
         /// </summary>
-        public string Uri { get; set; }
+        public Uri Uri { get; set; }
 
         /// <summary>
         /// 

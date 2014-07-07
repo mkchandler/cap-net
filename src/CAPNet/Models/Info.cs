@@ -1,45 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CAPNet
+namespace CAPNet.Models
 {
     /// <summary>
     /// The container for all component parts of the info sub-element of the alert message.
     /// </summary>
     public class Info
     {
+        private string language;
+
+        private readonly ICollection<Parameter> parameters;
+
+        private readonly ICollection<EventCode> eventCodes;
+
+        private readonly ICollection<Category> categories;
+
+        private readonly ICollection<Resource> resources;
+
+        private readonly ICollection<Area> areas;
+
+        private readonly ICollection<ResponseType> responseTypes;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public readonly string DefaultLanguage = "en-US";
+
         /// <summary>
         /// 
         /// </summary>
         public Info()
         {
-            _categories = new List<Category>();
-            _resources = new List<Resource>();
-            _areas = new List<Area>();
+            parameters = new List<Parameter>();
+            eventCodes = new List<EventCode>();
+            categories = new List<Category>();
+            resources = new List<Resource>();
+            areas = new List<Area>();
+            responseTypes = new List<ResponseType>();
         }
-
-        private string _language;
 
         /// <summary>
         /// Gets or sets the code denoting the language of the info sub-element of the alert message.
         /// </summary>
         public string Language
         {
-            get { return String.IsNullOrWhiteSpace(_language) ? "en-US" : _language; }
-            set { _language = value; }
+            get { return String.IsNullOrWhiteSpace(language) ? DefaultLanguage : language; }
+            set { language = value; }
         }
 
-        private ICollection<Category> _categories;
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICollection<ResponseType> ResponseTypes
+        {
+            get
+            {
+                return responseTypes;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
         public ICollection<Category> Categories
         {
-            get
-            {
-                return _categories;
-            }
+            get { return categories; }
         }
 
         /// <summary>
@@ -50,22 +76,17 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        public string ResponseType { get; set; }
+        public Urgency Urgency { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string Urgency { get; set; }
+        public Severity Severity { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public Severity? Severity { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Certainty { get; set; }
+        public Certainty Certainty { get; set; }
 
         /// <summary>
         /// 
@@ -75,22 +96,17 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        public string EventCode { get; set; }
+        public DateTimeOffset Effective { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime Effective { get; set; }
+        public DateTimeOffset Onset { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime Onset { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime Expires { get; set; }
+        public DateTimeOffset Expires { get; set; }
 
         /// <summary>
         /// 
@@ -115,113 +131,45 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        public string Web { get; set; }
+        public Uri Web { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public string Contact { get; set; }
 
-        private ICollection<Resource> _resources;
+        /// <summary>
+        /// System-specific additional parameters associated
+        /// with the alert message (OPTIONAL)
+        /// </summary>
+        public ICollection<Parameter> Parameters
+        {
+            get { return parameters; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICollection<EventCode> EventCodes
+        {
+            get { return eventCodes; }
+
+        }
 
         /// <summary>
         /// 
         /// </summary>
         public ICollection<Resource> Resources
         {
-            get { return _resources; }
+            get { return resources; }
         }
-
-        private ICollection<Area> _areas;
 
         /// <summary>
         /// 
         /// </summary>
         public ICollection<Area> Areas
         {
-            get { return _areas; }
+            get { return areas; }
         }
-    }
-
-    /// <summary>
-    /// The code denoting the category of the subject event of the alert message.
-    /// </summary>
-    public enum Category
-    {
-        /// <summary>
-        /// Geophysical (inc. landslide)
-        /// </summary>
-        Geo,
-        /// <summary>
-        /// 
-        /// </summary>
-        Met,
-        /// <summary>
-        /// 
-        /// </summary>
-        Safety,
-        /// <summary>
-        /// 
-        /// </summary>
-        Security,
-        /// <summary>
-        /// 
-        /// </summary>
-        Rescue,
-        /// <summary>
-        /// 
-        /// </summary>
-        Fire,
-        /// <summary>
-        /// 
-        /// </summary>
-        Health,
-        /// <summary>
-        /// 
-        /// </summary>
-        Env,
-        /// <summary>
-        /// 
-        /// </summary>
-        Transport,
-        /// <summary>
-        /// 
-        /// </summary>
-        Infra,
-        /// <summary>
-        /// 
-        /// </summary>
-        CBRNE,
-        /// <summary>
-        /// 
-        /// </summary>
-        Other
-    }
-
-    /// <summary>
-    /// The code denoting the severity of the subject event of the alert message.
-    /// </summary>
-    public enum Severity
-    {
-        /// <summary>
-        /// Extraordinary threat to life or property.
-        /// </summary>
-        Extreme,
-        /// <summary>
-        /// Signifcant threat to life or property.
-        /// </summary>
-        Severe,
-        /// <summary>
-        /// Possible threat to life or property.
-        /// </summary>
-        Moderate,
-        /// <summary>
-        /// Minimal threat to life or property.
-        /// </summary>
-        Minor,
-        /// <summary>
-        /// Severity unknown.
-        /// </summary>
-        Unknown
     }
 }

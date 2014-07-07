@@ -1,12 +1,13 @@
-**NOTE: CAPNet is currently in the early stages of development. Proceed with caution.**
+[![Build status](https://ci.appveyor.com/api/projects/status/kvnwx7gjk77d3nbl)](https://ci.appveyor.com/project/vgrigoriu/cap-net)
 
+**NOTE: CAPNet is currently in the early stages of development. Proceed with caution.**
 
 CAPNet
 ==
 
 CAPNet is a Common Alerting Protocol (CAP) library for the .NET framework.
 
-More information on CAP can be found here: http://www.oasis-open.org/standards#capv1.1.
+More information on CAP can be found here: http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.html.
 
 
 Usage
@@ -37,17 +38,17 @@ For more information on SemVer, please visit http://semver.org/.
 Authors
 -------
 
-**Matt Chandler**
+Based on original work by **Matt Chandler**
 
 + http://twitter.com/mkchandler
 + http://github.com/mkchandler
 
-A list of additional contributors can be viewed here: https://github.com/mkchandler/cap-net/contributors
+A list of additional contributors can be viewed here: https://github.com/TeamnetGroup/cap-net/contributors
 
 Copyright and license
 ---------------------
 
-Copyright 2013 Matt Chandler and contributors
+Copyright 2014 Matt Chandler and contributors
 
 Licensed under the MIT License (the "License"); you may not use this work except in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:
 
