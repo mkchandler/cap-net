@@ -1,4 +1,4 @@
-**NOTE: CAPNet is currently in the early stages of development. Proceed with caution.**
+**NOTE: This repository has been archived. Please see the following fork for a maintained version: https://github.com/TeamnetGroup/cap-net**
 
 
 CAPNet
